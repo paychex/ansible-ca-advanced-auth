@@ -1,0 +1,48 @@
+---
+# tasks file for tomcat-hardener
+
+- name: disable webdav support
+  blockinfile:
+    path: "{{ catalina_home }}/conf/web.xml"
+    state: present
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    backup: yes
+    insertbefore: '^</web-app>' 
+    block: |
+           <security-constraint>
+             <web-resource-collection>
+             <web-resource-name>restricted methods</web-resource-name>
+             <url-pattern>/*</url-pattern>
+             <http-method>PUT</http-method>
+             <http-method>DELETE</http-method>
+             <http-method>OPTIONS</http-method>
+             <http-method>TRACE</http-method>
+             </web-resource-collection>
+             <auth-constraint />
+           </security-constraint>
+  notify: restart tomcat
+  
+- name: remove webapps -  examples, host, host-manager, manager 
+  file:
+    path: "{{ catalina_home }}/webapps/{{ item }}"
+    force: yes
+    state: absent
+  with_items:
+    - examples
+    - docs
+    - host-manager
+    - manager
+  notify: restart tomcat
+
+- name: adjust TLS settings in server.xml
+  blockinfile: 
+    path: "{{ catalina_home }}/conf/server.xml"
+    insertbefore: '<Engine name="Catalina"'
+    block: | 
+      <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+         maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+         keystoreFile="/etc/pki/java/<hostname>.jks" keysStorePass="redacted"
+         keyPass="redacted"
+         clientAuth="false" sslProtocol="TLS" />
+  when: tomcat_tls is defined
+  notify: restart tomcat

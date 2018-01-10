@@ -1,0 +1,12 @@
+[rsk-app]
+rskapdvl1.pxlabus.com
+
+[rsk-db]
+rskdbdvl1.pxlabus.com
+
+[rsk:children]
+rsk-app
+rsk-db
+
+
+

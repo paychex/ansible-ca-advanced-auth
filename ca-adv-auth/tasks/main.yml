@@ -1,0 +1,32 @@
+---
+# tasks file for tomcat
+#
+
+
+- name: dir - create CA dir
+  file: 
+    name: "{{ arcot_home }}"
+    state: directory
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+
+- name: download strong auth zip
+  get_url:
+    url: "{{ str_auth_install_url }}"
+    dest: "{{ arcot_home }}"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+
+- name: unzip strong auth
+  unarchive: 
+    src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+    dest: "{{ arcot_home }}"
+    owner: tomcat
+    group: tomcat
+    remote_src: yes
+
+    
+
+
