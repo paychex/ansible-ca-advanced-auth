@@ -1,0 +1,5 @@
+---
+# vars file for tomca
+#
+
+# tomcat_install_url: {{ tomcat_install_url }}
