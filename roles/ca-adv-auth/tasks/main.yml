@@ -5,7 +5,6 @@
 - name: group - create arcot_user group
   group:
     name: "{{ arcot_user }}"
-    gid: 101
     state: present
 
 - name: user - create arcot_user user
