@@ -41,6 +41,8 @@
     args:
       chdir: "{{ arcot_home }}"
       creates: "{{ arcot_home }}/strongauth-installer.properties"
+      executable: /bin/bash
+      # bash must be used for globbing
 
 - name: copy DB access file
   copy:
