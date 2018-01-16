@@ -17,6 +17,7 @@
     shell: /bin/bash
     password: $1$21575$iBYQIOSnpf7Ac4lHoAVgb.
 
+# may be unnecessary since systemd launches the app
 - name: template - tomcat env script in profile.d
   template:
     src: tomcat.profile.sh.j2
