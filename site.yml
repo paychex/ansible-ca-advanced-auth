@@ -5,3 +5,4 @@
   roles:
     - tomcat9
     - ca-adv-auth
+    - ca-strong-auth

@@ -2,29 +2,25 @@
 # tasks file for tomcat
 #
 
+- name: group - create arcot_user group
+  group:
+    name: "{{ arcot_user }}"
+    gid: 101
+    state: present
+
+- name: user - create arcot_user user
+  user:
+    name: "{{ arcot_user }}"
+    shell: /bin/bash
+    password: "{{ arcot_password }}"
+
 - name: dir - create CA dir
   file:
     name: "{{ arcot_home }}"
     state: directory
-    owner: tomcat
-    group: tomcat
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
     mode: 0755
-
-- name: download strong auth zip
-  get_url:
-    url: "{{ str_auth_install_url }}"
-    dest: "{{ arcot_home }}"
-    owner: tomcat
-    group: tomcat
-    mode: 0755
-
-- name: unzip strong auth
-  unarchive:
-    src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
-    dest: "{{ arcot_home }}"
-    owner: tomcat
-    group: tomcat
-    remote_src: yes
 
 - name: template - tomcat.service for systemd
   template:

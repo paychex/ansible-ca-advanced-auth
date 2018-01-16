@@ -1,0 +1,124 @@
+#Choose features to be installed (WFSRV,WFSDK,WFAPP,Admin,arcotuds)
+#-------------------------------------------------------------------
+CHOSEN_FEATURE_LIST=WFSRV,WFSDK,WFAPP,Admin,arcotuds
+
+#Choose Installation Folder
+#--------------------------
+USER_INSTALL_DIR_SILENT=/opt/CA/AdvAuth
+
+#DBType Selected (oracle/mssqlserver/db2/mysql)
+#----------------------------------------------
+ARCOT_DBTYPE_SILENT=oracle
+
+
+##---------------------------------------
+###Primary Database Details
+##---------------------------------------
+
+ARCOT_CONFIG_PRIMARY_DB_SILENT=true
+
+#Primary DSN Name
+#----------------
+ARCOT_PRIMARY_DSN_NAME_SILENT=arcotdsn
+
+#Primary Database
+#----------------
+ARCOT_PRIMARY_DATABASE_SILENT=
+
+#Primary SID (For Oracle)
+#--------------------------
+ARCOT_PRIMARY_SID_SILENT=rsklb
+ARCOT_PRIMARY_TNS_SERVICE_NAME_SILENT=
+
+#Primary Host Name
+#-----------------
+ARCOT_PRIMARY_HOST_NAME_SILENT=rskdbdvl1.pxlabus.com
+
+#Primary Port Number
+#-------------------
+ARCOT_PRIMARY_PORT_SILENT=1521
+
+#Primary User Name
+#-----------------
+ARCOT_PRIMARY_USER_NAME_SILENT=arcotuser
+
+#Primary Password
+#----------------
+ARCOT_PRIMARY_PASSWORD_SILENT={{ arcot_db_password }}
+
+
+#Configure Backup DB if true (true/false)
+#----------------------------------------
+
+ARCOT_CONFIG_BACKUP_DB_SILENT=false
+
+##---------------------------------------
+###Backup Database Details
+##---------------------------------------
+
+#Backup DSN Name
+#---------------
+ARCOT_BACKUP_DSN_NAME_SILENT=
+
+#Backup Database
+#-----------------
+ARCOT_BACKUP_DATABASE_SILENT=
+
+#Backup SID
+#----------
+ARCOT_BACKUP_SID_SILENT=
+ARCOT_BACKUP_TNS_SERVICE_NAME_SILENT=
+
+#Backup Host Name
+#---------------
+ARCOT_BACKUP_HOST_NAME_SILENT=
+
+#Backup Port Number
+#------------------
+ARCOT_BACKUP_PORT_SILENT=
+
+#Backup User Name
+#----------------
+ARCOT_BACKUP_USER_NAME_SILENT=
+
+#Backup Password
+#---------------
+ARCOT_BACKUP_PASSWORD_SILENT=
+
+#-------------------------------------------
+###Encryption Details
+#-------------------------------------------
+
+#Encryption method: software/hardware
+ARCOT_ENC_TYPE_SILENT=S/W
+
+ARCOT_ENC_DEVICE_NAME_SILENT=
+ARCOT_KEY_LABEL_SILENT=
+ARCOT_HSM_PIN_SILENT=
+ARCOT_HSM_SHARED_LIBRARY_SILENT=
+ARCOT_HSM_STORAGE_SLOT_SILENT=
+
+#-------------------------------------------
+###DB Configuration Details
+#-------------------------------------------
+
+INITIALIZE_DB=0
+UPGRADE_DB=0
+
+#-------------------------------------------
+###Bootstrap Details
+#-------------------------------------------
+PERFORM_BOOTSTRAP=1
+GLOBAL_KEY_LABEL=
+GLOBAL_KEY_STORAGE_TYPE=
+MASTERADMIN_PASSWORD=
+DEFAULT_ORG_DISPLAY_NAME=
+DEFAULT_ORG_USE_GLOBAL_KEY=
+DEFAULT_ORG_KEY_STORAGE_TYPE=
+DEFAULT_ORG_KEY=
+
+#-------------------------------------------
+###Service auto start option
+#-------------------------------------------
+SERVICE_START=
+CM_SERVICE_START=
