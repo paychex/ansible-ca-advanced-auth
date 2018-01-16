@@ -9,7 +9,7 @@
     name: tomcat
     gid: 101
     state: present
-    
+
 - name: user - create tomcat user
   user:
     name: tomcat
@@ -18,12 +18,12 @@
     password: $1$21575$iBYQIOSnpf7Ac4lHoAVgb.
 
 - name: template - tomcat env script in profile.d
-  template: 
+  template:
     src: tomcat.profile.sh.j2
     dest: /etc/profile.d/tomcat.profile.sh
     mode: 0755
     owner: root
-    group: root 
+    group: root
 
 - name: template - tomcat.service for systemd
   template:
@@ -31,10 +31,18 @@
     dest: /etc/systemd/system/tomcat.service
     owner: root
     group: root
-    mode: 0755 
+    mode: 0755
+
+- name: template - sysconfig tomcat env vars for systemd
+  template:
+    src: sysconfig.tomcat.j2
+    dest: /etc/sysconfi/tomcat
+    owner: root
+    group: root
+    mode: 0755
 
 - name: dir - create tomcat dir
-  file: 
+  file:
     name: "{{ catalina_home }}"
     state: directory
     owner: tomcat
@@ -51,14 +59,14 @@
   notify: restart tomcat
 
 - name: unzip tomcat
-  unarchive: 
+  unarchive:
     src: "{{ catalina_home }}/{{ tomcat_install_url | basename }}"
     dest: "{{ catalina_home }}"
     owner: tomcat
     group: tomcat
     remote_src: yes
-    extra_opts: 
-      - --strip-components=1  
+    extra_opts:
+      - --strip-components=1
   notify: restart tomcat
 
 - name: start and enable tomcat
@@ -66,6 +74,3 @@
     name: tomcat.service
     enabled: true
     state: started
-    
-
-

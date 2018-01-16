@@ -1,0 +1,11 @@
+JAVA_HOME={{ java_home }}
+CATALINA_PID={{ catalina_home }}/temp/tomcat.pid
+CATALINA_HOME={{ catalina_home }}
+CATALINA_BASE={{ catalina_home }}
+CATALINA_OPTS='-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+JAVA_OPTS='-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+# CA VARS
+LD_LIBRARY_PATH={{ arcot_home }}odbc64v80/lib:/opt/CA/AdvAuth/sbin:/opt/CA/AdvAuth/lib:/opt/CA/AdvAuth/bin:/opt/CA/AdvAuth/sdk/server/plugin/c/lib:/opt/java/jre/bin
+ARCOT_HOME={{ arcot_home }}
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:/opt/tomcat/bin:/opt/java/bin:/root/bin:/opt/java/bin

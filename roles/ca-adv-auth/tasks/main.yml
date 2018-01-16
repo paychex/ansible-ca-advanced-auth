@@ -2,9 +2,8 @@
 # tasks file for tomcat
 #
 
-
 - name: dir - create CA dir
-  file: 
+  file:
     name: "{{ arcot_home }}"
     state: directory
     owner: tomcat
@@ -20,13 +19,26 @@
     mode: 0755
 
 - name: unzip strong auth
-  unarchive: 
+  unarchive:
     src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
     dest: "{{ arcot_home }}"
     owner: tomcat
     group: tomcat
     remote_src: yes
 
-    
+- name: template - tomcat.service for systemd
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart tomcat
 
-
+- name: template - sysconfig tomcat env vars for systemd
+  template:
+    src: sysconfig.tomcat.j2
+    dest: /etc/sysconfi/tomcat
+    owner: root
+    group: root
+    mode: 0755

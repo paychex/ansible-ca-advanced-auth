@@ -5,6 +5,6 @@
 rsk_auth_install_url: http://repoman.paychex.com/packages/CA/install-pkgs/CA-rsk-ath.zip
 str_auth_install_url: http://repoman.paychex.com/packages/CA/install-pkgs/CA-str-ath.zip
 JDBC_driver_url: http://repoman.paychex.com/packages/CA/install-pkgs/ojdbc8.jar
-java_home: /opt/jdk1.7.0_21
+java_home: /opt/java
 arcot_home: /opt/CA/AdvAuth
-ll
+catalina_home: /opt/tomcat

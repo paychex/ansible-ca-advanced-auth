@@ -1,31 +1,29 @@
 USAGE
 -----
 
-`ansible-playbook -u rmullen -k -i inventory site.yml`
-
-create an inventory
-create a playbook to run this and or additional roles
-
 
 Role Name
 =========
 
-this role installs tomcat 9.0.2
+this role installs ca AdvAuth 9
 
 Requirements
 ------------
 
-java is expected to be installed and located at /opt/java
+java and tomcat are expected to be installed and located at /opt/java & /opt/tomcat
 
 Role Variables
 --------------
 
 DEFAULTS:
+rsk_auth_install_url
+str_auth_install_url
+JDBC_driver_url
 java_home
+arcot_home
 catalina_home
-tomcat_install_url
 
-please make var changes in the tomcat/vars/main.yml, not defaults/main.yml
+please make var changes in the ca-adv-auth/vars/main.yml, not defaults/main.yml
 adjusted var names have not been tested
 
 Example Playbook
@@ -38,7 +36,8 @@ site.yml
 - hosts: rsk-app
   become: true
   roles:
-    - tomcat
+    - tomcat9
+    - ca-adv-auth
 
 
 HANDLERS
