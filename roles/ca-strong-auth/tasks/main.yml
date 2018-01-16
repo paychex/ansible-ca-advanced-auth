@@ -41,8 +41,7 @@
   args:
     chdir: "{{ arcot_home }}/GEN500000000000116"
     creates: "{{ arcot_home }}/strongauth-installer.properties"
-      #executable: /bin/bash
-      # bash must be used for globbing
+  when: strong_auth_install == "yes"
 
 - name: copy DB access file
   copy:
