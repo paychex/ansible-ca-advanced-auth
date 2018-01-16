@@ -37,7 +37,7 @@
 
 
 - name: run silent installer for strong auth
-    shell: "{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
+    shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
     args:
       chdir: "{{ arcot_home }}"
       creates: "{{ arcot_home }}/strongauth-installer.properties"

@@ -37,7 +37,7 @@
 - name: template - sysconfig tomcat env vars for systemd
   template:
     src: sysconfig.tomcat.j2
-    dest: /etc/sysconfi/tomcat
+    dest: /etc/sysconfig/tomcat
     owner: root
     group: root
     mode: 0755
