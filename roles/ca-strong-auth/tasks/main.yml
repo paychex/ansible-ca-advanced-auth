@@ -37,11 +37,11 @@
 
 
 - name: run silent installer for strong auth
-    shell: 'CA-S*.bin -f /tmp/strongauth-installer.properties -i silent'
+    shell: "{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
     args:
       chdir: "{{ arcot_home }}"
       creates: "{{ arcot_home }}/strongauth-installer.properties"
-      executable: /bin/bash
+      #executable: /bin/bash
       # bash must be used for globbing
 
 - name: copy DB access file
