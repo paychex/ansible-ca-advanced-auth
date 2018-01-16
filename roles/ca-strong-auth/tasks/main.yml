@@ -39,7 +39,7 @@
 - name: run silent installer for strong auth
   shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
   args:
-    chdir: "{{ arcot_home }}"
+    chdir: "{{ arcot_home }}/GEN500000000000116"
     creates: "{{ arcot_home }}/strongauth-installer.properties"
       #executable: /bin/bash
       # bash must be used for globbing
@@ -47,7 +47,7 @@
 - name: copy DB access file
   copy:
     remote_src: yes
-    src: "{{ arcot_home }}/native/linux/64bit/*"
+    src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
     dest: "{{ java_home }}/jre/bin"
     owner: "{{ arcot_user }}"
     group: "{{ arcot_user }}"
@@ -56,7 +56,7 @@
 - name: copy arcot-crypto-util
   copy:
     remote_src: yes
-    src: "{{ arcot_home }}/java/lib/arcot-crypto*"
+    src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
     dest: "{{ java_home }}/jre/lib/ext"
     owner: "{{ arcot_user }}"
     group: "{{ arcot_user }}"
