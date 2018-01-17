@@ -35,6 +35,13 @@
     owner: "{{ arcot_user }}"
     group: "{{ arcot_user }}"
 
+- name: workaround - copy securestore.enc file to conf directory
+  copy:
+    src: securestore.enc
+    dest: "{{ arcot_home }}/conf"
+    mode: 0644
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
 
 - name: run silent installer for strong auth
   shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
@@ -43,7 +50,8 @@
     creates: "{{ arcot_home }}/strongauth-installer.properties"
   when: strong_auth_install == "yes"
   environment:
-    ARCOT_HOME: /opt/CA/AdvAuth
+    ARCOT_HOME: "{{ arcot_home }}"
+  become_user: "{{ arcot_user }}"
 
 - name: copy DB access file
   copy:

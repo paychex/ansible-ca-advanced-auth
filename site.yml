@@ -1,6 +1,6 @@
 ---
 
-- hosts: rsk-app
+- hosts: "{{ target_hosts | default('test')}}"
   become: true
   roles:
     - tomcat9
