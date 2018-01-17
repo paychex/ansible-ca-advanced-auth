@@ -42,6 +42,8 @@
     chdir: "{{ arcot_home }}/GEN500000000000116"
     creates: "{{ arcot_home }}/strongauth-installer.properties"
   when: strong_auth_install == "yes"
+  environment:
+    ARCOT_HOME: /opt/CA/AdvAuth
 
 - name: copy DB access file
   copy:
