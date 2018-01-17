@@ -98,3 +98,4 @@
     group: tomcat
     mode: 0755
   when: sample_app == 'yes'
+  notify: restart tomcat
