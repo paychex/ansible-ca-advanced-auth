@@ -13,6 +13,12 @@
     shell: /bin/bash
     password: "{{ arcot_password }}"
 
+- name: user - add tomcat user to arcot group
+  user:
+    name: tomcat
+    append: yes
+    group: arcot
+
 - name: dir - create CA dir
   file:
     name: "{{ arcot_home }}"
