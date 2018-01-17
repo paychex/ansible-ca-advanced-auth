@@ -92,7 +92,7 @@
 - name: deploy sample app
   copy:
     remote_src: yes
-    src: "{{ arcot_home }}/java/webapps/*sample*.war"
+    src: "{{ arcot_home }}/java/webapps/ca-strongauth-sample-application.war"
     dest: "{{ catalina_home }}/webapps"
     owner: tomcat
     group: tomcat
