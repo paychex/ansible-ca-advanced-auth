@@ -51,7 +51,7 @@ ARCOT_PRIMARY_PASSWORD_SILENT=arc0tuser!
 #Configure Backup DB if true (true/false)
 #----------------------------------------
 
-ARCOT_CONFIG_BACKUP_DB_SILENT=false
+ARCOT_CONFIG_BACKUP_DB_SILENT=true
 
 ##---------------------------------------
 ###Backup Database Details
@@ -103,23 +103,23 @@ ARCOT_HSM_STORAGE_SLOT_SILENT=
 ###DB Configuration Details
 #-------------------------------------------
 
-INITIALIZE_DB=0
+INITIALIZE_DB=1
 UPGRADE_DB=0
 
 #-------------------------------------------
 ###Bootstrap Details
 #-------------------------------------------
 PERFORM_BOOTSTRAP=1
-GLOBAL_KEY_LABEL=
-GLOBAL_KEY_STORAGE_TYPE=
-MASTERADMIN_PASSWORD=
-DEFAULT_ORG_DISPLAY_NAME=
-DEFAULT_ORG_USE_GLOBAL_KEY=
-DEFAULT_ORG_KEY_STORAGE_TYPE=
-DEFAULT_ORG_KEY=
+GLOBAL_KEY_LABEL=skey1
+GLOBAL_KEY_STORAGE_TYPE=Software
+MASTERADMIN_PASSWORD=master1234!!
+DEFAULT_ORG_DISPLAY_NAME=DEFAULT
+DEFAULT_ORG_USE_GLOBAL_KEY=true
+DEFAULT_ORG_KEY_STORAGE_TYPE=Software
+DEFAULT_ORG_KEY=dost1234
 
 #-------------------------------------------
 ###Service auto start option
 #-------------------------------------------
-SERVICE_START=
+SERVICE_START=0
 CM_SERVICE_START=
