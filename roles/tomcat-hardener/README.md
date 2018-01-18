@@ -6,6 +6,8 @@ USAGE
 create an inventory
 create a playbook to run this and or additional roles
 
+for TSL settings, include `-e 'tomcat_tls == yes'` in your ansible call
+
 
 Role Name
 =========
@@ -15,7 +17,7 @@ hardening rules came from: https://wiki.paychex.com/display/WEBENG/PWM+build+inf
 Requirements
 ------------
 
-tomcat must be installed, recommend using tomcat ansible role
+tomcat must be installed, recommend using tomcat9 ansible role
 
 Role Variables
 --------------
