@@ -27,19 +27,42 @@
     group: "{{ arcot_user }}"
     mode: 0755
 
-- name: template - tomcat.service for systemd
+- name: deploy systemd services and sysconfig env vars
   template:
-    src: tomcat.service.j2
-    dest: /etc/systemd/system/tomcat.service
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: 0755
-  notify: restart tomcat
+  notify: "restart {{ item.handler }}"
+  with_items:
+    - { src:'tomcat.service.j2', dest:'/etc/systemd/system/tomcat.service', handler:'tomcat' }
+    - { src:'sysconfig.tomcat.j2', dest:'/etc/sysconfig/tomcat', handler:'tomcat' }
+    - { src:'arcot.service.j2', dest:'/etc/sysconfig/arcot', handler:'systemd' }
 
-- name: template - sysconfig tomcat env vars for systemd
-  template:
-    src: sysconfig.tomcat.j2
-    dest: /etc/sysconfig/tomcat
-    owner: root
-    group: root
-    mode: 0755
+
+
+# - name: template - tomcat.service for systemd
+#   template:
+#     src: tomcat.service.j2
+#     dest: /etc/systemd/system/tomcat.service
+#     owner: root
+#     group: root
+#     mode: 0755
+#   notify: restart tomcat
+
+# - name: template - sysconfig tomcat env vars for systemd
+#   template:
+#     src: sysconfig.tomcat.j2
+#     dest: /etc/sysconfig/tomcat
+#     owner: root
+#     group: root
+#     mode: 0755
+
+# - name: template - sysconfig arcot env vars for systemd
+#   template:
+#     src: sysconfig.arcot.j2
+#     dest: /etc/sysconfig/arcot
+#     owner: root
+#     group: root
+#     mode: 0755
