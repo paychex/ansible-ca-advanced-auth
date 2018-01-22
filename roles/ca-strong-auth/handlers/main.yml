@@ -7,3 +7,7 @@
     name: tomcat.service
     state: restarted
     daemon_reload: yes
+    
+- name: restart systemd
+  systemd:
+    daemon_reload: yes
