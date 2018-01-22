@@ -26,6 +26,9 @@ arcot_db_password: !vault |
           3630393165643262650a363437343332326566313865383639636633323565653466356464653334
           3736
 
+arcot_db_host: rskdbdvl1.pxlabus.com
+
+
 # ROLE: tomcat9
 tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz
 java_home: /opt/java
