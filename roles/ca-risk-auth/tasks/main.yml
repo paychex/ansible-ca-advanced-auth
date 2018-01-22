@@ -27,85 +27,35 @@
     mode: 0755
     remote_src: yes
 
-# - name: template - strong risk silent install file
-#   template:
-#     src: str.installer.properties.j2
-#     dest: "/tmp/strongauth-installer.properties"
-#     mode: 0755
-#     owner: "{{ arcot_user }}"
-#     group: "{{ arcot_user }}"
-#
-# - name: workaround - copy securestore.enc file to conf directory
-#   copy:
-#     src: securestore.enc
-#     dest: "{{ arcot_home }}/conf/securestore.enc"
-#     mode: 0644
-#     owner: "{{ arcot_user }}"
-#     group: "{{ arcot_user }}"
-#
-# - name: run silent installer for strong auth
-#   shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
-#   args:
-#     chdir: "{{ arcot_home }}/GEN500000000000116"
-#     creates: "{{ arcot_home }}/strongauth-installer.properties"
-#   when: strong_auth_install == "yes"
-#   environment:
-#     ARCOT_HOME: "{{ arcot_home }}"
-#   become_user: "{{ arcot_user }}"
-#
-# - name: copy DB access file
-#   copy:
-#     remote_src: yes
-#     src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
-#     dest: "{{ java_home }}/jre/bin"
-#     owner: "{{ arcot_user }}"
-#     group: "{{ arcot_user }}"
-#     mode: 0755
-#
-# - name: copy arcot-crypto-util
-#   copy:
-#     remote_src: yes
-#     src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
-#     dest: "{{ java_home }}/jre/lib/ext"
-#     owner: "{{ arcot_user }}"
-#     group: "{{ arcot_user }}"
-#     mode: 0755
-#
-# - name: download JDBC JAR
-#   get_url:
-#     url: "{{ JDBC_driver_url }}"
-#     dest: "{{ catalina_home }}/lib"
-#     owner: tomcat
-#     group: tomcat
-#     mode: 0755
-#
-# - name: deploy arcot admin
-#   copy:
-#     remote_src: yes
-#     src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
-#     dest: "{{ catalina_home }}/webapps"
-#     owner: tomcat
-#     group: tomcat
-#     mode: 0755
-#   notify: restart tomcat
-#
-# - name: deploy UDS
-#   copy:
-#     remote_src: yes
-#     src: "{{ arcot_home }}/java/webapps/arcotuds.war"
-#     dest: "{{ catalina_home }}/webapps"
-#     owner: tomcat
-#     group: tomcat
-#     mode: 0755
-#   notify: restart tomcat
-#
-# - name: deploy sample app
-#   copy:
-#     remote_src: yes
-#     src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
-#     dest: "{{ catalina_home }}/webapps"
-#     owner: tomcat
-#     group: tomcat
-#     mode: 0755
-#   when: sample_app == 'yes'
-#   notify: restart tomcat
+##################################################################
+#### install starts here #########################################
+
+- name: deploy systemd services and sysconfig env vars
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0755
+  notify: "restart {{ item.handler }}"
+  with_items:
+    - { src:'riskauth.service.j2', dest:'/etc/systemd/system/riskauth.service', handler:'systemd' }
+    - { src:'casemgmt.service.j2', dest:'/etc/systemd/system/casemgmt.service', handler:'systemd' }
+
+- name: template - strong risk silent install file
+  template:
+    src: rsk.installer.properties.j2
+    dest: "/tmp/riskauth-installer.properties"
+    mode: 0755
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+
+- name: run silent installer for strong auth
+  shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
+  args:
+    chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
+    creates: "{{ arcot_home }}/riskauth-installer.properties"
+  when: risk_auth_install == "yes"
+  environment:
+    ARCOT_HOME: "{{ arcot_home }}"
+  become_user: "{{ arcot_user }}"
