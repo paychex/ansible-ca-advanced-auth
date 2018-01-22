@@ -1,0 +1,17 @@
+[Unit]
+Description=CA Strong Auth Server
+After=network.target
+
+[Service]
+Type=forking
+EnvironmentFile=/etc/sysconfig/arcot
+ExecStart={{ arcot_home }}/bin/webfortserver start
+ExecStop={{ arcot_home }}/bin/webfortserver stop
+
+WorkingDirectory={{ arcot_home }}
+
+User={{ arcot_user }}
+Group={{ arcot_user }}
+
+[Install]
+WantedBy=multi-user.target
