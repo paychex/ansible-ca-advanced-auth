@@ -36,9 +36,9 @@
     mode: 0755
   notify: "restart {{ item.handler }}"
   with_items:
-    - { src:'tomcat.service.j2', dest:'/etc/systemd/system/tomcat.service', handler:'tomcat' }
-    - { src:'sysconfig.tomcat.j2', dest:'/etc/sysconfig/tomcat', handler:'tomcat' }
-    - { src:'arcot.service.j2', dest:'/etc/sysconfig/arcot', handler:'systemd' }
+    - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat' }
+    - { src: 'sysconfig.tomcat.j2', dest: '/etc/sysconfig/tomcat', handler: 'tomcat' }
+    - { src: 'arcot.service.j2', dest: '/etc/sysconfig/arcot', handler: 'systemd' }
 
 
 
