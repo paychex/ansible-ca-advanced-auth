@@ -43,7 +43,6 @@
     group: "{{ arcot_user }}"
     mode: 0755
 
-
 - name: workaround - copy securestore.enc file to conf directory
   copy:
     src: securestore.enc
@@ -109,7 +108,7 @@
 
 - name: enable and start strong Auth
   systemd:
-    name: strongauth.services
+    name: strongauth.service
     daemon_reload: yes
     state: started
     enabled: yes
