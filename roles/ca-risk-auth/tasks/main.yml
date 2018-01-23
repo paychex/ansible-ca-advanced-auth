@@ -59,3 +59,14 @@
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
+
+- name: deploy sample app
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/samples/java/ca-riskauth-sample-application.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  when: sample_app == 'yes'
+  notify: restart tomcat
