@@ -103,7 +103,7 @@
     dest: /etc/systemd/system/strongauth.service
     owner: root
     group: root
-    mode: 0755
+    mode: 0655
   handler: restart systemd
 
 - name: enable and start strong Auth
