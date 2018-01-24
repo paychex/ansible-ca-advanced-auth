@@ -30,7 +30,7 @@
 ##################################################################
 #### install starts here #########################################
 
-- name: template - webfort
+- name: template - riskfort
   vars:
     app: riskfortserver
   template:
@@ -40,7 +40,7 @@
     group: root
     mode: 0755
 
-- name: template - webfort
+- name: template - casemgmt
   vars:
     app: casemanagementserver
   template:
@@ -62,7 +62,7 @@
 #     - { src: 'riskauth.service.j2', dest: '/etc/systemd/system/riskauth.service', handler: 'systemd' }
 #     - { src: 'casemgmt.service.j2', dest: '/etc/systemd/system/casemgmt.service', handler: 'systemd' }
 
-- name: template - strong risk silent install file
+- name: template - risk silent install file
   template:
     src: rsk.installer.properties.j2
     dest: "/tmp/riskauth-installer.properties"
@@ -70,7 +70,7 @@
     owner: "{{ arcot_user }}"
     group: "{{ arcot_user }}"
 
-- name: run silent installer for strong auth
+- name: run silent installer for risk auth
   shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
   args:
     chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
