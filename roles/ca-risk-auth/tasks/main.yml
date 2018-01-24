@@ -38,7 +38,7 @@
     dest: "/etc/init.d/{{ app }}"
     owner: root
     group: root
-    mode: 0655
+    mode: 0755
 
 - name: template - webfort
   vars:
@@ -48,7 +48,7 @@
     dest: "/etc/init.d/{{ app }}"
     owner: root
     group: root
-    mode: 0655
+    mode: 0755
 
 # - name: deploy systemd services and sysconfig env vars
 #   template:
