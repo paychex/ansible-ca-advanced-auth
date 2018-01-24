@@ -30,17 +30,37 @@
 ##################################################################
 #### install starts here #########################################
 
-- name: deploy systemd services and sysconfig env vars
+- name: template - webfort
+  vars:
+    app: riskfortserver
   template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: init.d.j2
+    dest: "/etc/init.d/{{ app }}"
     owner: root
     group: root
-    mode: 0644
-  notify: "restart {{ item.handler }}"
-  with_items:
-    - { src: 'riskauth.service.j2', dest: '/etc/systemd/system/riskauth.service', handler: 'systemd' }
-    - { src: 'casemgmt.service.j2', dest: '/etc/systemd/system/casemgmt.service', handler: 'systemd' }
+    mode: 0655
+
+- name: template - webfort
+  vars:
+    app: casemanagementserver
+  template:
+    src: init.d.j2
+    dest: "/etc/init.d/{{ app }}"
+    owner: root
+    group: root
+    mode: 0655
+
+# - name: deploy systemd services and sysconfig env vars
+#   template:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: root
+#     group: root
+#     mode: 0644
+#   notify: "restart {{ item.handler }}"
+#   with_items:
+#     - { src: 'riskauth.service.j2', dest: '/etc/systemd/system/riskauth.service', handler: 'systemd' }
+#     - { src: 'casemgmt.service.j2', dest: '/etc/systemd/system/casemgmt.service', handler: 'systemd' }
 
 - name: template - strong risk silent install file
   template:

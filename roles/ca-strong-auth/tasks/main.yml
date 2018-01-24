@@ -97,18 +97,29 @@
     mode: 0755
   notify: restart tomcat
 
-- name: template - strongauth.service for systemd
+- name: template - webfort
+  vars:
+    app: webfortserver
   template:
-    src: strongauth.service.j2
-    dest: /etc/systemd/system/strongauth.service
+    src: init.d.j2
+    dest: "/etc/init.d/{{ app }}"
     owner: root
     group: root
     mode: 0655
-  handler: restart systemd
+
+
+# - name: template - strongauth.service for systemd
+#   template:
+#     src: strongauth.service.j2
+#     dest: /etc/systemd/system/strongauth.service
+#     owner: root
+#     group: root
+#     mode: 0655
+#   handler: restart systemd
 
 - name: enable and start strong Auth
   systemd:
-    name: strongauth.service
+    name: webfortserver
     daemon_reload: yes
     state: started
     enabled: yes
