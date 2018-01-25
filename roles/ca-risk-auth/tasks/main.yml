@@ -39,6 +39,8 @@
     owner: root
     group: root
     mode: 0755
+  notify: start riskfort
+
 
 - name: template - casemgmt
   vars:
@@ -49,6 +51,7 @@
     owner: root
     group: root
     mode: 0755
+  notify: start riskfort
 
 # - name: deploy systemd services and sysconfig env vars
 #   template:
@@ -75,10 +78,11 @@
   args:
     chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
     creates: "{{ arcot_home }}/riskauth-installer.properties"
-  when: risk_auth_install == "yes"
+  when: risk_auth_install is defined
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
+  notify: start riskfort
 
 - name: deploy sample app
   copy:

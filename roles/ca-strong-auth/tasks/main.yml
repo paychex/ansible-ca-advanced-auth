@@ -10,6 +10,10 @@
     group: "{{ arcot_user }}"
     mode: 0755
 
+# - name: strong auth installer
+#   block:
+#   when: strong_auth_install == "yes"
+
 - name: download strong auth zip
   get_url:
     url: "{{ str_auth_install_url }}"
@@ -56,10 +60,10 @@
   args:
     chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
     creates: "{{ arcot_home }}/strongauth-installer.properties"
-  when: strong_auth_install == "yes"
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
+  notify: start webfort
 
 - name: copy DB access file
   copy:
@@ -106,6 +110,7 @@
     owner: root
     group: root
     mode: 0755
+  notify: start webfort
 
 
 # - name: template - strongauth.service for systemd
@@ -117,12 +122,13 @@
 #     mode: 0655
 #   handler: restart systemd
 
-- name: enable and start strong Auth
-  systemd:
-    name: webfortserver
-    daemon_reload: yes
-    state: started
-    enabled: yes
+# commented out because systemd cannot manage CA tools natively through unit files
+# - name: enable and start strong Auth
+#   systemd:
+#     name: webfortserver
+#     daemon_reload: yes
+#     state: started
+#     enabled: yes
 
 - name: deploy UDS
   copy:
