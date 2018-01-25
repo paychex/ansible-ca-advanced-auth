@@ -2,12 +2,8 @@
 # handlers file for tomcat
 #
 
-- name: restart tomcat
-  systemd:
-    name: tomcat.service
-    state: restarted
-    daemon_reload: yes
+- name: start webfort
+  shell: "systemctl daemon-reload && systemctl enable webfortserver && systemctl start webfortserver"
 
-- name: restart systemd
-  systemd:
-    daemon_reload: yes
+- name: start riskfort
+  shell: "systemctl daemon-reload && systemctl enable riskfortserver && systemctl start riskfortserver && systemctl enable casemanagementserver && systemctl start casemanagementserver"
