@@ -32,7 +32,7 @@
     dest: /etc/systemd/system/tomcat.service
     owner: root
     group: root
-    mode: 0644
+    mode: 0664
 
 - name: template - sysconfig tomcat env vars for systemd
   template:
