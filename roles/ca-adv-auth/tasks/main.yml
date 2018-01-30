@@ -37,7 +37,7 @@
   notify: "restart {{ item.handler }}"
   with_items:
     - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat', mode: '0664' }
-    - { src: 'sysconfig.arcot.j2', dest: '/etc/sysconfig/arcot', handler: 'systemd', mode: '0644' }
+#    - { src: 'sysconfig.arcot.j2', dest: '/etc/sysconfig/arcot', handler: 'systemd', mode: '0644' }
 #    - { src: 'sysconfig.tomcat.j2', dest: '/etc/sysconfig/tomcat', handler: 'tomcat', mode: '0644' }
 
 blockinfile:
@@ -51,28 +51,3 @@ blockinfile:
          ARCOT_HOME={{ arcot_home }}
          PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin"
 notify: restart tomcat
-
-# - name: template - tomcat.service for systemd
-#   template:
-#     src: tomcat.service.j2
-#     dest: /etc/systemd/system/tomcat.service
-#     owner: root
-#     group: root
-#     mode: 0755
-#   notify: restart tomcat
-
-# - name: template - sysconfig tomcat env vars for systemd
-#   template:
-#     src: sysconfig.tomcat.j2
-#     dest: /etc/sysconfig/tomcat
-#     owner: root
-#     group: root
-#     mode: 0755
-
-# - name: template - sysconfig arcot env vars for systemd
-#   template:
-#     src: sysconfig.arcot.j2
-#     dest: /etc/sysconfig/arcot
-#     owner: root
-#     group: root
-#     mode: 0755
