@@ -1,0 +1,8 @@
+---
+# defaults file for tomcat
+
+#tomcat_install_url: http://mirror.cogentco.com/pub/apache/tomcat/tomcat-9/v9.0.2/bin/apache-tomcat-9.0.2.tar.gz
+rsk_auth_install_url: http://repoman.paychex.com/packages/CA/install-pkgs/CA-rsk-ath.zip
+java_home: /opt/java
+arcot_home: /opt/CA/AdvAuth
+catalina_home: /opt/tomcat

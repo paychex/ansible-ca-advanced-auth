@@ -1,7 +1,9 @@
 ---
 
-- hosts: rsk-app
+- hosts: "{{ target_hosts | default('rsk-app')}}"
   become: true
   roles:
-    - tomcat7
+    - tomcat9
     - ca-adv-auth
+    - ca-strong-auth
+    - ca-risk-auth

@@ -1,0 +1,152 @@
+---
+# tasks file for tomcat
+#
+
+- name: dir - create CA dir
+  file:
+    name: "{{ arcot_home }}"
+    state: directory
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+
+# - name: strong auth installer
+#   block:
+#   when: strong_auth_install == "yes"
+
+- name: download strong auth zip
+  get_url:
+    url: "{{ str_auth_install_url }}"
+    dest: "{{ arcot_home }}"
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+
+- name: unzip strong auth
+  unarchive:
+    src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+    dest: "{{ arcot_home }}"
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+    remote_src: yes
+
+- name: template - strong auth silent install file
+  template:
+    src: str.installer.properties.j2
+    dest: "/tmp/strongauth-installer.properties"
+    mode: 0755
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+
+- name: workaround - create conf directory
+  file:
+    name: "{{ arcot_home }}/conf"
+    state: directory
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+
+- name: workaround - copy securestore.enc file to conf directory
+  copy:
+    src: securestore.enc
+    dest: "{{ arcot_home }}/conf/securestore.enc"
+    mode: 0644
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+
+- name: run silent installer for strong auth
+  shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
+  args:
+    chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
+    creates: "{{ arcot_home }}/strongauth-installer.properties"
+  environment:
+    ARCOT_HOME: "{{ arcot_home }}"
+  become_user: "{{ arcot_user }}"
+  notify: start webfort
+
+- name: copy DB access file
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
+    dest: "{{ java_home }}/jre/bin"
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+
+- name: copy arcot-crypto-util
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
+    dest: "{{ java_home }}/jre/lib/ext"
+    owner: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
+    mode: 0755
+
+- name: download JDBC JAR
+  get_url:
+    url: "{{ JDBC_driver_url }}"
+    dest: "{{ catalina_home }}/lib"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+
+- name: deploy arcot admin
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
+- name: template - webfort
+  vars:
+    app: webfortserver
+  template:
+    src: init.d.j2
+    dest: "/etc/init.d/{{ app }}"
+    owner: root
+    group: root
+    mode: 0755
+  notify: start webfort
+
+
+# - name: template - strongauth.service for systemd
+#   template:
+#     src: strongauth.service.j2
+#     dest: /etc/systemd/system/strongauth.service
+#     owner: root
+#     group: root
+#     mode: 0655
+#   handler: restart systemd
+
+# commented out because systemd cannot manage CA tools natively through unit files
+# - name: enable and start strong Auth
+#   systemd:
+#     name: webfortserver
+#     daemon_reload: yes
+#     state: started
+#     enabled: yes
+
+- name: deploy UDS
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotuds.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
+- name: deploy sample app
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  when: sample_app == 'yes'
+  notify: restart tomcat

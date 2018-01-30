@@ -1,0 +1,43 @@
+#! /bin/bash
+#
+# /etc/init.d/strongauth
+# init script for strongauth
+#
+# chkconfig: 2345 99 01
+# description: init script for strongauth
+#
+
+# providing necessary env vars
+source {{ arcot_home }}/sbin/arwfenv
+DIRUSER={{ arcot_user }}
+DSROOT={{ arcot_home }}/bin
+
+start() {
+          su - $DIRUSER -c "${DSROOT}/{{ app }} start"
+}
+
+stop() {
+        su - $DIRUSER -c "${DSROOT}/{{ app }} stop"
+}
+
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 1
+esac
+
+exit 0;
