@@ -1,4 +1,0 @@
----
-# defaults file for tomcat-hardener
-
-catalina_home: /opt/tomcat

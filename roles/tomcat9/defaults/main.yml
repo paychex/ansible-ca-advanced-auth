@@ -1,9 +1,0 @@
----
-# defaults file for tomcat
-
-#tomcat_install_url: http://mirror.cogentco.com/pub/apache/tomcat/tomcat-9/v9.0.2/bin/apache-tomcat-9.0.2.tar.gz
-tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz
-java_home: /opt/java
-catalina_home: /opt/tomcat
-
- 
