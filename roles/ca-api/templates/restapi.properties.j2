@@ -1,0 +1,161 @@
+#--------------------------------------------#
+#----- UDS Web Services Configuration -------#
+#--------------------------------------------#
+
+UdsWebServices.protocol=http
+UdsWebServices.hostname=localhost
+UdsWebServices.port=8080
+# example : 1-way or 2-way and is dependent on protocol property of https
+UdsWebServices.ssl.configuration=
+UdsWebServices.truststore.path=
+UdsWebServices.truststore.file=
+UdsWebServices.truststore.password=
+UdsWebServices.keystore.path=
+UdsWebServices.keystore.file=
+UdsWebServices.keystore.password=
+
+# example : 1-way or 2-way and is dependent on protocol property of https
+UdsWebServices.ssl.configuration=
+UdsWebServices.truststore.path=
+UdsWebServices.truststore.file=
+UdsWebServices.truststore.password=
+UdsWebServices.keystore.path=
+UdsWebServices.keystore.file=
+UdsWebServices.keystore.password=
+
+#----- RISK Administrative Web Services Configuration -------#
+
+RiskAdminWebServices.protocol=http
+RiskAdminWebServices.hostname=localhost
+RiskAdminWebServices.port=7777
+# example : 1-way or 2-way and is dependent on protocol property of https
+RiskAdminWebServices.ssl.configuration=
+RiskAdminWebServices.truststore.path=
+RiskAdminWebServices.truststore.file=
+RiskAdminWebServices.truststore.password=
+RiskAdminWebServices.keystore.path=
+RiskAdminWebServices.keystore.file=
+RiskAdminWebServices.keystore.password=
+
+RiskAuth.AnAConfiguration=ALL
+#--------------------------------------------#
+#----- STRONG Administrative Web Services Configuration -------#
+#--------------------------------------------#
+
+# example : http or https
+AdminWebServices.protocol=http
+AdminWebServices.hostname=localhost
+AdminWebServices.port=9745
+# example : 1-way or 2-way and is dependent on protocol property of https
+AdminWebServices.ssl.configuration=
+AdminWebServices.truststore.path=
+AdminWebServices.truststore.file=
+AdminWebServices.truststore.password=
+AdminWebServices.keystore.path=
+AdminWebServices.keystore.file=
+AdminWebServices.keystore.password=
+
+
+#--------------------------------------------#
+#----- SDK Authentication Configuration ------
+#--------------------------------------------#
+
+pool.numPreCreate=0
+pool.numConnectFailuresToTriggerFailover=1
+pool.maxActive=64
+pool.maxIdle=16
+pool.maxWaitTimeMillis=-1
+pool.minEvictableIdleTimeMillis=-1
+pool.timeBetweenEvictionRunsMillis=-1
+
+authentication.host.1=localhost
+authentication.port.1=9742
+authentication.transport.1=TCP
+authentication.connectionTimeout.1=10000
+authentication.readTimeout.1=30000
+
+authentication.serverCACertPEMPath.1=
+authentication.clientCertKeyP12Path.1=
+authentication.clientCertKeyPassword.1=
+
+#--------------------------------------------#
+#---------- SDK Issuance Configuration--------
+#-------------------------------------------------
+
+issuance.host.1=localhost
+issuance.port.1=9742
+issuance.transport.1=TCP
+issuance.connectionTimeout.1=10000
+issuance.readTimeout.1=30000
+
+issuance.serverCACertPEMPath.1=
+issuance.clientCertKeyP12Path.1=
+issuance.clientCertKeyPassword.1=
+
+
+# RiskAuth Configuration #
+
+#RiskFort server IP address
+HOST.1=localhost
+#RiskFort server port number
+PORT.1=7680
+#Parameter name for connection timeout(in milliseconds) with RiskFort Server
+CONNECTION_TIMEOUT=10000
+#Parameter name for connection retries with RiskFort Server
+CONNECTION_RETRIES=3
+#Parameter name for read timeout(in milliseconds) on a connection with RiskFort Server.
+READ_TIMEOUT=30000
+
+#Parameter for enabling or disabling the connection pooling to RiskFort Server.
+#Default is enabled, set USE_CONNECTION_POOLING=0 for disabling connection pooling.
+USE_CONNECTION_POOLING=1
+
+#Maximum number of connections allowed in the pool from the SDK to a given server.
+MAX_ACTIVE=128
+
+#Ensure that TIME_BETWEEN_CONNECTION_EVICTION + IDLE_TIME_OF_CONNECTION < firewall connection timeout
+#Example: If your firewall times out and closes idle connections in 1 hour,
+#then you can set IDLE_TIME_OF_CONNECTION to 1800000 milliseconds(30 mins)
+#and the Evictor Thread to run after 900000 milliseconds(15 minutes)
+
+# TIME_BETWEEN_CONNECTION_EVICTION: The amount of time in milliseconds to sleep, before checking the pool for idle connections to be evicted.
+# If the value of pool.timeBetweenEvictionRunsMillis is -1, then there would not be eviction of connections.
+TIME_BETWEEN_CONNECTION_EVICTION=900000
+
+#The minimum amount of time in milliseconds a connection can stay idle, before being evicted.
+# If set to -1, the idle connections would not be evicted.
+IDLE_TIME_OF_CONNECTION=1800000
+
+#WHEN_EXHAUSTED_ACTION: Defines the behavior when the pool has been exuasted (maximum number of connections already used).
+# Possible values:
+#BLOCK: Wait for a connection to be free. This is the default behavior.
+#FAIL: Fail the transaction.
+#GROW: Simply grow the pool.
+WHEN_EXHAUSTED_ACTION=BLOCK
+
+#Transport Type, Possible values are TCP and SSL
+TRANSPORT_TYPE=TCP
+
+# Required if TRANSPORT_TYPE = SSL: CA certificate file.
+CA_CERT_FILE=<server CA certificate (in PEM format) file path>
+
+#Use CLIENT_P12_FILE for the client PKCS 12 file (contains client key and certificate pair)
+#Use CLIENT_P12_PASSWORD for the password of the aforementioned PKCS 12 file
+
+# LIFO: Determine whether or not the pool returns idle objects in last-in-first-out order
+# Set it to false to ensure each connection is used in a round-robin and does not idle. Recommended
+# value is false for high load deployments.
+LIFO=false
+
+# NUM_PRE_CREATE: Number of connections to be pre created during pool initialization
+NUM_PRE_CREATE=32
+
+# NUM_CONNECT_FAILURES_TO_TRIGGER_FAILOVER: Number of consecutive connection failures to trigger fail over to another pool
+NUM_CONNECT_FAILURES_TO_TRIGGER_FAILOVER=2
+
+# MAX_IDLE: Maximum number of idle connections allowed in the pool from the SDK to a given server
+MAX_IDLE=-1
+
+# MAX_WAIT_TIME_MILLIS: Maximum amount of time in milliseconds, a request would wait on a connection from a pool.
+# If set to -1, the request would wait indefinitely.
+MAX_WAIT_TIME_MILLIS=3000
