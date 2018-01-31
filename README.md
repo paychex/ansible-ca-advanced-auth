@@ -1,6 +1,6 @@
 USAGE
 -----
-ansible-playbook -u rmullen -k -i inventory -e "strong_auth_install=yes risk_auth_install=yes sample_app=yes" site.yml
+ansible-playbook -i inventory -e "strong_auth_install=yes risk_auth_install=yes sample_app=yes" site.yml
 
 create an inventory create a playbook to run this and or additional roles
 
