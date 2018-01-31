@@ -1,34 +1,41 @@
 USAGE
 -----
-ansible-playbook -u rmullen -k -i inventory -e "strong_auth_install= yes sample_app=yes" site.yml
+ansible-playbook -i inventory -e "strong_auth_install=yes risk_auth_install=yes sample_app=yes" site.yml
 
 create an inventory create a playbook to run this and or additional roles
 
 Role Name
-this role installs tomcat 7.0.81
+this role installs advanced auth 9.0.2
 
 Requirements
 ------------
-java is expected to be installed and located at /opt/jdk1.7.0_21
+java is expected to be installed at /opt/java
+tomcat is expected to be installed at /opt/tomcat
 
 Role Variables
 --------------
-DEFAULTS: java_home catalina_home tomcat_install_url
+check group_vars/all.yml
 
-please make var changes in the tomcat/vars/main.yml, not defaults/main.yml adjusted var names have not been tested
+Group vars can be overwritten using ansible precedence. Please do not write over group_vars values unless they are intended to be permanent
+http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
 Example Playbook
 site.yml
 
-hosts: rsk-app become: true roles:
-tomcat
+hosts: rsk-app
+become: true
+roles:
+  - ca-adv-auth
+  - ca-strong-auth
+  - ca-risk-auth
 
 HANDLERS
 --------
-if the zip file is updated the unzip playbook should notify the 'restart tomcat' handler
+handlers are stored in ca-adv-auth and shared using meta dependencies
 
 notify:
-name: restart tomcat
+name: restart webfort
+
 
 License
 BSD

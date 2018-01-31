@@ -48,7 +48,7 @@
     backup: yes
     insertafter: EOF
     block: |
-           "LD_LIBRARY_PATH={{ arcot_home }}/odbc64v80/lib:{{ arcot_home }}/sbin:{{ arcot_home }}/lib:{{ arcot_home }}/bin:{{ arcot_home }}/sdk/server/plugin/c/lib:{{ java_home }}/jre/bin
+           LD_LIBRARY_PATH={{ arcot_home }}/odbc64v80/lib:{{ arcot_home }}/sbin:{{ arcot_home }}/lib:{{ arcot_home }}/bin:{{ arcot_home }}/sdk/server/plugin/c/lib:{{ java_home }}/jre/bin
            ARCOT_HOME={{ arcot_home }}
-           PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin"
+           PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
   notify: restart tomcat
