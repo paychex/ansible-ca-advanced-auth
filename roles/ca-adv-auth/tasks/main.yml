@@ -19,7 +19,7 @@
   user:
     name: tomcat
     append: yes
-    group: ""{{ arcot_user }}""
+    group: "{{ arcot_user }}"
 
 - name: dir - create CA dir
   file:
