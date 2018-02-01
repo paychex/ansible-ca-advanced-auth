@@ -6,6 +6,8 @@
   group:
     name: "{{ arcot_user }}"
     state: present
+    gid: 1000
+    # arcot keeps getting assigned gid 100 causing problems with permissions
 
 - name: user - create arcot_user user
   user:
@@ -17,7 +19,7 @@
   user:
     name: tomcat
     append: yes
-    group: arcot
+    group: {{ arcot_user }}
 
 - name: dir - create CA dir
   file:
