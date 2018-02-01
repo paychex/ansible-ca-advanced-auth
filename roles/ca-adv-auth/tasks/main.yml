@@ -19,7 +19,7 @@
   user:
     name: tomcat
     append: yes
-    group: {{ arcot_user }}
+    group: ""{{ arcot_user }}""
 
 - name: dir - create CA dir
   file:
@@ -28,6 +28,14 @@
     owner: "{{ arcot_user }}"
     group: "{{ arcot_user }}"
     mode: 0755
+
+- name: template - tomcat env script in profile.d
+  template:
+    src: arwfenv.profile.sh.j2
+    dest: /etc/profile.d/arwfenv.sh
+    mode: 0755
+    owner: root
+    group: root
 
 - name: deploy systemd services and sysconfig env vars
   template:
