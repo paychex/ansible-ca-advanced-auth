@@ -12,6 +12,7 @@
 - name: user - create arcot_user user
   user:
     name: "{{ arcot_user }}"
+    group: "{{ arcot_user }}"
     shell: /bin/bash
     password: "{{ arcot_password }}"
 
@@ -29,7 +30,7 @@
     group: "{{ arcot_user }}"
     mode: 0755
 
-- name: template - tomcat env script in profile.d
+- name: template - arcot env script in profile.d
   template:
     src: arwfenv.profile.sh.j2
     dest: /etc/profile.d/arwfenv.sh
