@@ -2,7 +2,7 @@
 # tasks file for tomcat
 #
 
-- name: user - create arcot_user user
+- name: user - create arcot user
   user:
     name: arcot
     group: arcot
