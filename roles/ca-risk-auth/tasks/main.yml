@@ -1,29 +1,29 @@
 ---
-# tasks file for tomcat
+# tasks file for risk auth
 #
 
 - name: dir - create CA dir
   file:
     name: "{{ arcot_home }}"
     state: directory
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: download risk auth zip
   get_url:
     url: "{{ rsk_auth_install_url }}"
     dest: "{{ arcot_home }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: unzip risk auth
   unarchive:
     src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
     dest: "{{ arcot_home }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
     remote_src: yes
 
@@ -70,8 +70,8 @@
     src: rsk.installer.properties.j2
     dest: "/tmp/riskauth-installer.properties"
     mode: 0755
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
 
 - name: run silent installer for risk auth
   shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
@@ -83,6 +83,16 @@
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
   notify: start riskfort
+
+- name: deploy arcot admin
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
 
 - name: deploy sample app
   copy:

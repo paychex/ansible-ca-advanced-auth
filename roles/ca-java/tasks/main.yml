@@ -1,32 +1,12 @@
 ---
-# tasks file for tomcat
+# tasks for ca java based apps
 #
-
-- name: group - arcot
-  group:
-    name: arcot
-    state: present
-
-- name: user - create arcot user
-  user:
-    name: arcot
-    group: arcot
-    shell: /bin/bash
-    password: "{{ arcot_password }}"
 
 - name: user - add tomcat user to arcot group
   user:
     name: tomcat
     append: yes
-    groups: arcot
-
-- name: dir - create CA dir
-  file:
-    name: "{{ arcot_home }}"
-    state: directory
-    owner: arcot
     group: arcot
-    mode: 0755
 
 - name: template - arcot env script in profile.d
   template:
@@ -35,17 +15,7 @@
     mode: 0755
     owner: root
     group: root
-#
-# - name: deploy systemd services and sysconfig env vars
-#   template:
-#     src: "{{ item.src }}"
-#     dest: "{{ item.dest }}"
-#     owner: root
-#     group: root
-#     mode: "{{ item.mode }}"
-#   notify: "restart {{ item.handler }}"
-#   with_items:
-#     - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat', mode: '0664' }
+
 
 - name: add arcot env vars to tomcat systemd config file
   blockinfile:
