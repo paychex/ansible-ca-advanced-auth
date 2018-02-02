@@ -84,6 +84,16 @@
   become_user: "{{ arcot_user }}"
   notify: start riskfort
 
+- name: deploy arcot admin
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
 - name: deploy sample app
   copy:
     remote_src: yes
