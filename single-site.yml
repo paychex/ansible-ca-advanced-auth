@@ -3,7 +3,7 @@
 - hosts: "{{ target_hosts | default('rsk-app')}}"
   become: true
   vars_files:
-    - "{{ facter_payx_environment }}.yml"
+    - "group_vars/{{ facter_payx_environment }}.yml"
   roles:
     - ca-strong-auth
     - ca-risk-auth
