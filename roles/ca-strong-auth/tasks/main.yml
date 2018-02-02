@@ -2,14 +2,6 @@
 # tasks file for strong auth
 #
 
-- name: dir - create CA dir
-  file:
-    name: "{{ arcot_home }}"
-    state: directory
-    owner: arcot
-    group: arcot
-    mode: 0755
-
 # - name: strong auth installer
 #   block:
 #   when: strong_auth_install == "yes"
@@ -85,24 +77,6 @@
     group: root
     mode: 0755
   notify: start webfort
-
-
-# - name: template - strongauth.service for systemd
-#   template:
-#     src: strongauth.service.j2
-#     dest: /etc/systemd/system/strongauth.service
-#     owner: root
-#     group: root
-#     mode: 0655
-#   handler: restart systemd
-
-# commented out because systemd cannot manage CA tools natively through unit files
-# - name: enable and start strong Auth
-#   systemd:
-#     name: webfortserver
-#     daemon_reload: yes
-#     state: started
-#     enabled: yes
 
 - name: deploy UDS
   copy:
