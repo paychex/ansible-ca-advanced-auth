@@ -6,8 +6,8 @@
   file:
     name: "{{ arcot_home }}"
     state: directory
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 # - name: strong auth installer
@@ -18,16 +18,16 @@
   get_url:
     url: "{{ str_auth_install_url }}"
     dest: "{{ arcot_home }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: unzip strong auth
   unarchive:
     src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
     dest: "{{ arcot_home }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
     remote_src: yes
 
@@ -36,8 +36,8 @@
     src: str.installer.properties.j2
     dest: "/tmp/strongauth-installer.properties"
     mode: 0755
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
 
 - name: run silent installer for strong auth
   shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
@@ -46,7 +46,7 @@
     creates: "{{ arcot_home }}/strongauth-installer.properties"
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
-  become_user: "{{ arcot_user }}"
+  become_user: arcot
   notify: start webfort
 
 - name: copy DB access file
@@ -54,8 +54,8 @@
     remote_src: yes
     src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
     dest: "{{ java_home }}/jre/bin"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: copy arcot-crypto-util
@@ -63,8 +63,8 @@
     remote_src: yes
     src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
     dest: "{{ java_home }}/jre/lib/ext"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: download JDBC JAR

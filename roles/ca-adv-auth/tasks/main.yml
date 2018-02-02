@@ -4,8 +4,8 @@
 
 - name: user - create arcot_user user
   user:
-    name: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    name: arcot
+    group: arcot
     shell: /bin/bash
     password: "{{ arcot_password }}"
 
@@ -13,14 +13,14 @@
   user:
     name: tomcat
     append: yes
-    group: "{{ arcot_user }}"
+    group: arcot
 
 - name: dir - create CA dir
   file:
     name: "{{ arcot_home }}"
     state: directory
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
+    owner: arcot
+    group: arcot
     mode: 0755
 
 - name: template - arcot env script in profile.d
