@@ -2,6 +2,11 @@
 # tasks file for tomcat
 #
 
+- name: group - arcot
+  group:
+    name: arcot
+    state: present
+
 - name: user - create arcot user
   user:
     name: arcot
@@ -13,7 +18,7 @@
   user:
     name: tomcat
     append: yes
-    group: arcot
+    groups: arcot
 
 - name: dir - create CA dir
   file:
@@ -30,17 +35,17 @@
     mode: 0755
     owner: root
     group: root
-
-- name: deploy systemd services and sysconfig env vars
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: "{{ item.mode }}"
-  notify: "restart {{ item.handler }}"
-  with_items:
-    - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat', mode: '0664' }
+#
+# - name: deploy systemd services and sysconfig env vars
+#   template:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: root
+#     group: root
+#     mode: "{{ item.mode }}"
+#   notify: "restart {{ item.handler }}"
+#   with_items:
+#     - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat', mode: '0664' }
 
 - name: add arcot env vars to tomcat systemd config file
   blockinfile:
