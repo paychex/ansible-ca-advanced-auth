@@ -77,9 +77,7 @@
   args:
     chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
     creates: "{{ arcot_home }}/riskauth-installer.properties"
-  when: risk_auth_install is defined
   environment:
-  when: installed.stat.exists == false
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
   when: installed.stat.exists == false
