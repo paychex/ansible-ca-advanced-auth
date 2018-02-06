@@ -2,8 +2,6 @@
 
 - hosts: "{{ target_app_hosts | default('rsk-app')}}"
   become: true
-  vars:
-    rsk_app: yes
   vars_files:
     - "group_vars/{{ facter_payx_environment }}.yml"
   roles:
@@ -13,8 +11,6 @@
 
 - hosts: "{{ target_web_hosts | default('rsk-web')}}"
   become: true
-  vars:
-    rsk_web: yes
   vars_files:
     - "group_vars/{{ facter_payx_environment }}.yml"
   roles:
