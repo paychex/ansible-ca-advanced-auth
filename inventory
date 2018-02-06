@@ -1,12 +1,16 @@
 [rsk-app]
 rskapdvl1.pxlabus.com
 
+[rsk-app:vars]
+rsk_app=yes
+rsk_web=no
+
+[rsk-web]
+rmullen2.pxlabus.com
+
+[rsk-web:vars]
+rsk_app=no
+rsk_web=yes
+
 [rsk-db]
 rskdbdvl1.pxlabus.com
-
-[rsk:children]
-rsk-app
-rsk-db
-
-[drew]
-rmullen1.pxlabus.com
