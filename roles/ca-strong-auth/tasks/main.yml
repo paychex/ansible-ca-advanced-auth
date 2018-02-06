@@ -39,33 +39,57 @@
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: arcot
-  notify: start webfort
+#  notify: start webfort
 
-- name: copy DB access file
-  copy:
-    remote_src: yes
-    src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
-    dest: "{{ java_home }}/jre/bin"
-    owner: arcot
-    group: arcot
-    mode: 0755
+- name: complete tasks for web apps
+  block:
+    - name: copy DB access file
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
+        dest: "{{ java_home }}/jre/bin"
+        owner: arcot
+        group: arcot
+        mode: 0755
 
-- name: copy arcot-crypto-util
-  copy:
-    remote_src: yes
-    src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
-    dest: "{{ java_home }}/jre/lib/ext"
-    owner: arcot
-    group: arcot
-    mode: 0755
+    - name: copy arcot-crypto-util
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
+        dest: "{{ java_home }}/jre/lib/ext"
+        owner: arcot
+        group: arcot
+        mode: 0755
 
-- name: download JDBC JAR
-  get_url:
-    url: "{{ JDBC_driver_url }}"
-    dest: "{{ catalina_home }}/lib"
-    owner: tomcat
-    group: tomcat
-    mode: 0755
+    - name: download JDBC JAR
+      get_url:
+        url: "{{ JDBC_driver_url }}"
+        dest: "{{ catalina_home }}/lib"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+
+    - name: deploy UDS
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/java/webapps/arcotuds.war"
+        dest: "{{ catalina_home }}/webapps"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+      notify: restart tomcat
+
+    - name: deploy sample app
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
+        dest: "{{ catalina_home }}/webapps"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+      when: sample_app == 'yes'
+      notify: restart tomcat
+  when: rsk_web == "yes"
 
 - name: template - webfort
   vars:
@@ -77,24 +101,4 @@
     group: root
     mode: 0755
   notify: start webfort
-
-- name: deploy UDS
-  copy:
-    remote_src: yes
-    src: "{{ arcot_home }}/java/webapps/arcotuds.war"
-    dest: "{{ catalina_home }}/webapps"
-    owner: tomcat
-    group: tomcat
-    mode: 0755
-  notify: restart tomcat
-
-- name: deploy sample app
-  copy:
-    remote_src: yes
-    src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
-    dest: "{{ catalina_home }}/webapps"
-    owner: tomcat
-    group: tomcat
-    mode: 0755
-  when: sample_app == 'yes'
-  notify: restart tomcat
+  when: rsk_app == "yes"

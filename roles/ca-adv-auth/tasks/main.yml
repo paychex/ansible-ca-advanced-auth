@@ -59,3 +59,4 @@
            ARCOT_HOME={{ arcot_home }}
            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
   notify: restart tomcat
+  when: rsk_web == "yes"
