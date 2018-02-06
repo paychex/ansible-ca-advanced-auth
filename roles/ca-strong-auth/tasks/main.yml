@@ -6,40 +6,49 @@
 #   block:
 #   when: strong_auth_install == "yes"
 
-- name: download strong auth zip
-  get_url:
-    url: "{{ str_auth_install_url }}"
-    dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
-    mode: 0755
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+  register: installed
 
-- name: unzip strong auth
-  unarchive:
-    src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
-    dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
-    mode: 0755
-    remote_src: yes
+- name: install strong auth
+  block:
 
-- name: template - strong auth silent install file
-  template:
-    src: str.installer.properties.j2
-    dest: "/tmp/strongauth-installer.properties"
-    mode: 0755
-    owner: arcot
-    group: arcot
+    - name: download strong auth zip
+      get_url:
+        url: "{{ str_auth_install_url }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
 
-- name: run silent installer for strong auth
-  shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
-  args:
-    chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
-    creates: "{{ arcot_home }}/strongauth-installer.properties"
-  environment:
-    ARCOT_HOME: "{{ arcot_home }}"
-  become_user: arcot
-#  notify: start webfort
+    - name: unzip strong auth
+      unarchive:
+        src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+        remote_src: yes
+
+    - name: template - strong auth silent install file
+      template:
+        src: str.installer.properties.j2
+        dest: "/tmp/strongauth-installer.properties"
+        mode: 0755
+        owner: arcot
+        group: arcot
+
+    - name: run silent installer for strong auth
+      shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
+      args:
+        chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
+        creates: "{{ arcot_home }}/strongauth-installer.properties"
+      environment:
+        ARCOT_HOME: "{{ arcot_home }}"
+      become_user: arcot
+  when: installed.stat.exists == false
+
 
 - name: complete tasks for web apps
   block:
