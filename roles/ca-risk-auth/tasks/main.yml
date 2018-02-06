@@ -10,22 +10,31 @@
     group: arcot
     mode: 0755
 
-- name: download risk auth zip
-  get_url:
-    url: "{{ rsk_auth_install_url }}"
-    dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
-    mode: 0755
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+  register: installed
 
-- name: unzip risk auth
-  unarchive:
-    src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
-    dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
-    mode: 0755
-    remote_src: yes
+- name: install risk auth
+  block:
+
+    - name: download risk auth zip
+      get_url:
+        url: "{{ rsk_auth_install_url }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+
+    - name: unzip risk auth
+      unarchive:
+        src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+        remote_src: yes
+  when: installed.stat.exists == false
 
 ##################################################################
 #### install starts here #########################################
@@ -54,17 +63,6 @@
         mode: 0755
       notify: start riskfort
   when: rsk_app == "yes"
-# - name: deploy systemd services and sysconfig env vars
-#   template:
-#     src: "{{ item.src }}"
-#     dest: "{{ item.dest }}"
-#     owner: root
-#     group: root
-#     mode: 0644
-#   notify: "restart {{ item.handler }}"
-#   with_items:
-#     - { src: 'riskauth.service.j2', dest: '/etc/systemd/system/riskauth.service', handler: 'systemd' }
-#     - { src: 'casemgmt.service.j2', dest: '/etc/systemd/system/casemgmt.service', handler: 'systemd' }
 
 - name: template - risk silent install file
   template:
@@ -81,9 +79,11 @@
     creates: "{{ arcot_home }}/riskauth-installer.properties"
   when: risk_auth_install is defined
   environment:
+  when: installed.stat.exists == false
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
-#  notify: start riskfort
+  when: installed.stat.exists == false
+
 
 - name: deploy web components
   block:
