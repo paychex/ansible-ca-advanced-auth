@@ -1,7 +1,0 @@
----
-
-- hosts: rsk-app
-  become: true
-  roles:
-    - tomcat7
-    - ca-adv-auth

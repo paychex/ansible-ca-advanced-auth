@@ -1,8 +1,0 @@
----
-# handlers file for tomcat
-#
-
-- name: restart tomcat
-  systemd:
-    name: tomcat.service
-    state: restarted

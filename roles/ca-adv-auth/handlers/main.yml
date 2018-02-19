@@ -1,0 +1,9 @@
+---
+# handlers file for tomcat
+#
+
+- name: start webfort
+  shell: "systemctl daemon-reload && systemctl enable webfortserver && systemctl start webfortserver"
+
+- name: start riskfort
+  shell: "systemctl daemon-reload && systemctl enable riskfortserver && systemctl start riskfortserver && systemctl enable casemanagementserver && systemctl start casemanagementserver"

@@ -1,0 +1,16 @@
+---
+# handlers file for tomcat
+#
+- name: ensure stack is up
+  block:
+    - name: remove logs
+
+    - name: start stack
+
+    - name: arcotadmin
+    #Arcot Administration Console Configured Successfully
+    - name: uds
+
+    - name: strong auth sample app
+
+    - name: risk auth sample app
