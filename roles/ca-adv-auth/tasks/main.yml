@@ -166,3 +166,111 @@
     mode: 0755
   notify: start webfort
   when: rsk_app == "yes"
+
+# tasks file for risk auth
+#
+
+- name: dir - create CA dir
+  file:
+    name: "{{ arcot_home }}"
+    state: directory
+    owner: arcot
+    group: arcot
+    mode: 0755
+
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+  register: installed
+
+- name: install risk auth
+  block:
+
+    - name: download risk auth zip
+      get_url:
+        url: "{{ rsk_auth_install_url }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+
+    - name: unzip risk auth
+      unarchive:
+        src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+        remote_src: yes
+  when: installed.stat.exists == false
+
+##################################################################
+#### install starts here #########################################
+- name: install app components
+  block:
+    - name: template - riskfort
+      vars:
+        app: riskfortserver
+      template:
+        src: init.d.j2
+        dest: "/etc/init.d/{{ app }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: start riskfort
+
+
+    - name: template - casemgmt
+      vars:
+        app: casemanagementserver
+      template:
+        src: init.d.j2
+        dest: "/etc/init.d/{{ app }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: start riskfort
+  when: rsk_app == "yes"
+
+- name: template - risk silent install file
+  template:
+    src: rsk.installer.properties.j2
+    dest: "/tmp/riskauth-installer.properties"
+    mode: 0755
+    owner: arcot
+    group: arcot
+
+- name: run silent installer for risk auth
+  shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
+  args:
+    chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
+    creates: "{{ arcot_home }}/riskauth-installer.properties"
+  environment:
+    ARCOT_HOME: "{{ arcot_home }}"
+  become_user: "{{ arcot_user }}"
+  when: installed.stat.exists == false
+
+
+- name: deploy web components
+  block:
+    - name: deploy arcot admin
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
+        dest: "{{ catalina_home }}/webapps"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+      notify: restart tomcat
+
+    - name: deploy sample app
+      copy:
+        remote_src: yes
+        src: "{{ arcot_home }}/samples/java/ca-riskauth-sample-application.war"
+        dest: "{{ catalina_home }}/webapps"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+      when: sample_app == 'yes'
+      notify: restart tomcat
+  when: rsk_web == "yes"
