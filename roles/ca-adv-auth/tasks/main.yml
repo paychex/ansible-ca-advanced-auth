@@ -253,4 +253,4 @@
 # install patch 9.0.02
 - import_tasks: patch.yml
   vars:
-    patch_url: http://repoman.paychex.com/packages/CA/install-pkgs/patches/CA-AdvancedAuthentication-Patch-9.0.02-Linux
+    patch_url: http://repoman.paychex.com/packages/CA/install-pkgs/patches/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
