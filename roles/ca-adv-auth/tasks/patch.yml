@@ -1,3 +1,4 @@
+---
 # this grouping of  tasks receives a download location for a zipped patch and applies it to the host
 
 - name: check if patch is installed
@@ -7,19 +8,40 @@
 
 - name: install patch
   block:
+    # name: shutdown stack
+    - import_tasks: powerdown_stack.yml
+
     - name: dir - create CA dir
       file:
-        name: "{{ arcot_home }}/{{ patch_url | basename }}"
+        name: "{{ arcot_home }}/patches"
         state: directory
         owner: arcot
         group: arcot
         mode: 0755
 
     - name: download patch
+      get_url:
+        url: "{{ patch_url }}"
+        dest: "{{ arcot_home }}/patches/{{ patch_url | basename }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
 
     - name: unzip patch
+      unarchive:
+        src: "{{ arcot_home }}/patches/{{ patch_url | basename }}/{{ patch_url | basename }}"
+        dest: "{{ arcot_home }}"
+        owner: arcot
+        group: arcot
+        mode: 0755
+        remote_src: yes
 
-    - name: install patch
-
-
+    - name: run silent installer for strong auth
+      shell: "./install.sh"
+      args:
+        chdir: "{{ arcot_home }}/patches/{{ patch_url | basename }}/{{ patch_url | basename }}"
+      environment:
+        ARCOT_HOME: "{{ arcot_home }}"
+      become_user: arcot
+      
   when: installed.stat.exists == false
