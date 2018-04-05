@@ -1,6 +1,0 @@
----
-
-# - name: group - create arcot_user group
-#   group:
-#     name: "{{ arcot_user }}"
-#     state: present
