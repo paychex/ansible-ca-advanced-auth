@@ -205,7 +205,7 @@
   when: installed.stat.exists == false
 
 ##################################################################
-#### install starts here #########################################
+#### risk install starts here ####################################
 - name: install app components
   block:
     - name: template - riskfort
