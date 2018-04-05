@@ -1,5 +1,4 @@
 ---
-
 # ROLE: ca-adv-auth
 rsk_auth_install_url: http://repoman.paychex.com/packages/CA/install-pkgs/CA-rsk-ath.zip
 str_auth_install_url: http://repoman.paychex.com/packages/CA/install-pkgs/CA-str-ath.zip
@@ -25,9 +24,6 @@ arcot_db_password: !vault |
           62346264303938366362663537626639393335306231303635363665386165373930643130643162
           3630393165643262650a363437343332326566313865383639636633323565653466356464653334
           3736
-
-arcot_db_host: rskdbdvl1.pxlabus.com
-
 
 # ROLE: tomcat9
 tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz

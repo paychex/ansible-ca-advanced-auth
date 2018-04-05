@@ -1,5 +1,8 @@
 ---
-# vars file for tomca
+# USE THIS FILE TO OVERRIDE VARS NOT THE GROUP_VARS FILES
+#
+# vars file for adv_auth
 #
 
+# ex:
 # tomcat_install_url: {{ tomcat_install_url }}
