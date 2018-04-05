@@ -59,7 +59,7 @@
            ARCOT_HOME={{ arcot_home }}
            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
   notify: restart tomcat
-  when: rsk_web == "yes"
+  when: facter_payx_advauthrole == "rsk_web"
 
 - name: check for download
   stat:
@@ -153,7 +153,7 @@
         mode: 0755
       when: sample_app == 'yes'
       notify: restart tomcat
-  when: rsk_web == "yes"
+  when: facter_payx_advauthrole == "rsk_web"
 
 - name: template - webfort
   vars:
@@ -165,7 +165,7 @@
     group: root
     mode: 0755
   notify: start webfort
-  when: rsk_app == "yes"
+  when: facter_payx_advauthrole == "rsk_app"
 
 # tasks file for risk auth
 #
@@ -230,7 +230,7 @@
         group: root
         mode: 0755
       notify: start riskfort
-  when: rsk_app == "yes"
+  when: facter_payx_advauthrole == "rsk_app"
 
 - name: template - risk silent install file
   template:
