@@ -2,7 +2,8 @@
 # this grouping of  tasks receives a download location for a zipped patch and applies it to the host
 
 - name: check if patch is installed
-  stat: "{{ arcot_home }}/{{ patch_url | basename }}"
+  stat:
+    path: "{{ arcot_home }}/{{ patch_url | basename }}"
   register: installed
 
 
