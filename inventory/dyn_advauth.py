@@ -43,13 +43,13 @@ import foreman_query
 
 ###############< CHANGE THESE VALUES >###################
 # 1. Create the foreman_query() lists
-group_query = [['params.payx_hostgroup',''],['and','params.payx_nodestatus','active'],['or','params.payx_nodestatus','maintenance']]
-group_query2 = [['hostgroup','DHCP_Primary'],['or','hostgroup','DHCP_Secondary'],['and','params.payx_nodestatus','active'],['or','params.payx_nodestatus','maintenance']]
+group_query = [['params.payx_advauthrole','rsk-app']]
+group_query2 = [['params.payx_advauthrole','rsk-web']]
 
 # 2. Add to playbook_dict{}
 #     - keys should be hostgroup names (ansible references these)
 #     - values should be the list for each hostgroup (the hosts that you'd list in your inv group)
-playbook_dict = {'rsk-app': group_query, 'rsk-web': group_query}
+playbook_dict = {'rsk-app': group_query, 'rsk-web': group_query2}
 ###########< DO NOT CHANGE BELOW >###############
 
 
