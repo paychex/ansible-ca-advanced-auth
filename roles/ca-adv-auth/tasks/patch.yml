@@ -31,8 +31,8 @@
 
     - name: unzip patch
       unarchive:
-        src: "{{ arcot_home }}/patches/{{ patch_url | basename }}/{{ patch_url | basename }}"
-        dest: "{{ arcot_home }}"
+        src: "{{ arcot_home }}/patches/{{ patch_url | basename }}/{{ patch_url | basename }"
+        dest: "{{ arcot_home }}/patches/{{ patch_url | basename }}"
         owner: arcot
         group: arcot
         mode: 0755
