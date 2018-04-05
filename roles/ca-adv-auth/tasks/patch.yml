@@ -41,7 +41,7 @@
     - name: run silent installer for strong auth
       shell: "./install.sh"
       args:
-        chdir: "{{ arcot_home }}/patches/{{ patch_url | basename }}/{{ patch_url | basename }}"
+        chdir: "{{ arcot_home }}/patches/{{ patch_url | basename }}"
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: arcot
