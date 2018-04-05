@@ -1,0 +1,5 @@
+- name: stop webfort
+  shell: "systemctl daemon-reload && systemctl stop webfortserver"
+
+- name: stop riskfort
+  shell: "systemctl daemon-reload && systemctl stop riskfortserver && systemctl stop casemanagementserver"
