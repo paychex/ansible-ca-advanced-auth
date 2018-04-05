@@ -10,6 +10,7 @@
   block:
     # name: shutdown stack
     - import_tasks: powerdown_stack.yml
+      notify: start stack
 
     - name: dir - create CA dir
       file:
@@ -43,5 +44,5 @@
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: arcot
-      
+
   when: installed.stat.exists == false

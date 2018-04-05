@@ -164,7 +164,7 @@
     owner: root
     group: root
     mode: 0755
-  notify: start webfort
+  notify: start stack
   when: facter_payx_advauthrole == "rsk_app"
 
 # tasks file for risk auth
@@ -217,7 +217,7 @@
         owner: root
         group: root
         mode: 0755
-      notify: start riskfort
+      notify: start stack
 
 
     - name: template - casemgmt
@@ -229,7 +229,7 @@
         owner: root
         group: root
         mode: 0755
-      notify: start riskfort
+      notify: start stack
   when: facter_payx_advauthrole == "rsk_app"
 
 - name: template - risk silent install file
