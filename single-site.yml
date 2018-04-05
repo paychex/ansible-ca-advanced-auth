@@ -1,16 +1,13 @@
 ---
+become: true
+vars_files:
+  - "group_vars/{{ lookup('env', 'HOSTNAME') | regex_search('paychex|pxlabus') }}.yml"
 
-- hosts: "{{ target_app_hosts | default('rsk-app')}}"
-  become: true
-  vars_files:
-    - "group_vars/{{ lookup('env', 'HOSTNAME') | regex_search('paychex|pxlabus') }}.yml"
+- hosts: rsk-app
   roles:
     - ca-adv-auth
 
-- hosts: "{{ target_web_hosts | default('rsk-web')}}"
-  become: true
-  vars_files:
-    - "group_vars/{{ lookup('env', 'HOSTNAME') | regex_search('paychex|pxlabus') }}.yml"
+- hosts: rsk-web
   roles:
     - tomcat9
     - ca-adv-auth
