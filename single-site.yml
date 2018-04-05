@@ -10,8 +10,8 @@
 - hosts: "{{ target_web_hosts | default('rsk-web')}}"
   become: true
   vars_files:
-    - "group_vars/{{ facter_payx_environment }}.yml"
-    #- "../group_vars/{{ lookup('env', 'HOSTNAME') | regex_search('paychex|pxlabus') }}.yml"
+    - "group_vars/{{ lookup('env', 'HOSTNAME') | regex_search('paychex|pxlabus') }}.yml"
   roles:
     - tomcat9
     - ca-adv-auth
+    - ca-web
