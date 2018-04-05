@@ -1,5 +1,5 @@
 ---
-# tasks file for tomcat
+# tasks file for advanced auth
 #
 
 - name: group - arcot
@@ -249,28 +249,3 @@
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
   when: installed.stat.exists == false
-
-
-- name: deploy web components
-  block:
-    - name: deploy arcot admin
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
-        dest: "{{ catalina_home }}/webapps"
-        owner: tomcat
-        group: tomcat
-        mode: 0755
-      notify: restart tomcat
-
-    - name: deploy sample app
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/samples/java/ca-riskauth-sample-application.war"
-        dest: "{{ catalina_home }}/webapps"
-        owner: tomcat
-        group: tomcat
-        mode: 0755
-      when: sample_app == 'yes'
-      notify: restart tomcat
-  when: rsk_web == "yes"
