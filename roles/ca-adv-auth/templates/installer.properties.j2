@@ -15,11 +15,11 @@ ARCOT_DBTYPE_SILENT=oracle
 ###Primary Database Details
 ##---------------------------------------
 
-ARCOT_CONFIG_PRIMARY_DB_SILENT=true
+ARCOT_CONFIG_PRIMARY_DB_SILENT={{ arcot_config_db }}
 
 #Primary DSN Name
 #----------------
-ARCOT_PRIMARY_DSN_NAME_SILENT=arcotdsn
+ARCOT_PRIMARY_DSN_NAME_SILENT={{ arcot_dsn }}
 
 #Primary Database
 #----------------
@@ -27,26 +27,24 @@ ARCOT_PRIMARY_DATABASE_SILENT=
 
 #Primary SID (For Oracle)
 #--------------------------
-ARCOT_PRIMARY_SID_SILENT=rsklb
+ARCOT_PRIMARY_SID_SILENT={{ arcot_sid }}
 ARCOT_PRIMARY_TNS_SERVICE_NAME_SILENT=
 
 #Primary Host Name
 #-----------------
-ARCOT_PRIMARY_HOST_NAME_SILENT=rskdbdvl1.pxlabus.com
-#{{ arcot_db_host }}
+ARCOT_PRIMARY_HOST_NAME_SILENT={{ arcot_db_host }}
 
 #Primary Port Number
 #-------------------
-ARCOT_PRIMARY_PORT_SILENT=1521
+ARCOT_PRIMARY_PORT_SILENT={{ arcot_db_port }}
 
 #Primary User Name
 #-----------------
-ARCOT_PRIMARY_USER_NAME_SILENT=arcotuser
+ARCOT_PRIMARY_USER_NAME_SILENT={{ arcot_db_user }}
 
 #Primary Password
 #----------------
-ARCOT_PRIMARY_PASSWORD_SILENT=arc0tuser!
-#{{ arcot_db_password }}
+ARCOT_PRIMARY_PASSWORD_SILENT={{ arcot_db_password }}
 
 
 #Configure Backup DB if true (true/false)
@@ -95,7 +93,7 @@ ARCOT_BACKUP_PASSWORD_SILENT=
 ARCOT_ENC_TYPE_SILENT=S/W
 
 ARCOT_ENC_DEVICE_NAME_SILENT=
-ARCOT_KEY_LABEL_SILENT=master1234!!
+ARCOT_KEY_LABEL_SILENT={{ arcot_enc_masterkey }}
 ARCOT_HSM_PIN_SILENT=
 ARCOT_HSM_SHARED_LIBRARY_SILENT=
 ARCOT_HSM_STORAGE_SLOT_SILENT=
@@ -104,20 +102,20 @@ ARCOT_HSM_STORAGE_SLOT_SILENT=
 ###DB Configuration Details
 #-------------------------------------------
 
-INITIALIZE_DB=1
-UPGRADE_DB=0
+INITIALIZE_DB={{ arcot_init_db }}
+UPGRADE_DB={{ arcot_upgrade_db }}
 
 #-------------------------------------------
 ###Bootstrap Details
 #-------------------------------------------
-PERFORM_BOOTSTRAP=1
+PERFORM_BOOTSTRAP={{ arcot_bootstrap }}
 GLOBAL_KEY_LABEL=skey1
 GLOBAL_KEY_STORAGE_TYPE=Software
-MASTERADMIN_PASSWORD=master1234!!
+MASTERADMIN_PASSWORD={{ arcot_masteradmin_pw }}
 DEFAULT_ORG_DISPLAY_NAME=DEFAULT
 DEFAULT_ORG_USE_GLOBAL_KEY=true
 DEFAULT_ORG_KEY_STORAGE_TYPE=Software
-DEFAULT_ORG_KEY=dost1234
+DEFAULT_ORG_KEY={{ arcot_default_org_key }}
 
 #-------------------------------------------
 ###Service auto start option

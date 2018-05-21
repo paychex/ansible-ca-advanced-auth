@@ -11,7 +11,7 @@
   block:
     # name: shutdown stack
     - import_tasks: powerdown_app_stack.yml
-      when: facter_payx_advauthrole == "rsk_app"
+      when: facter_payx_advauthrole == "rsk-app"
       notify: start stack
 
     - name: dir - create CA dir

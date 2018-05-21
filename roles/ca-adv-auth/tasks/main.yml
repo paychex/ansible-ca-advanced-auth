@@ -59,7 +59,7 @@
            ARCOT_HOME={{ arcot_home }}
            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
   notify: restart tomcat
-  when: facter_payx_advauthrole == "rsk_web"
+  when: facter_payx_advauthrole == "rsk-web"
 
 - name: check for download
   stat:
@@ -88,7 +88,7 @@
 
     - name: template - strong auth silent install file
       template:
-        src: str.installer.properties.j2
+        src: installer.properties.j2
         dest: "/tmp/strongauth-installer.properties"
         mode: 0755
         owner: arcot
@@ -102,6 +102,7 @@
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: arcot
+      notify: start stack
   when: installed.stat.exists == false
 
 
@@ -153,7 +154,7 @@
         mode: 0755
       when: sample_app == 'yes'
       notify: restart tomcat
-  when: facter_payx_advauthrole == "rsk_web"
+  when: facter_payx_advauthrole == "rsk-web"
 
 - name: template - webfort
   vars:
@@ -165,7 +166,7 @@
     group: root
     mode: 0755
   notify: start stack
-  when: facter_payx_advauthrole == "rsk_app"
+  when: facter_payx_advauthrole == "rsk-app"
 
 # tasks file for risk auth
 #
@@ -230,11 +231,11 @@
         group: root
         mode: 0755
       notify: start stack
-  when: facter_payx_advauthrole == "rsk_app"
+  when: facter_payx_advauthrole == "rsk-app"
 
 - name: template - risk silent install file
   template:
-    src: rsk.installer.properties.j2
+    src: installer.properties.j2
     dest: "/tmp/riskauth-installer.properties"
     mode: 0755
     owner: arcot
@@ -248,9 +249,11 @@
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
   become_user: "{{ arcot_user }}"
+  notify: start stack
+
   when: installed.stat.exists == false
 
 # install patch 9.0.02
 - import_tasks: patch.yml
   vars:
-    patch_url: http://repoman.paychex.com/packages/CA/install-pkgs/patches/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
+    patch_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0.02/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip

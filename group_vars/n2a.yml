@@ -1,0 +1,15 @@
+arcot_db_host: dbdv1w18.paychex.com
+arcot_sid: rmdprx1
+arcot_dsn: arcotdsn_n2a
+arcot_db_user: arcotuser
+arcot_db_password: arc0tuser!
+
+
+arcot_config_db: true
+arcot_init_db: 0
+arcot_upgrade_db: 0
+
+arcot_bootstrap: 0
+arcot_masteradmin_pw: master1234!
+arcot_default_org_key: master1234!
+arcot_enc_masterkey: MasterKeyProd

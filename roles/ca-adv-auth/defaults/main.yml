@@ -1,0 +1,18 @@
+
+# true will setup the config files to DB provided info
+# false will leave all db configs blank
+arcot_config_db: true
+arcot_db_port: 1521
+arcot_db_user: ARCOTUSER
+
+# initalize DB - only desired on blank DBs
+arcot_init_db: 0
+
+# will auto run db upgrade scripts
+arcot_upgrade_db: 0
+
+
+# bootstrap the admin console - only desireable on blank DBs
+arcot_bootstrap: 0
+arcot_masteradmin_pw: master1234!
+arcot_default_org_key: master1234!
