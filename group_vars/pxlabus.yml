@@ -3,11 +3,11 @@
 # ROLE: ca-adv-auth
 arcot_db_host: rmddblab1.pxlabus.com
 
-arcot_sid: rmdlab_1
+arcot_sid: rmdlab_l
 arcot_dsn: arcotdsn
 
 arcot_db_user: ARCOTUSER 
-arcot_db_pass: arc0tuser!
+arcot_db_password: arc0tuser!
 
 arcot_config_db: true
 arcot_init_db: 1
