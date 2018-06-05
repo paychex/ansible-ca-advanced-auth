@@ -1,0 +1,5 @@
+[rsk-app]
+172.30.2.20 facter_payx_advauthrole=rsk_app
+
+[rsk-web]
+172.30.2.21 facter_payx_advauthrole=rsk_web 
