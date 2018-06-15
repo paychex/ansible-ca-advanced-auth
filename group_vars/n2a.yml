@@ -1,7 +1,7 @@
 arcot_db_host: rmddbbn2aw10
 arcot_sid: rmdn2a1
 arcot_dsn: ''
-arcot_password: !!
+arcot_password: '!!'
 arcot_db_user: arcotuser
 arcot_db_password: ''
 arcot_service_name: ''
