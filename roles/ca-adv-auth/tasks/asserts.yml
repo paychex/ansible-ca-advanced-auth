@@ -1,0 +1,11 @@
+---
+
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+  register: str_installed
+
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+  register: rsk_installed
