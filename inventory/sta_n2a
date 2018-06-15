@@ -1,5 +1,5 @@
 [rsk-app]
-rmdapn2aw10.paychex.com
+rmdapn2aw10.paychex.com facter_payx_advauthrole=rsk_app web_services=False env=n2a.yml
 
 [rsk-web]
-rmdapn2aw20.paychex.com
+rmdapn2aw20.paychex.com facter_payx_advauthrole=rsk_web web_services=True env=n2a.yml
