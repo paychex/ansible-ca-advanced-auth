@@ -15,6 +15,7 @@ str_bin: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
 rsk_zip_dir: GEN500000000000127
 rsk_bin: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
 db_upgrade_zip_dir: GEN500000000000104
+db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
 
 
 # ROLE: tomcat9
