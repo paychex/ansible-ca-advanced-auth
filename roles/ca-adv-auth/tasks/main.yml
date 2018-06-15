@@ -11,7 +11,7 @@
   user:
     name: arcot
     group: arcot
-    shell: /bin/bash
+    shell: /sbin/nologin
     password: "{{ arcot_password }}"
 
 - name: user - add tomcat user to arcot group
