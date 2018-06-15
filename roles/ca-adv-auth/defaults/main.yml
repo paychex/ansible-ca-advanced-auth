@@ -16,3 +16,5 @@ arcot_upgrade_db: 0
 arcot_bootstrap: 0
 arcot_masteradmin_pw: master1234!
 arcot_default_org_key: master1234!
+
+sample_app: False
