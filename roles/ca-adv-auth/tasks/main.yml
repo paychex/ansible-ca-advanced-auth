@@ -2,6 +2,9 @@
 # tasks file for advanced auth
 #
 
+- name: Asserts.yml
+  import_tasks: asserts.yml
+
 - name: group - arcot
   group:
     name: arcot
@@ -14,12 +17,6 @@
     shell: /sbin/nologin
     password: "{{ arcot_password }}"
 
-- name: user - add tomcat user to arcot group
-  user:
-    name: tomcat
-    append: yes
-    groups: arcot
-
 - name: dir - create CA dir
   file:
     name: "{{ arcot_home }}"
@@ -27,231 +24,18 @@
     owner: arcot
     group: arcot
     mode: 0755
-
-- name: template - arcot env script in profile.d
-  template:
-    src: arwfenv.profile.sh.j2
-    dest: /etc/profile.d/arwfenv.sh
-    mode: 0755
-    owner: root
-    group: root
-#
-# - name: deploy systemd services and sysconfig env vars
-#   template:
-#     src: "{{ item.src }}"
-#     dest: "{{ item.dest }}"
-#     owner: root
-#     group: root
-#     mode: "{{ item.mode }}"
-#   notify: "restart {{ item.handler }}"
-#   with_items:
-#     - { src: 'tomcat.service.j2', dest: '/etc/systemd/system/tomcat.service', handler: 'tomcat', mode: '0664' }
-
-- name: add arcot env vars to tomcat systemd config file
-  blockinfile:
-    path: "/etc/sysconfig/tomcat"
-    state: present
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
-    backup: yes
-    insertafter: EOF
-    block: |
-           LD_LIBRARY_PATH={{ arcot_home }}/odbc64v80/lib:{{ arcot_home }}/sbin:{{ arcot_home }}/lib:{{ arcot_home }}/bin:{{ arcot_home }}/sdk/server/plugin/c/lib:{{ java_home }}/jre/bin
-           ARCOT_HOME={{ arcot_home }}
-           PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
-  notify: restart tomcat
-  when: facter_payx_advauthrole == "rsk-web"
-
-- name: check for download
-  stat:
-    path: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
-  register: installed
 
 - name: install strong auth
-  block:
-
-    - name: download strong auth zip
-      get_url:
-        url: "{{ str_auth_install_url }}"
-        dest: "{{ arcot_home }}"
-        owner: arcot
-        group: arcot
-        mode: 0755
-
-    - name: unzip strong auth
-      unarchive:
-        src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
-        dest: "{{ arcot_home }}"
-        owner: arcot
-        group: arcot
-        mode: 0755
-        remote_src: yes
-
-    - name: template - strong auth silent install file
-      template:
-        src: installer.properties.j2
-        dest: "/tmp/strongauth-installer.properties"
-        mode: 0755
-        owner: arcot
-        group: arcot
-
-    - name: run silent installer for strong auth
-      shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
-      args:
-        chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
-        creates: "{{ arcot_home }}/strongauth-installer.properties"
-      environment:
-        ARCOT_HOME: "{{ arcot_home }}"
-      become_user: arcot
-      notify: start stack
-  when: installed.stat.exists == false
-
-
-- name: complete tasks for web apps
-  block:
-    - name: copy DB access file
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
-        dest: "{{ java_home }}/jre/bin"
-        owner: arcot
-        group: arcot
-        mode: 0755
-
-    - name: copy arcot-crypto-util
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
-        dest: "{{ java_home }}/jre/lib/ext"
-        owner: arcot
-        group: arcot
-        mode: 0755
-
-    - name: download JDBC JAR
-      get_url:
-        url: "{{ JDBC_driver_url }}"
-        dest: "{{ catalina_home }}/lib"
-        owner: tomcat
-        group: tomcat
-        mode: 0755
-
-    - name: deploy UDS
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/java/webapps/arcotuds.war"
-        dest: "{{ catalina_home }}/webapps"
-        owner: tomcat
-        group: tomcat
-        mode: 0755
-      notify: restart tomcat
-
-    - name: deploy sample app
-      copy:
-        remote_src: yes
-        src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
-        dest: "{{ catalina_home }}/webapps"
-        owner: tomcat
-        group: tomcat
-        mode: 0755
-      when: sample_app == 'yes'
-      notify: restart tomcat
-  when: facter_payx_advauthrole == "rsk-web"
-
-- name: template - webfort
-  vars:
-    app: webfortserver
-  template:
-    src: init.d.j2
-    dest: "/etc/init.d/{{ app }}"
-    owner: root
-    group: root
-    mode: 0755
-  notify: start stack
-  when: facter_payx_advauthrole == "rsk-app"
-
-# tasks file for risk auth
-#
-
-- name: dir - create CA dir
-  file:
-    name: "{{ arcot_home }}"
-    state: directory
-    owner: arcot
-    group: arcot
-    mode: 0755
-
-- name: check for download
-  stat:
-    path: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
-  register: installed
+  import_tasks: strong_auth.yml
+  when: str_installed.stat.exists == false
 
 - name: install risk auth
-  block:
+  import_tasks: risk_auth.yml
+  when: str_installed.stat.exists == false
 
-    - name: download risk auth zip
-      get_url:
-        url: "{{ rsk_auth_install_url }}"
-        dest: "{{ arcot_home }}"
-        owner: arcot
-        group: arcot
-        mode: 0755
-
-    - name: unzip risk auth
-      unarchive:
-        src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
-        dest: "{{ arcot_home }}"
-        owner: arcot
-        group: arcot
-        mode: 0755
-        remote_src: yes
-  when: installed.stat.exists == false
-
-##################################################################
-#### risk install starts here ####################################
-- name: install app components
-  block:
-    - name: template - riskfort
-      vars:
-        app: riskfortserver
-      template:
-        src: init.d.j2
-        dest: "/etc/init.d/{{ app }}"
-        owner: root
-        group: root
-        mode: 0755
-      notify: start stack
-
-
-    - name: template - casemgmt
-      vars:
-        app: casemanagementserver
-      template:
-        src: init.d.j2
-        dest: "/etc/init.d/{{ app }}"
-        owner: root
-        group: root
-        mode: 0755
-      notify: start stack
-  when: facter_payx_advauthrole == "rsk-app"
-
-- name: template - risk silent install file
-  template:
-    src: installer.properties.j2
-    dest: "/tmp/riskauth-installer.properties"
-    mode: 0755
-    owner: arcot
-    group: arcot
-
-- name: run silent installer for risk auth
-  shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
-  args:
-    chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
-    creates: "{{ arcot_home }}/riskauth-installer.properties"
-  environment:
-    ARCOT_HOME: "{{ arcot_home }}"
-  become_user: "{{ arcot_user }}"
-  notify: start stack
-
-  when: installed.stat.exists == false
+- name: install web services
+  import_tasks: java_apps.yml
+  when: web_services
 
 # install patch 9.0.02
 - import_tasks: patch.yml
