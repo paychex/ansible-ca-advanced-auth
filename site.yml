@@ -14,7 +14,8 @@
   become: true
   vars_files:
     - group_vars/pxlabus.yml
+  vars:
+    - web_services: True
   roles:
     - tomcat9
     - ca-adv-auth
-    - ca-web
