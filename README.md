@@ -1,7 +1,5 @@
 USAGE
 -----
-ansible-playbook -i inventory -e "strong_auth_install=yes risk_auth_install=yes sample_app=yes" site.yml
-
 create an inventory create a playbook to run this and or additional roles
 
 Role Name
@@ -14,20 +12,102 @@ tomcat is expected to be installed at /opt/tomcat
 
 Role Variables
 --------------
-check group_vars/all.yml
+You must provide the following vars:
+- arcot_enc_masterkey
+- arcot_db_password
 
-Group vars can be overwritten using ansible precedence. Please do not write over group_vars values unless they are intended to be permanent
-http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+`java_home`: 
+- where java has been installed
+- Default: `/opt/java`
 
-Example Playbook
-site.yml
+`catalina_home`: 
+- where tomcat has been installed
+- Default: `/opt/tomcat`
 
-hosts: rsk-app
-become: true
-roles:
-  - ca-adv-auth
-  - ca-strong-auth
-  - ca-risk-auth
+`arcot_home`: 
+- where advanced auth tools will be installed
+- Default: `/opt/CA/AdvAuth`
+
+## DB Config
+*These properties populte the silent install file and can be found in installer.properties.j2 template
+
+`arcot_config_db`: 
+- 
+- Default: `true`
+
+`arcot_db_port`:
+
+- Default: `1521`
+
+`arcot_db_user`:
+
+- Default: `ARCOTUSER`
+
+`arcot_db_password`: 
+- Default: `''`
+
+`arcot_db_host`: 
+- Default: `''`
+
+`arcot_sid`: 
+- Default: `''`
+
+`arcot_dsn`: 
+- Default: `''`
+
+`arcot_service_name`: 
+- Default: `''`
+
+# initalize DB - only desired on blank DBs
+`arcot_init_db`:
+- Default: `0`
+
+# will auto run db upgrade scripts
+`arcot_upgrade_db`: 
+- Default: `0`
+
+
+# bootstrap the admin console - only desireable on blank DBs
+`arcot_bootstrap`: 
+- Default: `0`
+`arcot_masteradmin_pw`: 
+- Default: `master1234!`
+
+`arcot_default_org_key`: 
+- Default: `master1234!`
+
+`sample_app`: 
+- Default: `False`
+
+`str_zip_dir`: 
+- Default: `GEN500000000000116`
+
+`str_bin`: 
+- Default: `CA-StrongAuthentication-9.0.0-Linux-Installer.bin`
+
+`rsk_zip_dir`: 
+- Default: `GEN500000000000127`
+
+`rsk_bin`: 
+- Default: `CA-RiskAuthentication-9.0.0-Linux-Installer.bin`
+
+`arcot_user`: 
+- Default: `arcot`
+
+`arcot_password`: 
+- Default: `''`
+
+# ROLE: ca-adv-auth
+#Download URLs
+`rsk_auth_install_url`: 
+- Default: `''`
+
+`str_auth_install_url`: 
+- Default: `''`
+
+`JDBC_driver_url`: 
+- Default: `''`
+
 
 HANDLERS
 --------
