@@ -5,6 +5,9 @@
   run_once: True
   vars_files:
     - ../group_vars/all.yml
+  vars:
+    - db_upgrade_zip_dir: GEN500000000000104
+    - db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
   tasks:
     # ENSURE ONLY RUN ONCE
     - name: download risk auth zip
