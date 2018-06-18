@@ -17,3 +17,8 @@ arcot_bootstrap: 1
 arcot_masteradmin_pw: master1234!!
 arcot_default_org_key: master1234!!
 arcot_enc_masterkey: masterkeylab
+
+rsk_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
+str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
+JDBC_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
+tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz

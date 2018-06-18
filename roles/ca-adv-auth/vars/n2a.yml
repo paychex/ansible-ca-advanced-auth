@@ -1,17 +1,8 @@
 arcot_db_host: rmddbn2aw10
 arcot_sid: rmdn2a1
 arcot_dsn: 'arcotdsn_n2a'
-arcot_password: ''
-arcot_db_user: arcotuser
-arcot_db_password: ''
-arcot_service_name: ''
-arcot_db_port: 1521
 
-# arcot_config_db: true
-# arcot_init_db: 0
-# arcot_upgrade_db: 0
-
-# arcot_bootstrap: 0
-# arcot_masteradmin_pw: master1234!
-# arcot_default_org_key: master1234!
-# arcot_enc_masterkey: ''
+rsk_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
+str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
+JDBC_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
+tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz
