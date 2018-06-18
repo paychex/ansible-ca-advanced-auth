@@ -12,7 +12,7 @@ tomcat is expected to be installed at /opt/tomcat
 
 Role Variables
 --------------
-You must provide the following vars:
+**You must provide the following vars:**
 - arcot_enc_masterkey
 - arcot_db_password
 
@@ -29,7 +29,8 @@ You must provide the following vars:
 - Default: `/opt/CA/AdvAuth`
 
 ## DB Config
-*These properties populte the silent install file and can be found in installer.properties.j2 template
+**These properties populte the silent install file and can be found in installer.properties.j2 template**
+
 
 `arcot_config_db`: 
 - 
