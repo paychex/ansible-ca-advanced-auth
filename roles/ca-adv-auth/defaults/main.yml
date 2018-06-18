@@ -1,9 +1,16 @@
 
-# true will setup the config files to DB provided info
-# false will leave all db configs blank
+java_home: /opt/java
+catalina_home: /opt/tomcat
+arcot_home: /opt/CA/AdvAuth
+
 arcot_config_db: true
 arcot_db_port: 1521
 arcot_db_user: ARCOTUSER
+arcot_db_password: ''
+arcot_db_host: ''
+arcot_sid: ''
+arcot_dsn: ''
+arcot_service_name: ''
 
 # initalize DB - only desired on blank DBs
 arcot_init_db: 0
@@ -24,18 +31,13 @@ str_bin: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
 rsk_zip_dir: GEN500000000000127
 rsk_bin: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
 
-arcot_home: /opt/CA/AdvAuth
 arcot_user: arcot
-arcot_password: arcot
+arcot_password: ''
 
 # ROLE: ca-adv-auth
 #Download URLs
-rsk_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
-str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
-JDBC_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
+rsk_auth_install_url: ''
+str_auth_install_url: ''
+JDBC_driver_url: ''
 
 
-# ROLE: tomcat9
-tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz
-java_home: /opt/java
-catalina_home: /opt/tomcat
