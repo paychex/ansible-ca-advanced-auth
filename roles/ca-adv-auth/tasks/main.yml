@@ -14,7 +14,7 @@
   user:
     name: arcot
     group: arcot
-    shell: /sbin/nologin
+    shell: /bin/bash
     password: "{{ arcot_password }}"
 
 - name: dir - create CA dir
