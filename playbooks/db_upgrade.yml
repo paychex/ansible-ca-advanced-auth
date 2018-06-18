@@ -8,6 +8,8 @@
   vars:
     - db_upgrade_zip_dir: GEN500000000000104
     - db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
+    - db_upgrade_zip_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/GEN500000000000104.zip
+
   tasks:
     # ENSURE ONLY RUN ONCE
     - name: download risk auth zip
