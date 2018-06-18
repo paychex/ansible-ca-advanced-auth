@@ -18,3 +18,12 @@ arcot_masteradmin_pw: master1234!
 arcot_default_org_key: master1234!
 
 sample_app: False
+
+str_zip_dir: GEN500000000000116
+str_bin: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
+rsk_zip_dir: GEN500000000000127
+rsk_bin: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
+
+arcot_home: /opt/CA/AdvAuth
+arcot_user: arcot
+arcot_password: arcot

@@ -1,17 +1,17 @@
 arcot_db_host: rmddbn2aw10
 arcot_sid: rmdn2a1
-arcot_dsn: ''
-arcot_password: '!!'
+arcot_dsn: 'arcotdsn_n2a'
+arcot_password: ''
 arcot_db_user: arcotuser
 arcot_db_password: ''
 arcot_service_name: ''
 arcot_db_port: 1521
 
-arcot_config_db: true
-arcot_init_db: 0
-arcot_upgrade_db: 0
+# arcot_config_db: true
+# arcot_init_db: 0
+# arcot_upgrade_db: 0
 
-arcot_bootstrap: 0
-arcot_masteradmin_pw: master1234!
-arcot_default_org_key: master1234!
-arcot_enc_masterkey: ''
+# arcot_bootstrap: 0
+# arcot_masteradmin_pw: master1234!
+# arcot_default_org_key: master1234!
+# arcot_enc_masterkey: ''

@@ -6,16 +6,7 @@ str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/C
 JDBC_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
 db_upgrade_zip_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/GEN500000000000104.zip
 
-arcot_home: /opt/CA/AdvAuth
-arcot_user: arcot
-arcot_password: arcot
 
-str_zip_dir: GEN500000000000116
-str_bin: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
-rsk_zip_dir: GEN500000000000127
-rsk_bin: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
-db_upgrade_zip_dir: GEN500000000000104
-db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
 
 
 # ROLE: tomcat9
