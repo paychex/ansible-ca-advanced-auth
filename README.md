@@ -7,8 +7,8 @@ this role installs advanced auth 9.0.2
 
 Requirements
 ------------
-java is expected to be installed at /opt/java
-tomcat is expected to be installed at /opt/tomcat
+- java is expected to be installed at /opt/java
+- tomcat is expected to be installed at /opt/tomcat
 
 Role Variables
 --------------
