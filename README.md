@@ -16,18 +16,6 @@ Role Variables
 - arcot_enc_masterkey
 - arcot_db_password
 
-`java_home`: 
-- where java has been installed
-- Default: `/opt/java`
-
-`catalina_home`: 
-- where tomcat has been installed
-- Default: `/opt/tomcat`
-
-`arcot_home`: 
-- where advanced auth tools will be installed
-- Default: `/opt/CA/AdvAuth`
-
 ## DB Config
 **These properties populte the silent install file and can be found in installer.properties.j2 template**
 
@@ -59,16 +47,12 @@ Role Variables
 `arcot_service_name`: 
 - Default: `''`
 
-# initalize DB - only desired on blank DBs
 `arcot_init_db`:
 - Default: `0`
 
-# will auto run db upgrade scripts
 `arcot_upgrade_db`: 
 - Default: `0`
 
-
-# bootstrap the admin console - only desireable on blank DBs
 `arcot_bootstrap`: 
 - Default: `0`
 `arcot_masteradmin_pw`: 
@@ -76,6 +60,21 @@ Role Variables
 
 `arcot_default_org_key`: 
 - Default: `master1234!`
+
+## App Config
+**These vars determine where the apps will be installed**
+
+`java_home`: 
+- where java has been installed
+- Default: `/opt/java`
+
+`catalina_home`: 
+- where tomcat has been installed
+- Default: `/opt/tomcat`
+
+`arcot_home`: 
+- where advanced auth tools will be installed
+- Default: `/opt/CA/AdvAuth`
 
 `sample_app`: 
 - Default: `False`
