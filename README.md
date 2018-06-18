@@ -97,8 +97,7 @@ Role Variables
 `arcot_password`: 
 - Default: `''`
 
-# ROLE: ca-adv-auth
-#Download URLs
+## Download URLs
 `rsk_auth_install_url`: 
 - Default: `''`
 
