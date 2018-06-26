@@ -2,7 +2,7 @@
 # tasks file for advanced auth
 #
 
-- name: Asserts.yml
+- name: Asserts
   import_tasks: asserts.yml
 
 - name: group - arcot
@@ -32,6 +32,11 @@
 - name: install risk auth
   import_tasks: risk_auth.yml
   when: str_installed.stat.exists == false
+
+# - name: execute jar for old db upgrade
+#   import_tasks: older_db_upgrade.yml
+#   when: older_db_upgrade
+
 
 - name: install web services
   import_tasks: java_apps.yml
