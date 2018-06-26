@@ -3,11 +3,13 @@
 # ROLE: ca-adv-auth
 arcot_db_host: rmddblab1.pxlabus.com
 
-arcot_sid: rmdlab_l
+#arcot_sid: rmdlab_l
+arcot_sid: ''
 arcot_dsn: arcotdsn
+arcot_service_name: rmdlab_l
 
 arcot_db_user: ARCOTUSER 
-arcot_db_password: arc0tuser!
+arcot_db_password: ''
 
 arcot_config_db: true
 arcot_init_db: 1
@@ -16,7 +18,7 @@ arcot_upgrade_db: 0
 arcot_bootstrap: 1
 arcot_masteradmin_pw: master1234!!
 arcot_default_org_key: master1234!!
-arcot_enc_masterkey: masterkeylab
+arcot_enc_masterkey: ''
 
 rsk_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
 str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
