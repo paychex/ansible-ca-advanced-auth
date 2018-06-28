@@ -4,16 +4,16 @@
   get_url:
     url: "{{ arcot_risk_url }}"
     dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
     mode: 0755
 
 - name: unzip risk auth
   unarchive:
     src: "{{ arcot_home }}/{{ arcot_risk_url | basename }}"
     dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
     mode: 0755
     remote_src: True 
 
@@ -45,8 +45,8 @@
     src: installer.properties.j2
     dest: "/tmp/riskauth-installer.properties"
     mode: 0755
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
 
 - name: run silent installer for risk auth
   shell: "./{{ arcot_risk_installer }} -f /tmp/riskauth-installer.properties -i silent"
