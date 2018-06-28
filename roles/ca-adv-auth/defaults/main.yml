@@ -11,15 +11,8 @@ properties_db_host: ''
 properties_db_sid: ''
 properties_db_dsn: ''
 properties_db_service_name: ''
-
-# initalize DB - only desired on blank DBs
 properties_db_initialize : 0
-
-# will auto run db upgrade scripts
 properties_db_upgrade: 0
-
-
-# bootstrap the admin console - only desireable on blank DBs
 properties_bootstrap: 0
 properties_admin_pw: master1234!
 properties_default_org_key: master1234!
@@ -37,8 +30,6 @@ arcot_os_password: ''
 
 arcot_adapter_install: false
 
-# ROLE: ca-adv-auth
-#Download URLs
 arcot_risk_url: ''
 arcot_strong_url: ''
 jdbc_driver_url: ''
