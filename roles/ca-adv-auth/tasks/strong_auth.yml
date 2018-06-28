@@ -12,16 +12,16 @@
   get_url:
     url: "{{ arcot_strong_url }}"
     dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
     mode: 0755
 
 - name: unzip strong auth
   unarchive:
     src: "{{ arcot_home }}/{{ arcot_strong_url | basename }}"
     dest: "{{ arcot_home }}"
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
     mode: 0755
     remote_src: yes
 
@@ -30,8 +30,8 @@
     src: installer.properties.j2
     dest: "/tmp/strongauth-installer.properties"
     mode: 0755
-    owner: arcot
-    group: arcot
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
 
 - name: run silent installer for strong auth
   shell: "./{{ arcot_strong_installer }} -f /tmp/strongauth-installer.properties -i silent"
@@ -40,7 +40,7 @@
     creates: "{{ arcot_home }}/strongauth-installer.properties"
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
-  become_user: arcot
+  become_user: "{{ arcot_os_user }}"
   become: true
   notify: start stack
 
