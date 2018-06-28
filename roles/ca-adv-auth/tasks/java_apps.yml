@@ -40,7 +40,7 @@
 
 - name: download JDBC JAR
   get_url:
-    url: "{{ JDBC_driver_url }}"
+    url: "{{ jdbc_driver_url }}"
     dest: "{{ catalina_home }}/lib"
     owner: tomcat
     group: tomcat
@@ -64,7 +64,7 @@
     owner: tomcat
     group: tomcat
     mode: 0755
-  when: sample_app
+  when: arcot_install_sample_app
   notify: restart tomcat
 
 - name: deploy risk auth sample app
@@ -75,7 +75,7 @@
     owner: tomcat
     group: tomcat
     mode: 0755
-  when: sample_app == 'yes'
+  when: arcot_install_sample_app == 'yes'
   notify: restart tomcat
 
 - name: deploy arcot admin

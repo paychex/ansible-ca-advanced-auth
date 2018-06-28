@@ -14,51 +14,51 @@ Role Variables
 --------------
 **You must provide the following vars:**
 - arcot_enc_masterkey
-- arcot_db_password
+- properties_db_password
 
 ## DB Config
 **These properties populte the silent install file and can be found in installer.properties.j2 template**
 
 
-`arcot_config_db`: 
-- 
+`properties_configure_db`: 
+- the arcotcommon.ini db 
 - Default: `true`
 
-`arcot_db_port`:
+`properties_db_port`:
 
 - Default: `1521`
 
-`arcot_db_user`:
+`properties_db_user`:
 
 - Default: `ARCOTUSER`
 
-`arcot_db_password`: 
+`properties_db_password`: 
 - Default: `''`
 
-`arcot_db_host`: 
+`properties_db_host`: 
 - Default: `''`
 
-`arcot_sid`: 
+`properties_db_sid`: 
 - Default: `''`
 
-`arcot_dsn`: 
+`properties_db_dsn`: 
 - Default: `''`
 
-`arcot_service_name`: 
+`properties_db_service_name`: 
 - Default: `''`
 
-`arcot_init_db`:
+`properties_db_initialize `:
 - Default: `0`
 
-`arcot_upgrade_db`: 
+`properties_db_upgrade`: 
 - Default: `0`
 
-`arcot_bootstrap`: 
+`properties_bootstrap`: 
 - Default: `0`
-`arcot_masteradmin_pw`: 
+`properties_admin_pw`: 
 - Default: `master1234!`
 
-`arcot_default_org_key`: 
+`properties_default_org_key`: 
 - Default: `master1234!`
 
 ## App Config
@@ -76,35 +76,35 @@ Role Variables
 - where advanced auth tools will be installed
 - Default: `/opt/CA/AdvAuth`
 
-`sample_app`: 
+`arcot_install_sample_app`: 
 - Default: `False`
 
-`str_zip_dir`: 
+`arcot_strong_zip_parent_dir`: 
 - Default: `GEN500000000000116`
 
-`str_bin`: 
+`arcot_strong_installer`: 
 - Default: `CA-StrongAuthentication-9.0.0-Linux-Installer.bin`
 
-`rsk_zip_dir`: 
+`arcot_risk_zip_parent_dir`: 
 - Default: `GEN500000000000127`
 
-`rsk_bin`: 
+`arcot_risk_installer`: 
 - Default: `CA-RiskAuthentication-9.0.0-Linux-Installer.bin`
 
-`arcot_user`: 
+`arcot_os_user`: 
 - Default: `arcot`
 
-`arcot_password`: 
+`arcot_os_password`: 
 - Default: `''`
 
 ## Download URLs
-`rsk_auth_install_url`: 
+`arcot_risk_url`: 
 - Default: `''`
 
-`str_auth_install_url`: 
+`arcot_strong_url`: 
 - Default: `''`
 
-`JDBC_driver_url`: 
+`jdbc_driver_url`: 
 - Default: `''`
 
 

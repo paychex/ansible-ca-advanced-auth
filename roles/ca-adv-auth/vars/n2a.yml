@@ -1,10 +1,10 @@
 ---
 
-arcot_db_host: rmddbn2aw10
-arcot_sid: rmdn2a1
-arcot_dsn: 'arcotdsn_n2a'
+properties_db_host: rmddbn2aw10
+properties_db_sid: rmdn2a1
+properties_db_dsn: 'arcotdsn_n2a'
 
-rsk_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
-str_auth_install_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
-JDBC_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
+arcot_risk_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
+arcot_strong_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
+jdbc_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
 tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz

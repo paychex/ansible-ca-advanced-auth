@@ -2,7 +2,7 @@
 
 - name: download risk auth zip
   get_url:
-    url: "{{ rsk_auth_install_url }}"
+    url: "{{ arcot_risk_url }}"
     dest: "{{ arcot_home }}"
     owner: arcot
     group: arcot
@@ -10,7 +10,7 @@
 
 - name: unzip risk auth
   unarchive:
-    src: "{{ arcot_home }}/{{ rsk_auth_install_url | basename }}"
+    src: "{{ arcot_home }}/{{ arcot_risk_url | basename }}"
     dest: "{{ arcot_home }}"
     owner: arcot
     group: arcot
@@ -49,11 +49,11 @@
     group: arcot
 
 - name: run silent installer for risk auth
-  shell: "./{{ rsk_bin }} -f /tmp/riskauth-installer.properties -i silent"
+  shell: "./{{ arcot_risk_installer }} -f /tmp/riskauth-installer.properties -i silent"
   args:
-    chdir: "{{ arcot_home }}/{{ rsk_zip_dir }}"
+    chdir: "{{ arcot_home }}/{{ arcot_risk_zip_parent_dir }}"
     creates: "{{ arcot_home }}/riskauth-installer.properties"
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
-  become_user: "{{ arcot_user }}"
+  become_user: "{{ arcot_os_user }}"
   notify: start stack

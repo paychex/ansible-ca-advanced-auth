@@ -15,7 +15,7 @@
     name: arcot
     group: arcot
     shell: /bin/bash
-    password: "{{ arcot_password }}"
+    password: "{{ arcot_os_password }}"
 
 - name: dir - create CA dir
   file:

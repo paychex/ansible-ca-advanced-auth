@@ -16,24 +16,24 @@
       get_url:
         url: "{{ db_upgrade_zip_url }}"
         dest: "/tmp/{{ db_upgrade_zip_url | basename }}"
-        owner: "{{ arcot_user }}"
-        group: "{{ arcot_user }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_user }}"
         mode: 0755
       
     - name: make upgrade package dir
       file:
         path: "{{ arcot_home }}/{{ db_upgrade_zip_dir }}"
         state: directory
-        owner: "{{ arcot_user }}"
-        group: "{{ arcot_user }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_user }}"
         mode: 0755
 
     - name: download and unzip db upgrade package
       unarchive:
         src: "/tmp/{{ db_upgrade_zip_dir }}.zip"
         dest: "{{ arcot_home }}"
-        owner: "{{ arcot_user }}"
-        group: "{{ arcot_user }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_user }}"
         mode: 0755
         remote_src: True
 

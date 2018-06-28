@@ -16,9 +16,9 @@ Role Variables
 --------------
 
 DEFAULTS:
-rsk_auth_install_url
-str_auth_install_url
-JDBC_driver_url
+arcot_risk_url
+arcot_strong_url
+jdbc_driver_url
 java_home
 arcot_home
 catalina_home

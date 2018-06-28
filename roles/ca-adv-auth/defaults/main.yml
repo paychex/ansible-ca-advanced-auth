@@ -3,44 +3,44 @@ java_home: /opt/java
 catalina_home: /opt/tomcat
 arcot_home: /opt/CA/AdvAuth
 
-arcot_config_db: true
-arcot_db_port: 1521
-arcot_db_user: ARCOTUSER
-arcot_db_password: ''
-arcot_db_host: ''
-arcot_sid: ''
-arcot_dsn: ''
-arcot_service_name: ''
+properties_configure_db: true
+properties_db_port: 1521
+properties_db_user: ARCOTUSER
+properties_db_password: ''
+properties_db_host: ''
+properties_db_sid: ''
+properties_db_dsn: ''
+properties_db_service_name: ''
 
 # initalize DB - only desired on blank DBs
-arcot_init_db: 0
+properties_db_initialize : 0
 
 # will auto run db upgrade scripts
-arcot_upgrade_db: 0
+properties_db_upgrade: 0
 
 
 # bootstrap the admin console - only desireable on blank DBs
-arcot_bootstrap: 0
-arcot_masteradmin_pw: master1234!
-arcot_default_org_key: master1234!
+properties_bootstrap: 0
+properties_admin_pw: master1234!
+properties_default_org_key: master1234!
 
-sample_app: False
+arcot_install_sample_app: False
 
-str_zip_dir: GEN500000000000116
-str_bin: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
-rsk_zip_dir: GEN500000000000127
-rsk_bin: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
-adapter_bin: CA-Adapter-9.0.0-Linux-Installer.bin
+arcot_strong_zip_parent_dir: GEN500000000000116
+arcot_strong_installer: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
+arcot_risk_zip_parent_dir: GEN500000000000127
+arcot_risk_installer: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
+arcot_adapter_installer: CA-Adapter-9.0.0-Linux-Installer.bin
 
-arcot_user: arcot
-arcot_password: ''
+arcot_os_user: arcot
+arcot_os_password: ''
 
 arcot_adapter_install: false
 
 # ROLE: ca-adv-auth
 #Download URLs
-rsk_auth_install_url: ''
-str_auth_install_url: ''
-JDBC_driver_url: ''
+arcot_risk_url: ''
+arcot_strong_url: ''
+jdbc_driver_url: ''
 
 

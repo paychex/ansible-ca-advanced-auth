@@ -10,7 +10,7 @@
 
 - name: download strong auth zip
   get_url:
-    url: "{{ str_auth_install_url }}"
+    url: "{{ arcot_strong_url }}"
     dest: "{{ arcot_home }}"
     owner: arcot
     group: arcot
@@ -18,7 +18,7 @@
 
 - name: unzip strong auth
   unarchive:
-    src: "{{ arcot_home }}/{{ str_auth_install_url | basename }}"
+    src: "{{ arcot_home }}/{{ arcot_strong_url | basename }}"
     dest: "{{ arcot_home }}"
     owner: arcot
     group: arcot
@@ -34,9 +34,9 @@
     group: arcot
 
 - name: run silent installer for strong auth
-  shell: "./{{ str_bin }} -f /tmp/strongauth-installer.properties -i silent"
+  shell: "./{{ arcot_strong_installer }} -f /tmp/strongauth-installer.properties -i silent"
   args:
-    chdir: "{{ arcot_home }}/{{ str_zip_dir }}"
+    chdir: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}"
     creates: "{{ arcot_home }}/strongauth-installer.properties"
   environment:
     ARCOT_HOME: "{{ arcot_home }}"
