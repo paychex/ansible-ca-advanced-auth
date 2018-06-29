@@ -29,6 +29,10 @@
   import_tasks: strong_auth.yml
   when: str_installed.stat.exists == false
 
+- name: install ca adapter
+  import_tasks: adapter.yml
+  when: arcot_adapter_install
+
 - name: install risk auth
   import_tasks: risk_auth.yml
   when: str_installed.stat.exists == false
