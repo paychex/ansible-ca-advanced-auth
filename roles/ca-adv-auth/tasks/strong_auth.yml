@@ -54,7 +54,3 @@
     group: root
     mode: 0755
   notify: start stack
-
-- name: install ca adapter
-  import_tasks: adapter.yml
-  when: arcot_adapter_install
