@@ -1,1 +1,33 @@
 ---
+
+
+# install pip
+# conditional for pip.conf change
+# pip install pexpect
+# create playbook to install pexpect
+# install pip 
+# configure /root/.pip/pip.conf
+# pip install pexpect
+
+# run installer
+
+- name: install pexpect for adapter installation
+  import_tasks: pexpect.yml
+  when: <>
+
+- name: download strong auth zip that contains adapter
+  get_url:
+    url: "{{ arcot_strong_url }}"
+    dest: "{{ arcot_home }}"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0755
+
+- name: unzip strong auth that contains adapter
+  unarchive:
+    src: "{{ arcot_home }}/{{ arcot_strong_url | basename }}"
+    dest: "{{ arcot_home }}"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0755
+    remote_src: yes
