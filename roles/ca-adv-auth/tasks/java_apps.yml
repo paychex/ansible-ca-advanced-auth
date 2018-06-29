@@ -1,0 +1,91 @@
+---
+
+- name: user - add tomcat user to arcot group
+  user:
+    name: tomcat
+    append: yes
+    groups: arcot
+
+- name: add arcot env vars to tomcat systemd config file
+  blockinfile:
+    path: "/etc/sysconfig/tomcat"
+    state: present
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    backup: yes
+    insertafter: EOF
+    block: |
+           LD_LIBRARY_PATH={{ arcot_home }}/odbc64v80/lib:{{ arcot_home }}/sbin:{{ arcot_home }}/lib:{{ arcot_home }}/bin:{{ arcot_home }}/sdk/server/plugin/c/lib:{{ java_home }}/jre/bin
+           ARCOT_HOME={{ arcot_home }}
+           PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
+  notify: restart tomcat
+
+
+- name: copy DB access file
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/native/linux/64bit/libArcotAccessKeyProvider.so"
+    dest: "{{ java_home }}/jre/bin"
+    owner: arcot
+    group: arcot
+    mode: 0755
+
+- name: copy arcot-crypto-util
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/lib/arcot-crypto-util.jar"
+    dest: "{{ java_home }}/jre/lib/ext"
+    owner: arcot
+    group: arcot
+    mode: 0755
+
+- name: download JDBC JAR
+  get_url:
+    url: "{{ jdbc_driver_url }}"
+    dest: "{{ catalina_home }}/lib"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+
+- name: deploy UDS
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotuds.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
+- name: deploy strong auth sample app
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/samples/java/ca-strongauth-sample-application.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  when: arcot_install_sample_app
+  notify: restart tomcat
+
+- name: deploy risk auth sample app
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/samples/java/ca-riskauth-sample-application.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  when: arcot_install_sample_app == 'yes'
+  notify: restart tomcat
+
+- name: deploy arcot admin
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/java/webapps/arcotadmin.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
+

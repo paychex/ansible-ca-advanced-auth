@@ -1,20 +1,27 @@
 ---
 
 
-- hosts: rsk-app
+- hosts: all
   become: true
   vars_files:
-    - group_vars/n2a.yml
+    - "{{ env }}.yml"
   roles:
+    - /home/rmullen/git/roles/tomcat9
     - ca-adv-auth
 
 
 
-- hosts: rsk-web
-  become: true
-  vars_files:
-    - group_vars/n2a.yml
-  roles:
-    - tomcat9
-    - ca-adv-auth
-    - ca-web
+# - hosts: rsk-web
+#   become: true
+#   vars_files:
+#     - "{{ env }}.yml"
+#   roles:
+#     - /home/rmullen/git/roles/tomcat9
+#     - ca-adv-auth
+
+# # - hosts: statemanager
+# #   become: true
+# #   vars_files:
+# #     - /home/rmullen/git/advanced_auth/roles/ca-adv-auth/defaults/main.yml
+# #   roles:
+# #     - /home/rmullen/git/roles/tomcat9
