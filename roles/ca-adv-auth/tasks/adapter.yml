@@ -1,19 +1,9 @@
 ---
 
-
-# install pip
-# conditional for pip.conf change
-# pip install pexpect
-# create playbook to install pexpect
-# install pip 
-# configure /root/.pip/pip.conf
-# pip install pexpect
-
 # run installer
 
 - name: install pexpect for adapter installation
   import_tasks: pexpect.yml
-  when: <>
 
 - name: download strong auth zip that contains adapter
   get_url:
@@ -31,3 +21,17 @@
     group: "{{ arcot_os_group }}"
     mode: 0755
     remote_src: yes
+
+- name: install ca adapter
+    expect:
+    command: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}/CA-Adapter/{{ arcot_adapter_installer }}"
+    responses:
+        'Install Location': '/usr/CA/'
+        'PRESS <ENTER> TO CONTINUE': "\n"
+        'PRESS <ENTER> TO INSTALL': "\n"
+        'DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT': "Y"
+        'ENTER THE NUMBER FOR THE INSTALL SET': "\n"
+        'TO EXIT THE INSTALLER': "\n"
+    become_user: "{{ arcot_os_user }}"
+    become: true
+        
