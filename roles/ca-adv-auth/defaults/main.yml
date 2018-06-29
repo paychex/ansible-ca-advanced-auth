@@ -32,8 +32,12 @@ arcot_os_password: ''
 
 arcot_adapter_install: false
 
+
 arcot_risk_url: ''
 arcot_strong_url: ''
 jdbc_driver_url: ''
+pip_configure_proxy: false
+pip_proxy_url: ''
+pip_trusted_host: ''
 
 
