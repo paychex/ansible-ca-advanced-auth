@@ -1,3 +1,4 @@
+---
 
 java_home: /opt/java
 catalina_home: /opt/tomcat
@@ -26,6 +27,7 @@ arcot_risk_installer: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
 arcot_adapter_installer: CA-Adapter-9.0.0-Linux-Installer.bin
 
 arcot_os_user: arcot
+arcot_os_group: arcot
 arcot_os_password: ''
 
 arcot_adapter_install: false
