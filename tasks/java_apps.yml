@@ -56,6 +56,16 @@
     mode: 0755
   notify: restart tomcat
 
+- name: deploy Statemanager
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/adapterStateManager/arcotsm.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  notify: restart tomcat
+
 - name: deploy strong auth sample app
   copy:
     remote_src: yes
