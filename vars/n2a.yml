@@ -8,6 +8,8 @@ arcot_risk_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-Risk
 arcot_strong_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip
 jdbc_driver_url: http://repoman.paychex.com/packages/CA/advanced_auth/misc/ojdbc8.jar
 tomcat_install_url: http://repoman.paychex.com/packages/tomcat/apache-tomcat-9.0.2.tar.gz
+arcot_adapter_patch_url: 
+arcot_patch_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0.02/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
 
 pip_configure_proxy: true
 pip_proxy_url: http://artapdvw1.paychex.com:8081/artifactory/api/pypi/python-pypi-remote/simple

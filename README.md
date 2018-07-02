@@ -108,6 +108,11 @@ Recommended Runtime Vars
 `jdbc_driver_url`: 
 - Default: `''`
 
+`arcot_adapter_patch_url`:
+- Default: ''
+
+`arcot_patch_url`:
+- Default: ''
 
 HANDLERS
 --------

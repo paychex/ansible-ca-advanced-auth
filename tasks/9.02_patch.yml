@@ -47,3 +47,18 @@
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: arcot
   when: installed.stat.exists == false
+
+
+  # download adapter patch
+
+- name: download adapter patch
+  get_url:
+    url: "{{ adapter_patch_url }}"
+    dest: "{{ arcot_home }}/patches/{{ adapter_patch_url | basename }}"
+    owner: arcot
+    group: arcot
+    mode: 0755
+
+  # unzip
+  # remove old state manager
+  # install new state manager
