@@ -1,0 +1,5 @@
+---
+- name: execute jar for db upgrade
+  command:
+  args:
+    chdir: /opt/CA/AdvAuth/
