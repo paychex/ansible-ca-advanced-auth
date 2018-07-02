@@ -37,15 +37,15 @@
   import_tasks: risk_auth.yml
   when: str_installed.stat.exists == false
 
-# - name: execute jar for old db upgrade
-#   import_tasks: older_db_upgrade.yml
-#   when: older_db_upgrade
-
 
 - name: install web services
   import_tasks: java_apps.yml
   when: web_services
 
-# install patch 9.0.02
 - import_tasks: 9.02_patch.yml
   when: arcot_patch_update
+
+
+# - name: execute jar for old db upgrade
+#   import_tasks: older_db_upgrade.yml
+#   when: older_db_upgrade
