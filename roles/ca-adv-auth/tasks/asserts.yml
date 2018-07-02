@@ -8,4 +8,4 @@
 - name: check for download
   stat:
     path: "{{ arcot_home }}/{{ arcot_risk_url | basename }}"
-  register: rsk_installed
+  register: rsk_installed  
