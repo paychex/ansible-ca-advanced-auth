@@ -46,7 +46,7 @@
   import_tasks: java_apps.yml
   when: web_services
 
-# install patch 9.0.02
-- import_tasks: patch.yml
-  vars:
-    patch_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0.02/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
+# # install patch 9.0.02
+# - import_tasks: patch.yml
+#   vars:
+#     patch_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0.02/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
