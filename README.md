@@ -98,6 +98,9 @@ Recommended Runtime Vars
 `arcot_os_password`: 
 - Default: `''`
 
+`arcot_patch_update`:
+- Default: false
+
 ## Download URLs
 `arcot_risk_url`: 
 - Default: `''`
@@ -111,7 +114,7 @@ Recommended Runtime Vars
 `arcot_adapter_patch_url`:
 - Default: ''
 
-`arcot_patch_url`:
+`arcot_arcot_patch_url`:
 - Default: ''
 
 HANDLERS
