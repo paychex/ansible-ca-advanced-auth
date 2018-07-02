@@ -11,7 +11,6 @@
   block:
     # name: shutdown stack
     - import_tasks: powerdown_app_stack.yml
-      when: facter_payx_advauthrole == "rsk-app"
       notify: start stack
 
     - name: dir - create CA dir
@@ -46,27 +45,41 @@
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: "{{ arcot_user }}"
+
+    - name: download adapter patch
+      get_url:
+        url: "{{ arcot_adapter_patch_url }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
+        owner: "{{ arcot_user }}"
+        group: "{{ arcot_user }}"
+        mode: 0755
+
+    - name: unzip adapter patch
+      unarchive:
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename}}/{{ arcot_adapter_patch_url | basename }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
+        owner: "{{ arcot_user }}"
+        group: "{{ arcot_user }}"
+        mode: 0755
+        remote_src: yes
+
+    - name: uninstall statemanager war
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "{{ catalina_home }}/webapps/arcotsm.war"
+        - "{{ catalina_home }}/webapps/arcotsm"
+
+    - name: install new statemanager war
+      copy: 
+        remote_src: yes
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}/adapterStateManager/oracle/arcotsm.war"
+        dest: "{{ catalina_home }}"/webapps
+        owner: tomcat
+        group: tomcat
+        mode: 0755
   when: installed.stat.exists == false
 
 
-  # download adapter patch
 
-- name: download adapter patch
-  get_url:
-    url: "{{ arcot_adapter_patch_url }}"
-    dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
-    mode: 0755
-
-- name: unzip patch
-  unarchive:
-    src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename}}/{{ arcot_adapter_patch_url | basename }}"
-    dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
-    owner: "{{ arcot_user }}"
-    group: "{{ arcot_user }}"
-    mode: 0755
-    remote_src: yes
-  # unzip
-  # remove old state manager
-  # install new state manager
