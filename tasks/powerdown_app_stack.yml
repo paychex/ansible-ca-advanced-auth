@@ -3,3 +3,6 @@
 
 - name: stop riskfort
   shell: "systemctl daemon-reload && systemctl stop riskfortserver && systemctl stop casemanagementserver"
+
+- name: stop tomcat
+  command: systemctl stop tomcat
