@@ -10,11 +10,12 @@ Requirements
 - java is expected to be installed at /opt/java
 - tomcat is expected to be installed at /opt/tomcat
 
-Role Variables
---------------
+Recommended Runtime Vars
+------------------------
 **You must provide the following vars:**
 - arcot_enc_masterkey
 - properties_db_password
+- arcot_os_password
 
 ## DB Config
 **These properties populte the silent install file and can be found in installer.properties.j2 template**
@@ -115,6 +116,10 @@ handlers are stored in ca-adv-auth and shared using meta dependencies
 notify:
 name: restart webfort
 
+
+TODO
+----
+- auto execute oracle db scripts where required
 
 License
 BSD
