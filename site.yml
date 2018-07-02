@@ -4,7 +4,9 @@
 - hosts: all
   become: true
   vars_files:
-    - "{{ env }}.yml"
+    - /home/rmullen/git/advanced_auth/roles/ca-adv-auth/vars/pxlabus.yml
+#    - "{{ env }}.yml"
+
   roles:
     - /home/rmullen/git/roles/tomcat9
     - ca-adv-auth
