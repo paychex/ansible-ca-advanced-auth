@@ -18,6 +18,7 @@ TODO
 ----
 - auto execute oracle db scripts where required
 - auto upgrade db
+- oracle RAC setup
 
 Recommended Runtime Vars
 ------------------------
@@ -118,6 +119,7 @@ Recommended Runtime Vars
 - Default: `''`
 
 `arcot_patch_update`:
+- boolean, true to install patches 9.02_patch.yml
 - Default: false
 
 ## Download URLs
