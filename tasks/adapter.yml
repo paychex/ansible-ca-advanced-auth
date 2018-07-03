@@ -25,7 +25,7 @@
   expect:
     command: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}/CA-Adapter/{{ arcot_adapter_installer }} -jvmxmx 1500m"
     responses:
-        'Install Location': '/opt'
+        'Install Location': '{{ arcot_adapter_install_home }}'
         'PRESS <ENTER> TO CONTINUE': "\n"
         'PRESS <ENTER> TO INSTALL': "\n"
         'DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT': "Y"

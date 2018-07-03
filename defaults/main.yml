@@ -3,6 +3,7 @@
 java_home: /opt/java
 catalina_home: /opt/tomcat
 arcot_home: /opt/CA/AdvAuth
+arcot_adapter_install_home: /opt
 
 properties_configure_db: true
 properties_db_port: 1521
@@ -33,6 +34,7 @@ arcot_os_password: ''
 
 arcot_adapter_install: false
 arcot_patch_update: false
+arcot_web_services: true
 
 arcot_adapter_patch_url: ''
 arcot_risk_url: ''
