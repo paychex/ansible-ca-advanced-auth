@@ -1,7 +1,8 @@
 ---
 
 - name: install pip
-  package: python-pip
+  package: 
+    name: python-pip
     state: present
 
 - name: ensure state of .pip folder
@@ -11,7 +12,7 @@
     mode: 0755
     owner: root
     group: root
-  when: configure_pip_proxy
+  when: pip_configure_proxy
 
 - name: Template - setup pip.conf
   template:
@@ -20,7 +21,7 @@
     mode: 0644
     owner: root
     group: root
-  when: configure_pip_proxy
+  when: pip_configure_proxy
 
 - name: install pexpect
   pip:
