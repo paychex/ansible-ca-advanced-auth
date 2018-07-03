@@ -17,6 +17,7 @@
            LD_LIBRARY_PATH={{ arcot_home }}/odbc64v80/lib:{{ arcot_home }}/sbin:{{ arcot_home }}/lib:{{ arcot_home }}/bin:{{ arcot_home }}/sdk/server/plugin/c/lib:{{ java_home }}/jre/bin
            ARCOT_HOME={{ arcot_home }}
            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin:/opt/puppetlabs/bin:{{ catalina_home }}/bin:{{ java_home }}/bin:/root/bin:{{ java_home }}/bin
+           AFM_HOME={{ arcot_home }}
   notify: restart tomcat
 
 
@@ -54,6 +55,17 @@
     owner: tomcat
     group: tomcat
     mode: 0755
+  notify: restart tomcat
+
+- name: deploy Statemanager
+  copy:
+    remote_src: yes
+    src: "{{ arcot_home }}/adapterStateManager/oracle/arcotsm.war"
+    dest: "{{ catalina_home }}/webapps"
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+  when: arcot_adapter_install
   notify: restart tomcat
 
 - name: deploy strong auth sample app

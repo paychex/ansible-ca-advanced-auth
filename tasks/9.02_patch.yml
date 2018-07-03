@@ -1,0 +1,85 @@
+---
+# this grouping of  tasks receives a download location for a zipped patch and applies it to the host
+
+- name: check if patch is installed
+  stat:
+    path: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+  register: installed
+
+
+- name: install patch
+  block:
+    # name: shutdown stack
+    - import_tasks: powerdown_app_stack.yml
+      notify: start stack
+
+    - name: dir - create CA dir
+      file:
+        name: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        state: directory
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_group }}"
+        mode: 0755
+
+    - name: download patch
+      get_url:
+        url: "{{ arcot_patch_url }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_group }}"
+        mode: 0755
+
+    - name: unzip patch
+      unarchive:
+        src: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename}}/{{ arcot_patch_url | basename }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_group }}"
+        mode: 0755
+        remote_src: yes
+
+    - name: "install patch {{ arcot_patch_url | basename }}"
+      shell: "./install.sh"
+      args:
+        chdir: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+      environment:
+        ARCOT_HOME: "{{ arcot_home }}"
+      become_user: "{{ arcot_os_user }}"
+
+    - name: download adapter patch
+      get_url:
+        url: "{{ arcot_adapter_patch_url }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_group }}"
+        mode: 0755
+
+    - name: unzip adapter patch
+      unarchive:
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename}}" #/{{ arcot_adapter_patch_url | basename }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
+        owner: "{{ arcot_os_user }}"
+        group: "{{ arcot_os_group }}"
+        mode: 0755
+        remote_src: yes
+
+    - name: uninstall statemanager war
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "{{ catalina_home }}/webapps/arcotsm.war"
+        - "{{ catalina_home }}/webapps/arcotsm"
+
+    - name: install new statemanager war
+      copy: 
+        remote_src: yes
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}/adapterStateManager/oracle/arcotsm.war"
+        dest: "{{ catalina_home }}/webapps"
+        owner: tomcat
+        group: tomcat
+        mode: 0755
+  when: installed.stat.exists == false
+
+
+

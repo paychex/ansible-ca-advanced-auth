@@ -1,0 +1,29 @@
+---
+
+- name: install pip
+  package: 
+    name: python-pip
+    state: present
+
+- name: ensure state of .pip folder
+  file:
+    state: directory
+    path: /root/.pip
+    mode: 0755
+    owner: root
+    group: root
+  when: pip_configure_proxy
+
+- name: Template - setup pip.conf
+  template:
+    src: pip.conf.j2
+    dest: /root/.pip/pip.conf
+    mode: 0644
+    owner: root
+    group: root
+  when: pip_configure_proxy
+
+- name: install pexpect
+  pip:
+    name: pexpect
+    state: latest

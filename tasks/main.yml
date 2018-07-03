@@ -29,20 +29,23 @@
   import_tasks: strong_auth.yml
   when: str_installed.stat.exists == false
 
+- name: install ca adapter
+  import_tasks: adapter.yml
+  when: arcot_adapter_install and adapter_installed.stat.exists == false
+
 - name: install risk auth
   import_tasks: risk_auth.yml
-  when: str_installed.stat.exists == false
-
-# - name: execute jar for old db upgrade
-#   import_tasks: older_db_upgrade.yml
-#   when: older_db_upgrade
+  when: rsk_installed.stat.exists == false
 
 
 - name: install web services
   import_tasks: java_apps.yml
-  when: web_services
+  when: arcot_web_services
 
-# install patch 9.0.02
-- import_tasks: patch.yml
-  vars:
-    patch_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0.02/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip
+- import_tasks: 9.02_patch.yml
+  when: arcot_patch_update
+
+
+# - name: execute jar for old db upgrade
+#   import_tasks: older_db_upgrade.yml
+#   when: older_db_upgrade
