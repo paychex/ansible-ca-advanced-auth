@@ -9,3 +9,9 @@
   stat:
     path: "{{ arcot_home }}/{{ arcot_risk_url | basename }}"
   register: rsk_installed  
+
+ # check if adapter is installed
+- name: check for download
+  stat:
+    path: "{{ arcot_home }}/adapterStateManager"
+  register: adapter_installed  
