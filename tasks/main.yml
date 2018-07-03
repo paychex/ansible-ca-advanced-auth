@@ -40,7 +40,7 @@
 
 - name: install web services
   import_tasks: java_apps.yml
-  when: web_services
+  when: arcot_web_services
 
 - import_tasks: 9.02_patch.yml
   when: arcot_patch_update
