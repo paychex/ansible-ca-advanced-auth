@@ -60,7 +60,7 @@
 - name: deploy Statemanager
   copy:
     remote_src: yes
-    src: "{{ arcot_home }}/adapterStateManager/arcotsm.war"
+    src: "{{ arcot_home }}/adapterStateManager/oracle/arcotsm.war"
     dest: "{{ catalina_home }}/webapps"
     owner: tomcat
     group: tomcat
