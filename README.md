@@ -44,7 +44,6 @@ Recommended Runtime Vars
 - Default: `1521`
 
 `properties_db_user`:
-
 - Default: `ARCOTUSER`
 
 `properties_db_password`: 
@@ -136,14 +135,13 @@ URLs for downloading components. Recommend these are hosted internally
 - Default: `''`
 
 `arcot_adapter_patch_url`:
-- Default: ''
+- Default: `''`
 
 `arcot_patch_url`:
-- Default: ''
+- Default: `''`
 
 HANDLERS
 --------
-handlers are stored in ca-adv-auth and shared using meta dependencies
 
 notify:
 name: restart webfort
