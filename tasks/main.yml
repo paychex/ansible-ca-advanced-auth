@@ -31,11 +31,11 @@
 
 - name: install ca adapter
   import_tasks: adapter.yml
-  when: arcot_adapter_install
+  when: arcot_adapter_install and adapter_installed.stat.exists == false
 
 - name: install risk auth
   import_tasks: risk_auth.yml
-  when: str_installed.stat.exists == false
+  when: rsk_installed.stat.exists == false
 
 
 - name: install web services
