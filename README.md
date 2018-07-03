@@ -1,14 +1,23 @@
 USAGE
 -----
-create an inventory create a playbook to run this and or additional roles
+It is my intention that you consume this role by populating an inventory with hosts + vars. Meaning, all key installation concerns take their direction from variables. You can populate those vars in your inventory or vars/. If a feature you need is not satisfied by a variable, create the feature and open a PR, please. 
 
-Role Name
-this role installs advanced auth 9.0.2
+Overview
+--------
+This role installs strong auth 9, risk auth 9, and adapter 9. It then applies patch 9.0.02 to all those tools. Although it does a full adapter install, it only deploys statemanager. But it would be easy to extend (PR welcome).
 
 Requirements
 ------------
+- linux installation
 - java is expected to be installed at /opt/java
 - tomcat is expected to be installed at /opt/tomcat
+- oracle DB is currently expected
+- CA zip files not included and are expected to be accessible via wget at runtime
+
+TODO
+----
+- auto execute oracle db scripts where required
+- auto upgrade db
 
 Recommended Runtime Vars
 ------------------------
@@ -16,6 +25,9 @@ Recommended Runtime Vars
 - arcot_enc_masterkey
 - properties_db_password
 - arcot_os_password
+
+
+# Variables
 
 ## DB Config
 **These properties populte the silent install file and can be found in installer.properties.j2 template**
@@ -26,7 +38,6 @@ Recommended Runtime Vars
 - Default: `true`
 
 `properties_db_port`:
-
 - Default: `1521`
 
 `properties_db_user`:
@@ -77,6 +88,14 @@ Recommended Runtime Vars
 - where advanced auth tools will be installed
 - Default: `/opt/CA/AdvAuth`
 
+`arcot_adapter_install_home`:
+- where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
+- Default: `/opt`
+
+- `arcot_web_services`:
+- Installs the webapps to tomcat
+- Default: true
+
 `arcot_install_sample_app`: 
 - Default: `False`
 
@@ -102,6 +121,7 @@ Recommended Runtime Vars
 - Default: false
 
 ## Download URLs
+URLs for downloading components. Recommend these are hosted internally
 `arcot_risk_url`: 
 - Default: `''`
 
@@ -114,7 +134,7 @@ Recommended Runtime Vars
 `arcot_adapter_patch_url`:
 - Default: ''
 
-`arcot_arcot_patch_url`:
+`arcot_patch_url`:
 - Default: ''
 
 HANDLERS
@@ -124,10 +144,6 @@ handlers are stored in ca-adv-auth and shared using meta dependencies
 notify:
 name: restart webfort
 
-
-TODO
-----
-- auto execute oracle db scripts where required
 
 License
 BSD
