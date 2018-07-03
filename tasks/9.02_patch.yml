@@ -75,7 +75,7 @@
       copy: 
         remote_src: yes
         src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}/adapterStateManager/oracle/arcotsm.war"
-        dest: "{{ catalina_home }}"/webapps
+        dest: "{{ catalina_home }}/webapps"
         owner: tomcat
         group: tomcat
         mode: 0755
