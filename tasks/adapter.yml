@@ -19,17 +19,23 @@
     group: "{{ arcot_os_group }}"
     mode: 0755
     remote_src: yes
+    creates: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}"
 
 - name: install ca adapter
-    expect:
-    command: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}/CA-Adapter/{{ arcot_adapter_installer }}"
+  expect:
+    command: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}/CA-Adapter/{{ arcot_adapter_installer }} -jvmxmx 1500m"
     responses:
-        'Install Location': '{{ arcot_home }}'
+        'Install Location': '/opt'
         'PRESS <ENTER> TO CONTINUE': "\n"
         'PRESS <ENTER> TO INSTALL': "\n"
         'DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT': "Y"
         'ENTER THE NUMBER FOR THE INSTALL SET': "\n"
         'TO EXIT THE INSTALLER': "\n"
-    become_user: "{{ arcot_os_user }}"
-    become: true
-        
+        'PRESS <ENTER> TO EXIT THE INSTALLER:': "\n"
+        '  2- /opt/': '2'
+  become_user: "{{ arcot_os_user }}"
+  become: true
+  register: cmd_result
+  failed_when: '"Installation Complete" not in cmd_result.stdout'
+
+      
