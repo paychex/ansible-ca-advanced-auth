@@ -25,7 +25,7 @@ TODO
 Recommended Runtime Vars
 ------------------------
 **You must provide the following vars:**
-- arcot_enc_masterkey
+- properties_enc_masterkey
 - properties_db_password
 - arcot_os_password
 
@@ -33,7 +33,7 @@ Recommended Runtime Vars
 # Variables
 
 ## DB Config
-**These properties populte the silent install file and can be found in installer.properties.j2 template**
+**These properties populate the silent install file and can be found in installer.properties.j2 template**
 
 
 `properties_configure_db`: 
@@ -61,7 +61,7 @@ Recommended Runtime Vars
 `properties_db_service_name`: 
 - Default: `''`
 
-`properties_db_initialize `:
+`properties_db_initialize`:
 - Default: `0`
 
 `properties_db_upgrade`: 
@@ -73,6 +73,9 @@ Recommended Runtime Vars
 - Default: `master1234!`
 
 `properties_default_org_key`: 
+- Default: `master1234!`
+
+`properties_enc_masterkey`:
 - Default: `master1234!`
 
 ## App Config
@@ -94,7 +97,7 @@ Recommended Runtime Vars
 - where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
 - Default: `/opt`
 
-- `arcot_web_services`:
+`arcot_web_services`:
 - Installs the webapps to tomcat
 - Default: true
 
@@ -125,6 +128,7 @@ Recommended Runtime Vars
 
 ## Download URLs
 URLs for downloading components. Recommend these are hosted internally
+
 `arcot_risk_url`: 
 - Default: `''`
 
