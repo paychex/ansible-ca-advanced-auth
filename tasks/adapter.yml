@@ -21,6 +21,13 @@
     remote_src: yes
     creates: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}"
 
+- name: "set {{ arcot_adapter_install_home }} permissions as workaround for installer issues"
+  file:
+    path: "{{ arcot_adapter_install_home }}"
+    state: directory
+    mode: 0777
+
+
 - name: install ca adapter
   expect:
     command: "{{ arcot_home }}/{{ arcot_strong_zip_parent_dir }}/CA-Adapter/{{ arcot_adapter_installer }} -jvmxmx 1500m"
@@ -37,5 +44,11 @@
   become: true
   register: cmd_result
   failed_when: '"Installation Complete" not in cmd_result.stdout'
+
+- name: "reset {{ arcot_adapter_install_home }} permissions as workaround for installer issues"
+  file:
+    path: "{{ arcot_adapter_install_home }}"
+    state: directory
+    mode: 0755
 
       
