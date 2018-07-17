@@ -43,5 +43,3 @@ jdbc_driver_url: ''
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
-
-

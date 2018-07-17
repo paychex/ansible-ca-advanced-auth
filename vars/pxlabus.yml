@@ -18,7 +18,7 @@ properties_db_upgrade: 0
 properties_bootstrap: 1
 properties_admin_pw: master1234!!
 properties_default_org_key: master1234!!
-arcot_enc_masterkey: ''
+properties_enc_masterkey: ''
 
 arcot_risk_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-RiskAuthentication-9.0.0-Linux-Installer.zip
 arcot_strong_url: http://repoman.paychex.com/packages/CA/advanced_auth/9.0/CA-StrongAuthentication-9.0.0-Linux-Installer.zip

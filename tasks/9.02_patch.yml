@@ -3,9 +3,8 @@
 
 - name: check if patch is installed
   stat:
-    path: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+    path: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename }}"
   register: installed
-
 
 - name: install patch
   block:
@@ -15,7 +14,7 @@
 
     - name: dir - create CA dir
       file:
-        name: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        name: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename }}"
         state: directory
         owner: "{{ arcot_os_user }}"
         group: "{{ arcot_os_group }}"
@@ -24,15 +23,15 @@
     - name: download patch
       get_url:
         url: "{{ arcot_patch_url }}"
-        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename }}" #/{{ arcot_patch_url | basename }}"
         owner: "{{ arcot_os_user }}"
         group: "{{ arcot_os_group }}"
         mode: 0755
 
     - name: unzip patch
       unarchive:
-        src: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename}}/{{ arcot_patch_url | basename }}"
-        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        src: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename}}/{{ arcot_patch_url | basename }}"
+        dest: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename }}/"
         owner: "{{ arcot_os_user }}"
         group: "{{ arcot_os_group }}"
         mode: 0755
@@ -41,7 +40,7 @@
     - name: "install patch {{ arcot_patch_url | basename }}"
       shell: "./install.sh"
       args:
-        chdir: "{{ arcot_home }}/patches/{{ arcot_patch_url | basename }}"
+        chdir: "{{ arcot_home }}/patches/{{ arcot_patch_url[:-4] | basename }}"
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: "{{ arcot_os_user }}"
@@ -56,8 +55,8 @@
 
     - name: unzip adapter patch
       unarchive:
-        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename}}" #/{{ arcot_adapter_patch_url | basename }}"
-        dest: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}"
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename}}"
+        dest: "{{ arcot_home }}/patches/"
         owner: "{{ arcot_os_user }}"
         group: "{{ arcot_os_group }}"
         mode: 0755
@@ -74,7 +73,7 @@
     - name: install new statemanager war
       copy: 
         remote_src: yes
-        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url | basename }}/adapterStateManager/oracle/arcotsm.war"
+        src: "{{ arcot_home }}/patches/{{ arcot_adapter_patch_url[:-4] | basename }}/adapterStateManager/oracle/arcotsm.war"
         dest: "{{ catalina_home }}/webapps"
         owner: tomcat
         group: tomcat

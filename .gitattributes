@@ -15,3 +15,5 @@
 *.pem binary
 *.el7 binary
 *.jar binary
+vars/*
+site.yml
