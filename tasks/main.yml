@@ -47,5 +47,6 @@
 
 
 # - name: execute jar for old db upgrade
-#   import_tasks: older_db_upgrade.yml
-#   when: older_db_upgrade
+#   import_tasks: 3.x_db_upgrade.yml
+#   when: arcot_3.x_db_upgrade
+#   run_once: true
