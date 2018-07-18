@@ -234,10 +234,10 @@ URLs for downloading components. Recommend these are hosted internally
 - Default: `''`
 
 HANDLERS
---------
 
-notify:
-name: restart webfort
+-----
+
+start stack
 
 License
 BSD
