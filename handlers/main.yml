@@ -1,5 +1,4 @@
 ---
-# handlers file for tomcat
 #
 
 - name: start stack
