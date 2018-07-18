@@ -79,6 +79,7 @@
         group: tomcat
         mode: 0755
   when: installed.stat.exists == false
+  notify: start stack
 
 
 

@@ -1,17 +1,17 @@
-USAGE
+# USAGE
 
 -----
 It is my intention that you consume this role by populating an inventory with hosts + vars. Meaning, all key installation concerns take their direction from variables. You can populate those vars in your inventory or vars/. If a feature you need is not satisfied by a variable, create the feature and open a PR, please. 
 
 Overview
 
---------
+-----
 
 This role installs strong auth 9, risk auth 9, and adapter 9. It then applies patch 9.0.02 to all those tools. Although it does a full adapter install, it only deploys statemanager. But it would be easy to extend (PR welcome).
 
 Requirements
 
-------------
+-----
 
 - linux installation
 - java is expected to be installed at /opt/java
@@ -21,7 +21,7 @@ Requirements
 
 TODO
 
-----
+-----
 
 - auto execute oracle db scripts where required
 - auto upgrade db
@@ -31,7 +31,7 @@ TODO
 
 Recommended Runtime Vars
 
-------------------------
+-----
 
 **You must provide the following vars:**
 
@@ -39,9 +39,9 @@ Recommended Runtime Vars
 - properties_db_password
 - arcot_os_password
 
-# Variables
+## Variables
 
-## DB Config
+### DB Config
 
 **These properties populate the silent install file and can be found in installer.properties.j2 template**
 
@@ -103,7 +103,7 @@ Recommended Runtime Vars
 - password for the encryption key `securestore.enc`
 - Default: `master1234!`
 
-## App Config
+### App Config
 
 **These vars determine where the apps will be installed**
 
@@ -167,7 +167,7 @@ Recommended Runtime Vars
 - boolean, true to install patches 9.02_patch.yml
 - Default: false
 
-## Download URLs
+### Download URLs
 
 URLs for downloading components. Recommend these are hosted internally
 
@@ -202,5 +202,4 @@ BSD
 
 Author Information
 
-------------------
 created by drew mullen rmullen@paychex.com
