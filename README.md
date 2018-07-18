@@ -1,13 +1,14 @@
-# USAGE
+# Overview
 
 -----
+
+This is an ansible role that installs strong auth 9, risk auth 9, and adapter 9. It then applies patch 9.0.02 to all those tools. Although it does a full adapter install, it only deploys statemanager. But it would be easy to extend (PR welcome). Its intended for system admins / engineers who want to manage their CA tool configurations via code.
+
+USAGE
+
+-----
+
 It is my intention that you consume this role by populating an inventory with hosts + vars. Meaning, all key installation concerns take their direction from variables. You can populate those vars in your inventory or vars/. If a feature you need is not satisfied by a variable, create the feature and open a PR, please. 
-
-Overview
-
------
-
-This role installs strong auth 9, risk auth 9, and adapter 9. It then applies patch 9.0.02 to all those tools. Although it does a full adapter install, it only deploys statemanager. But it would be easy to extend (PR welcome).
 
 Requirements
 
