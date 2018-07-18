@@ -44,6 +44,8 @@
       environment:
         ARCOT_HOME: "{{ arcot_home }}"
       become_user: "{{ arcot_os_user }}"
+      notify: start stack
+
 
     - name: download adapter patch
       get_url:
@@ -79,7 +81,6 @@
         group: tomcat
         mode: 0755
   when: installed.stat.exists == false
-  notify: start stack
 
 
 
