@@ -226,7 +226,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - name of sub folder zip creates
 - Default: `AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0`
 
-`arcot_db_upgrade_zip_url`: 
+`arcot_db_upgrade_zip_url`:
 
 - URL used to download upgrade zip file
 - Default: ''
