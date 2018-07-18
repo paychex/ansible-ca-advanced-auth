@@ -26,7 +26,6 @@ TODO
 - auto execute oracle db scripts where required
 - auto upgrade db
 - oracle RAC setup
-- enable ssl
 - check files/ for downloads first & change download to control then push to host
 
 Recommended Runtime Vars
@@ -38,6 +37,49 @@ Recommended Runtime Vars
 - properties_enc_masterkey
 - properties_db_password
 - arcot_os_password
+
+## Example 
+
+I have an inventory that defines the desired config and a playbook to mary the inv to the role. I also pass some vars during execution.
+
+
+### Playbook
+
+    - hosts: rm-app
+      become: true
+      roles:
+          - /home/rmullen/git/roles/tomcat9
+          - /home/rmullen/git/advanced_auth
+
+### Inventory
+
+    [rm-app]
+    riskminder-app.hostname.com
+
+    [rm-app:vars]
+    properties_db_host=dbhostname
+    properties_db_sid=mydbsid
+    properties_db_dsn='adsnname'
+
+    arcot_risk_url=http://example.com/file.zip
+    arcot_strong_url=http://example.com/file.zip
+    jdbc_driver_url=http://example.com/file.zip
+    tomcat_install_url=http://example.com/file.zip
+    arcot_adapter_patch_url=http://example.com/file.zip
+    arcot_patch_url=http://example.com/file.zip
+    arcot_patch_update=true
+    arcot_adapter_install=true
+    arcot_web_services=true
+
+    pip_configure_proxy=true
+    pip_proxy_url=http://example.com/
+    pip_trusted_host=example.com
+
+### Execute
+
+    ansible-playbook -i <your_inventory_file> <your_playbook_that_calls_role> -e "properties_enc_masterkey=<your_masterkey> properties_db_password=<your_db_password> arcot_os_password=<your_password>"
+
+
 
 ## Variables
 
@@ -192,13 +234,14 @@ URLs for downloading components. Recommend these are hosted internally
 - Default: `''`
 
 HANDLERS
---------
 
-notify:
-name: restart webfort
+-----
+
+start stack
 
 License
-BSD
+
+Apache 2.0
 
 Author Information
 
