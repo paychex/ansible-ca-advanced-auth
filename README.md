@@ -26,7 +26,6 @@ TODO
 - auto execute oracle db scripts where required
 - auto upgrade db
 - oracle RAC setup
-- enable ssl
 - check files/ for downloads first & change download to control then push to host
 
 Recommended Runtime Vars
