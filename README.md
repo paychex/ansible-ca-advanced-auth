@@ -53,27 +53,27 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 ### Inventory
 
-[rm-app]
-rmdapn2aw11.paychex.com 
+    [rm-app]
+    riskminder-app.hostname.com
 
-[rm-app:vars]
-properties_db_host=dbhostname
-properties_db_sid=mydbsid
-properties_db_dsn='adsnname'
+    [rm-app:vars]
+    properties_db_host=dbhostname
+    properties_db_sid=mydbsid
+    properties_db_dsn='adsnname'
 
-arcot_risk_url=http://example.com/file.zip
-arcot_strong_url=http://example.com/file.zip
-jdbc_driver_url=http://example.com/file.zip
-tomcat_install_url=http://example.com/file.zip
-arcot_adapter_patch_url=http://example.com/file.zip
-arcot_patch_url=http://example.com/file.zip
-arcot_patch_update=true
-arcot_adapter_install=true
-arcot_web_services=true
+    arcot_risk_url=http://example.com/file.zip
+    arcot_strong_url=http://example.com/file.zip
+    jdbc_driver_url=http://example.com/file.zip
+    tomcat_install_url=http://example.com/file.zip
+    arcot_adapter_patch_url=http://example.com/file.zip
+    arcot_patch_url=http://example.com/file.zip
+    arcot_patch_update=true
+    arcot_adapter_install=true
+    arcot_web_services=true
 
-pip_configure_proxy=true
-pip_proxy_url=http://example.com/
-pip_trusted_host=example.com
+    pip_configure_proxy=true
+    pip_proxy_url=http://example.com/
+    pip_trusted_host=example.com
 
 ### Execute
 
