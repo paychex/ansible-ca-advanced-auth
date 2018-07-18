@@ -26,6 +26,9 @@ arcot_strong_installer: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
 arcot_risk_zip_parent_dir: GEN500000000000127
 arcot_risk_installer: CA-RiskAuthentication-9.0.0-Linux-Installer.bin
 arcot_adapter_installer: CA-Adapter-9.0.0-Linux-Installer.bin
+arcot_db_upgrade_zip_dir: GEN500000000000104
+arcot_db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
+arcot_db_upgrade_zip_url: ''
 
 
 arcot_os_user: arcot
@@ -35,6 +38,7 @@ arcot_os_password: ''
 arcot_adapter_install: false
 arcot_patch_update: false
 arcot_web_services: true
+arcot_3.x_db_upgrade: false
 
 arcot_adapter_patch_url: ''
 arcot_risk_url: ''
