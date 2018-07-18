@@ -46,10 +46,10 @@ I have an inventory that defines the desired config and a playbook to mary the i
 ### Playbook
 
     - hosts: rm-app
-    become: true
-    roles:
-        - /home/rmullen/git/roles/tomcat9
-        - /home/rmullen/git/advanced_auth
+      become: true
+      roles:
+          - /home/rmullen/git/roles/tomcat9
+          - /home/rmullen/git/advanced_auth
 
 ### Inventory
 
