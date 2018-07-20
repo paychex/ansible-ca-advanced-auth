@@ -46,6 +46,9 @@
   import_tasks: 9.02_patch.yml
   when: arcot_patch_update
 
+- name: setup for RAC
+  import_tasks: rac_config.yml
+  when: arcot_db_rac
 
 # - name: execute jar for old db upgrade
 #   import_tasks: 3.x_db_upgrade.yml
