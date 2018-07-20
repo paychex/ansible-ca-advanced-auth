@@ -42,7 +42,8 @@
   import_tasks: java_apps.yml
   when: arcot_web_services
 
-- import_tasks: 9.02_patch.yml
+- name: install 9.0.02 patches
+  import_tasks: 9.02_patch.yml
   when: arcot_patch_update
 
 
