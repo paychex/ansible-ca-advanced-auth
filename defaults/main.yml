@@ -39,6 +39,7 @@ arcot_adapter_install: false
 arcot_patch_update: false
 arcot_web_services: true
 arcot_3.x_db_upgrade: false
+arcot_db_rac: false
 
 arcot_adapter_patch_url: ''
 arcot_risk_url: ''
