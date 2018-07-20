@@ -39,7 +39,7 @@ Recommended Runtime Vars
 - properties_db_password
 - arcot_os_password
 
-## Example 
+## Example
 
 I have an inventory that defines the desired config and a playbook to mary the inv to the role. I also pass some vars during execution.
 
@@ -178,6 +178,11 @@ I have an inventory that defines the desired config and a playbook to mary the i
 `arcot_install_sample_app`: 
 
 - Default: `False`
+
+`arcot_db_rac`:
+
+- Will overwrite config to enable RAC db
+- Default: `false`
 
 `arcot_strong_zip_parent_dir`: 
 
