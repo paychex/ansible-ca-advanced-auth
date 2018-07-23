@@ -1,2 +1,12 @@
 ---
 # configures advanced auth to use a RAC db
+
+#need these variables to be set correctly!
+-name: find and replace line in DB script comntinaing service name
+  replace:
+  path: '{{oracle_dbscripts_home}}/{{arcot_db_oracle_script}}'
+  regexp: "filename varchar2(50) := 'tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';$"
+  replace: "filename varchar2(100) := '{{ arcot_db_shared_datafile_path }}/{{ db_service_name }}/datafile/tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';"
+
+
+

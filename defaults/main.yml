@@ -4,6 +4,7 @@ java_home: /opt/java
 catalina_home: /opt/tomcat
 arcot_home: /opt/CA/AdvAuth
 arcot_adapter_install_home: /opt
+oracle_dbscripts_home: '{{ arcot_home }}/dbscripts/oracle/'
 
 properties_configure_db: true
 properties_db_port: 1521
@@ -29,6 +30,9 @@ arcot_adapter_installer: CA-Adapter-9.0.0-Linux-Installer.bin
 arcot_db_upgrade_zip_dir: GEN500000000000104
 arcot_db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
 arcot_db_upgrade_zip_url: ''
+arcot_db_oracle_script: db-config-for-common.sql
+arcot_db_shared_datafile_path:
+arcot_db_service_name:
 
 
 arcot_os_user: arcot
