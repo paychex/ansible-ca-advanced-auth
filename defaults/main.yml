@@ -52,3 +52,5 @@ jdbc_driver_url: ''
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
+arcot_jdbc_url: 'URL.1=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST={{ properties_db_host }})(PORT={{properties_db_port}})))(CONNECT_DATA=(SERVICE_NAME={{properties_db_service_name}})(SERVER=DEDICATED)))
+    

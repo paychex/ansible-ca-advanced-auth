@@ -2,11 +2,45 @@
 # configures advanced auth to use a RAC db
 
 #need these variables to be set correctly!
--name: find and replace line in DB script comntinaing service name
+- name: find and replace line in DB script comntinaing service name
   replace:
-  path: '{{oracle_dbscripts_home}}/{{arcot_db_oracle_script}}'
-  regexp: "filename varchar2(50) := 'tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';$"
-  replace: "filename varchar2(100) := '{{ arcot_db_shared_datafile_path }}/{{ db_service_name }}/datafile/tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';"
+    path: '{{oracle_dbscripts_home}}/{{arcot_db_oracle_script}}'
+    regexp: "filename varchar2(50) := 'tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';$"
+    replace: "filename varchar2(100) := '{{ arcot_db_shared_datafile_path }}/{{ db_service_name }}/datafile/tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';"
+
+
+# not yet tested below this point !!
+- name: append jdbc url to ini file # to be used for step 2
+  lineinfile:
+    path: '{{ arcot_home }}/conf/arcotcommon.ini'
+    state: present
+    insertafter: '{{ arcot_jdbc_url }}'
+    line: '^[arcot/db/primarydb]$'
+
+    #substep 2 is about updating username for the new db, however this should already be set correctly, leaving this note inc ase soemthing does infact need to change
+
+
+
+- name: odbc.ini update hostname
+  replace:
+    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    regexp: '^HostName='
+    replace: '#HostName='
+
+- name: odbc.ini update portnumber
+  replace:
+    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    regexp: '^PortNumber='
+    replace: '#PortNumber='
+
+- name: odbc.ini update SID
+  replace:
+    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    regexp: '^SID='
+    replace: '#SID='
+
+
+
 
 
 
