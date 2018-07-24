@@ -23,21 +23,36 @@
 
 - name: odbc.ini update hostname
   replace:
-    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
     regexp: '^HostName='
     replace: '#HostName='
 
 - name: odbc.ini update portnumber
   replace:
-    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
     regexp: '^PortNumber='
     replace: '#PortNumber='
 
 - name: odbc.ini update SID
   replace:
-    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
     regexp: '^SID='
     replace: '#SID='
+
+
+- name: odbc.ini add TNSNamesFile
+  replace:
+    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    line: 'TNSNamesFile=ARCOT_HOME/ora_file_name'
+
+- name: odbc.ini add TNSNamesFile
+  replace:
+    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    line: 'ServerName=section_name'
+
+
+
+
 
 
 
