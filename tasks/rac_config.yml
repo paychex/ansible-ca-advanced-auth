@@ -13,84 +13,78 @@
     regexp: "filename varchar2(50) := 'tabspace_arreports_'.?.? to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') .?.? '.dat';$"
     replace: "filename varchar2(100) := '{{ arcot_db_shared_datafile_path }}/data_file/tabspace_arreports_'|| to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') || '.dat';"
 
-
-# not yet tested below this point !!
-- name: append jdbc url to ini file # to be used for step 2
+- name: append jdbc url to arcotcommon.ini file
   lineinfile:
     path: '{{ arcot_home }}/conf/arcotcommon.ini'
     state: present
     line: '{{ arcot_jdbc_url }}'
     insertafter: '^[arcot/db/primarydb]$'
 
-    #substep 2 is about updating username for the new db, however this should already be set correctly, leaving this note inc ase soemthing does infact need to change
-
-
-
 - name: odbc.ini update hostname
   replace:
-    path: '{{ arcot_home }}/odbc{% if 64_bit '64v80' }}/odbc.ini'
-    regexp: '^HostName='
-    replace: '#HostName='
+    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini"
+    regexp: '^{{ item }}'
+    replace: '#{{ item }}'
+  loop:
+    - 'HostName='
+    - 'PortNumber='
+    - 'SID='
 
-- name: odbc.ini update portnumber
-  replace:
-    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
-    regexp: '^PortNumber='
-    replace: '#PortNumber='
+- name: odbc.ini add TNSNamesFile
+  lineinfile:
+    path: '{{ arcot_home }}/odbc64v80/odbc.ini'
+    line: "{{ item }}"
+  loop:
+    - 'TNSNamesFile=ARCOT_HOME/tnsnames.ora'
+    - 'ServerName={{ properties_section_name }}'
 
-- name: odbc.ini update SID
-  replace:
-    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
-    regexp: '^SID='
-    replace: '#SID='
+# - name: odbc.ini update portnumber
+#   replace:
+#     path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
+#     regexp: '^PortNumber='
+#     replace: '#PortNumber='
 
-- name: set properties_section_name value based on environment - n2a
-  set_fact: 
-    properties_section_name: rmdn2a
-    when: build_environment == 'n2a'
+# - name: odbc.ini update SID
+#   replace:
+#     path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
+#     regexp: '^SID='
+#     replace: '#SID='
 
-- name: set properties_section_name value based on environment - n1
-  set_fact: 
-    properties_section_name: rmdn1
-    when: build_environment == 'n1'
+# - name: set properties_section_name value based on environment - n2a
+#   set_fact: 
+#     properties_section_name: rmdn2a
+#     when: build_environment == 'n2a'
 
-- name: set properties_section_name value based on environment - n0
-  set_fact: 
-    properties_section_name: rmdn0
-    when: build_environment == 'n0'
+# - name: set properties_section_name value based on environment - n1
+#   set_fact: 
+#     properties_section_name: rmdn1
+#     when: build_environment == 'n1'
 
-- name: set properties_section_name value based on environment - perf
-  set_fact: 
-    properties_section_name: rmdpf
-    when: build_environment == 'perf'
+# - name: set properties_section_name value based on environment - n0
+#   set_fact: 
+#     properties_section_name: rmdn0
+#     when: build_environment == 'n0'
 
-- name: set properties_section_name value based on environment - prod
-  set_fact: 
-    properties_section_name: rmdpr
-    when: build_environment == 'prod'
+# - name: set properties_section_name value based on environment - perf
+#   set_fact: 
+#     properties_section_name: rmdpf
+#     when: build_environment == 'perf'
 
-- name: set properties_section_name value based on environment - lab
-  set_fact: 
-    properties_section_name: lab
-    when: build_environment == 'lab'
+# - name: set properties_section_name value based on environment - prod
+#   set_fact: 
+#     properties_section_name: rmdpr
+#     when: build_environment == 'prod'
 
-- name: Fail task when environment was not set to valid option
-  fail:
-    msg: "environment variable not set to valid option, check readme"
-  when: properties_section_name == ''
+# - name: set properties_section_name value based on environment - lab
+#   set_fact: 
+#     properties_section_name: lab
+#     when: build_environment == 'lab'
+
+# - name: Fail task when environment was not set to valid option
+#   fail:
+#     msg: "environment variable not set to valid option, check readme"
+#   when: properties_section_name == ''
   
-
-
-
-- name: odbc.ini add TNSNamesFile
-  replace:
-    path: '{{ arcot_home }}/odbc64v80/odbc.ini'
-    line: 'TNSNamesFile=ARCOT_HOME/tnsnames.ora'
-
-- name: odbc.ini add TNSNamesFile
-  replace:
-    path: '{{ arcot_home }}/odbc64v80/odbc.ini'
-    line: 'ServerName={{ properties_section_name }}'
 
 
 
