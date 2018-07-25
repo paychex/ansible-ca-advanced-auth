@@ -41,7 +41,7 @@
 
 - name: odbc.ini add TNSNamesFile
   lineinfile:
-    path: '{{ arcot_home }}/odbc64v80/odbc.ini'
+    path: '{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini'
     line: "{{ item }}"
   loop:
     - 'TNSNamesFile={{ arcot_home }}/tns.ora'
