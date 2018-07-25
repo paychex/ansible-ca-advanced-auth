@@ -62,6 +62,8 @@ I have an inventory that defines the desired config and a playbook to mary the i
     properties_db_sid=mydbsid
     properties_db_dsn='adsnname'
 
+    build_environment='n2a'
+
     arcot_risk_url=http://example.com/file.zip
     arcot_strong_url=http://example.com/file.zip
     jdbc_driver_url=http://example.com/file.zip
@@ -145,6 +147,14 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - password for the encryption key `securestore.enc`
 - Default: `master1234!`
+
+`build_environment`:
+
+- Default: `lab`
+- Possible choices: `lab`, `n2a`, `n1`, `n0`, `perf`, `prod`
+- Note: Leaving it as lab will not configure the database correctly.
+
+
 
 ### App Config
 
