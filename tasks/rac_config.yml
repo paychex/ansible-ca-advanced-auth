@@ -72,19 +72,19 @@
 - name: Fail task when environment was not set to valid option
   fail:
     msg: "environment variable not set to valid option, check readme"
-  when: 'properties_section_name' == ''
+  when: properties_section_name == ''
   
 
 
 
 - name: odbc.ini add TNSNamesFile
   replace:
-    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
     line: 'TNSNamesFile=ARCOT_HOME/tnsnames.ora'
 
 - name: odbc.ini add TNSNamesFile
   replace:
-    path: {{ arcot_home }}/odbc32v60wf/odbc.ini
+    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
     line: 'ServerName={{ properties_section_name }}'
 
 
