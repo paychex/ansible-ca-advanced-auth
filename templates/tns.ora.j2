@@ -1,0 +1,23 @@
+{{ arcot_rac_section_name }}=
+
+  (DESCRIPTION =
+
+    (ADDRESS_LIST =
+
+      (ADDRESS = (PROTOCOL = TCP)(HOST = {{ arcot_db_hostname }} )(PORT = 1521))
+
+    )
+
+    (CONNECT_DATA =
+
+      (SERVICE_NAME = {{ arcot_db_service_name}})
+      (SERVER=dedicated)
+
+    )
+    {%- if arcot_rac_additons != ''-%}
+    {{ arcot_rac_additons }}
+    {%- endif -%}
+  )
+
+
+   
