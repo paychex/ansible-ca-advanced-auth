@@ -5,6 +5,7 @@
   # replace
 # modify arcotcommon.ini url
 # modify odbc.ini 
+# create tsn.ora file
 
 #need these variables to be set correctly!
 - name: find and replace line in DB script comntinaing service name
@@ -19,6 +20,14 @@
     state: present
     line: '{{ arcot_jdbc_url }}'
     insertafter: '^[arcot/db/primarydb]$'
+
+- name: create tsn.ora file
+  template:
+    src: tsn.ora.j2
+    dest: "{{ arcot_home }}/tns.ora"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0644
 
 - name: odbc.ini update hostname
   replace:
@@ -35,7 +44,7 @@
     path: '{{ arcot_home }}/odbc64v80/odbc.ini'
     line: "{{ item }}"
   loop:
-    - 'TNSNamesFile=ARCOT_HOME/tnsnames.ora'
+    - 'TNSNamesFile={{ arcot_home }}/tns.ora'
     - 'ServerName={{ properties_section_name }}'
 
 # - name: odbc.ini update portnumber
