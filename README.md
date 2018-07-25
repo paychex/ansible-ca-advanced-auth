@@ -148,7 +148,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - password for the encryption key `securestore.enc`
 - Default: `master1234!`
 
-
 `build_environment`:
 
 - Default: `lab`

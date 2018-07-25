@@ -39,16 +39,42 @@
     regexp: '^SID='
     replace: '#SID='
 
+- name: set properties_section_name value based on environment - n2a
+  set_fact: 
+    properties_section_name: rmdn2a
+    when: build_environment == 'n2a'
+
+- name: set properties_section_name value based on environment - n1
+  set_fact: 
+    properties_section_name: rmdn1
+    when: build_environment == 'n1'
+
+- name: set properties_section_name value based on environment - n0
+  set_fact: 
+    properties_section_name: rmdn0
+    when: build_environment == 'n0'
+
+- name: set properties_section_name value based on environment - perf
+  set_fact: 
+    properties_section_name: rmdpf
+    when: build_environment == 'perf'
+
+- name: set properties_section_name value based on environment - prod
+  set_fact: 
+    properties_section_name: rmdpr
+    when: build_environment == 'prod'
+
+
 
 - name: odbc.ini add TNSNamesFile
   replace:
     path: {{ arcot_home }}/odbc32v60wf/odbc.ini
-    line: 'TNSNamesFile=ARCOT_HOME/ora_file_name'
+    line: 'TNSNamesFile=ARCOT_HOME/tnsnames.ora'
 
 - name: odbc.ini add TNSNamesFile
   replace:
     path: {{ arcot_home }}/odbc32v60wf/odbc.ini
-    line: 'ServerName=section_name'
+    line: 'ServerName={{ properties_section_name }}'
 
 
 
