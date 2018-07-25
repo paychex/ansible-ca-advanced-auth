@@ -19,7 +19,6 @@ properties_db_service_name: ''
 properties_db_initialize : 0
 properties_db_upgrade: 0
 properties_bootstrap: 0
-properties_section_name: ''
 properties_admin_pw: master1234!
 properties_default_org_key: master1234!
 
@@ -51,6 +50,7 @@ arcot_adapter_patch_url: ''
 arcot_risk_url: ''
 arcot_strong_url: ''
 jdbc_driver_url: ''
+jdbc_64_bit: true
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
