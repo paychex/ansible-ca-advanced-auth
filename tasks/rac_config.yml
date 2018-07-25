@@ -45,7 +45,7 @@
     line: "{{ item }}"
   loop:
     - 'TNSNamesFile={{ arcot_home }}/tns.ora'
-    - 'ServerName={{ properties_section_name }}'
+    - 'ServerName={{ arcot_rac_section_name }}'
 
 # - name: odbc.ini update portnumber
 #   replace:
