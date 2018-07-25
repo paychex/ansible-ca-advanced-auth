@@ -19,8 +19,8 @@
   lineinfile:
     path: '{{ arcot_home }}/conf/arcotcommon.ini'
     state: present
-    insertafter: '{{ arcot_jdbc_url }}'
-    line: '^[arcot/db/primarydb]$'
+    line: '{{ arcot_jdbc_url }}'
+    insertafter: '^[arcot/db/primarydb]$'
 
     #substep 2 is about updating username for the new db, however this should already be set correctly, leaving this note inc ase soemthing does infact need to change
 
