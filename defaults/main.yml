@@ -33,7 +33,6 @@ arcot_adapter_installer: CA-Adapter-9.0.0-Linux-Installer.bin
 arcot_db_upgrade_zip_dir: GEN500000000000104
 arcot_db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
 arcot_db_upgrade_zip_url: ''
-arcot_db_oracle_script: db-config-for-common.sql
 arcot_db_shared_datafile_path:
 arcot_db_service_name:
 
