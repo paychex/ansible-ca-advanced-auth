@@ -28,7 +28,7 @@
 
 - name: odbc.ini update hostname
   replace:
-    path: '{{ arcot_home }}/odbc32v60wf/odbc.ini'
+    path: '{{ arcot_home }}/odbc{% if 64_bit '64v80' }}/odbc.ini'
     regexp: '^HostName='
     replace: '#HostName='
 
