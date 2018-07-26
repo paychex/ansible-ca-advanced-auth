@@ -15,7 +15,7 @@ jdbc_64_bit: true
 
 arcot_install_configure_db: true
 arcot_install_db_upgrade: 0
-arcot_install_db_initalize : 0
+arcot_install_db_initalize: 0
 arcot_install_bootstrap: 0
 arcot_admin_pw: master1234!
 arcot_default_org_key: master1234!
@@ -26,9 +26,10 @@ arcot_db_password: ''
 arcot_db_host: ''
 arcot_db_sid: ''
 arcot_db_dsn: ''
-arcot_db_service_name: ''
+arcot_db_rac_service_name: ''
+arcot_db_rac_section_name: ''
 arcot_db_rac_shared_datafile_path: ''
-arcot_db_connect_string: ''
+arcot_db_rac_connect_string: ''
 
 arcot_strong_zip_parent_dir: GEN500000000000116
 arcot_strong_installer: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
