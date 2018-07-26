@@ -24,7 +24,7 @@
 
 - name: odbc.ini update hostname
   replace:
-    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini"
+    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit %}64v80{%  else %}32v60wf{%- endif -%}/odbc.ini"
     regexp: '^{{ item }}'
     replace: '#{{ item }}'
   loop:
@@ -34,7 +34,7 @@
 
 - name: odbc.ini add TNSNamesFile
   lineinfile:
-    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini"
+    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit %}64v80{%  else %}32v60wf{%- endif -%}/odbc.ini"
     line: "{{ item }}"
   loop:
     - 'TNSNamesFile={{ arcot_home }}/tns.ora'
