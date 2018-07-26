@@ -1,7 +1,5 @@
 ---
 
-build_environment: ''
-
 java_home: /opt/java
 catalina_home: /opt/tomcat
 arcot_home: /opt/CA/AdvAuth
