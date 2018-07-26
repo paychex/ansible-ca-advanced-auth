@@ -11,12 +11,12 @@
   lineinfile:
     path: '{{ arcot_home }}/conf/arcotcommon.ini'
     state: present
-    line: '{{ arcot_db_connect_string }}'
-    insertafter: '^[arcot/db/primarydb]$'
+    line: '{{ arcot_db_rac_connect_string }}'
+    insertafter: '^[arcot/db/primarydb]'
 
 - name: create tsn.ora file
   template:
-    src: tsn.ora.j2
+    src: tns.ora.j2
     dest: "{{ arcot_home }}/tns.ora"
     owner: "{{ arcot_os_user }}"
     group: "{{ arcot_os_group }}"
@@ -34,8 +34,8 @@
 
 - name: odbc.ini add TNSNamesFile
   lineinfile:
-    path: '{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini'
+    path: "{{ arcot_home }}/odbc{% if jdbc_64_bit '64v80' else '32v60wf' %}/odbc.ini"
     line: "{{ item }}"
   loop:
     - 'TNSNamesFile={{ arcot_home }}/tns.ora'
-    - 'ServerName={{ arcot_rac_section_name }}'
+    - 'ServerName={{ arcot_db_rac_section_name }}'
