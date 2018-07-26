@@ -19,6 +19,7 @@ arcot_install_db_initalize: 0
 arcot_install_bootstrap: 0
 arcot_admin_pw: master1234!
 arcot_default_org_key: master1234!
+arcot_install_enc_masterkey: 'master1234!'
 
 arcot_db_port: 1521
 arcot_db_user: ARCOTUSER
