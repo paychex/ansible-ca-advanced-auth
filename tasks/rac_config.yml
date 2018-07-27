@@ -12,7 +12,7 @@
     path: '{{ arcot_home }}/conf/arcotcommon.ini'
     state: present
     line: '{{ arcot_db_rac_connect_string }}'
-    insertafter: '^[arcot/db/primarydb]'
+    regexp: '^URL.1'
 
 - name: create tsn.ora file
   template:
