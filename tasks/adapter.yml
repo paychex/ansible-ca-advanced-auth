@@ -54,7 +54,7 @@
 - name: download arcotsm.properties file
   get_url:
     url: "{{ arcot_sm_url }}"
-    dest: "{{ arcot_home }}/afm"
+    dest: "{{ arcot_home }}/conf/afm/arcotsm.properties"
     owner: "{{ arcot_os_user }}"
     group: "{{ arcot_os_group }}"
     mode: 0755
