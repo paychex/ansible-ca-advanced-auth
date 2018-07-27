@@ -51,4 +51,17 @@
     state: directory
     mode: 0755
 
-      
+- name: download arcotsm.properties file
+  get_url:
+    url: "{{ arcot_sm_url }}"
+    dest: "{{ arcot_home }}/afm"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0755
+
+# - name: set confg for arcotsm.properties file
+#   lineinfile:
+
+
+    # AppServerConnectionPoolName.1=
+    # RiskFortHOST.1=
