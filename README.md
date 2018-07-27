@@ -35,7 +35,7 @@ Recommended Runtime Vars
 
 **You must provide the following vars:**
 
-- properties_enc_masterkey
+- arcot_install_enc_masterkey
 - arcot_db_password
 - arcot_os_password
 
@@ -80,7 +80,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 ### Execute
 
-    ansible-playbook -i <your_inventory_file> <your_playbook_that_calls_role> -e "properties_enc_masterkey=<your_masterkey> arcot_db_password=<your_db_password> arcot_os_password=<your_password>"
+    ansible-playbook -i <your_inventory_file> <your_playbook_that_calls_role> -e "arcot_install_enc_masterkey=<your_masterkey> arcot_db_password=<your_db_password> arcot_os_password=<your_password>"
 
 
 
@@ -119,7 +119,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `''`
 
-`arcot_db_service_name`: 
+`arcot_db_rac_service_name`: 
 
 - Default: `''`
 
@@ -143,17 +143,10 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `master1234!`
 
-`properties_enc_masterkey`:
+`arcot_install_enc_masterkey`:
 
 - password for the encryption key `securestore.enc`
 - Default: `master1234!`
-
-`build_environment`:
-
-- Default: `lab`
-- Possible choices: `lab`, `n2a`, `n1`, `n0`, `perf`, `prod`
-- Note: Leaving it as lab will not configure the database correctly.
-
 
 
 ### App Config
