@@ -28,7 +28,7 @@ ARCOT_PRIMARY_DATABASE_SILENT=
 #Primary SID (For Oracle)
 #--------------------------
 ARCOT_PRIMARY_SID_SILENT={{ arcot_db_sid }}
-ARCOT_PRIMARY_TNS_SERVICE_NAME_SILENT={{ arcot_db_service_name }}
+ARCOT_PRIMARY_TNS_SERVICE_NAME_SILENT={{ arcot_db_rac_service_name }}
 
 #Primary Host Name
 #-----------------
@@ -93,7 +93,7 @@ ARCOT_BACKUP_PASSWORD_SILENT=
 ARCOT_ENC_TYPE_SILENT=S/W
 
 ARCOT_ENC_DEVICE_NAME_SILENT=
-ARCOT_KEY_LABEL_SILENT={{ properties_enc_masterkey }}
+ARCOT_KEY_LABEL_SILENT={{ arcot_install_enc_masterkey }}
 ARCOT_HSM_PIN_SILENT=
 ARCOT_HSM_SHARED_LIBRARY_SILENT=
 ARCOT_HSM_STORAGE_SLOT_SILENT=
