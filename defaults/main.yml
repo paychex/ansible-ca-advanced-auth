@@ -31,6 +31,7 @@ arcot_db_rac_service_name: ''
 arcot_db_rac_section_name: ''
 arcot_db_rac_shared_datafile_path: ''
 arcot_db_rac_connect_string: ''
+arcot_db_rac_desc_additons: ''
 
 arcot_strong_zip_parent_dir: GEN500000000000116
 arcot_strong_installer: CA-StrongAuthentication-9.0.0-Linux-Installer.bin
@@ -49,6 +50,7 @@ arcot_adapter_patch_url: ''
 arcot_risk_url: ''
 arcot_strong_url: ''
 jdbc_driver_url: ''
+arcot_sm_url: ''
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
