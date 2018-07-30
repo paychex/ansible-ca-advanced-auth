@@ -4,7 +4,7 @@
 - name: find and replace line in DB script comntinaing service name
   replace:
     path: '{{ arcot_home }}/dbscripts/oracle/db-config-for-common.sql'
-    regexp: 'filename varchar2(50)'
+    regexp: '^filename'
     replace: "filename varchar2(100) := '{{ arcot_db_rac_shared_datafile_path }}/data_file/tabspace_arreports_'|| to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') || '.dat';"
 
 - name: append jdbc url to arcotcommon.ini file
