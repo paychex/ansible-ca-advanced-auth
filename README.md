@@ -35,7 +35,6 @@ Recommended Runtime Vars
 
 **You must provide the following vars:**
 
-- arcot_install_enc_masterkey
 - arcot_db_password
 - arcot_os_password
 
