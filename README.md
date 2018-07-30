@@ -38,6 +38,10 @@ Recommended Runtime Vars
 - arcot_db_password
 - arcot_os_password
 
+Recommend including:
+
+- arcot_install_enc_masterkey
+
 ## Example
 
 I have an inventory that defines the desired config and a playbook to mary the inv to the role. I also pass some vars during execution.
