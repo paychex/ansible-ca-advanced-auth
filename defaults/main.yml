@@ -23,7 +23,6 @@ arcot_install_enc_masterkey: 'master1234!'
 
 arcot_db_port: 1521
 arcot_db_user: ARCOTUSER
-arcot_db_password: ''
 arcot_db_host: ''
 arcot_db_sid: ''
 arcot_db_dsn: ''
@@ -43,7 +42,6 @@ arcot_db_upgrade_AA_dir: AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0
 
 arcot_os_user: arcot
 arcot_os_group: arcot
-arcot_os_password: ''
 
 arcot_db_upgrade_zip_url: ''
 arcot_adapter_patch_url: ''
