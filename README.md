@@ -89,14 +89,85 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 ## Variables
 
-### DB Config
+### Role Options
+
+`arcot_adapter_install_home`:
+
+- where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
+- Default: `/opt`
+
+`arcot_patch_update`:
+
+- boolean, true to install patches 9.02_patch.yml
+- Default: false
+
+`arcot_web_services`:
+
+- Installs the webapps to tomcat
+- Default: true
+
+`arcot_3.x_db_update`:
+
+- boolean, true to install 3.x db update. [CA Docs](https://docops.ca.com/ca-advanced-authentication/9-0/en/upgrading/upgrade-from-older-versions)
+- Default: false
+
+`arcot_db_rac`:
+
+- boolean, true to configure for a RAC DB
+- Default: false
+
+`arcot_install_sample_app`: 
+
+- boolean, true to install risk / web sample apps
+- Default: `False`
+
+`jdbc_64_bit`:
+
+- boolean, true for 64 bit CPUs.
+- Default: `true`
+
+`pip_configure_proxy`:
+
+- boolean, true will configure pip proxy settings
+- Default: `false`
+
+
+### Installation Properties File Options
 
 **These properties populate the silent install file and can be found in installer.properties.j2 template**
+
 
 `arcot_install_configure_db`: 
 
 - the arcotcommon.ini db 
 - Default: `true`
+
+`arcot_install_db_initalize`:
+
+- Default: `0`
+
+`arcot_install_db_upgrade`:
+
+- Default: `0`
+
+`arcot_install_bootstrap`:
+
+- Default: `0`
+
+`arcot_install_admin_pw`:
+
+- Default: `'master1234!'`
+
+`arcot_install_default_org_key`:
+
+- Default: `'master1234!'`
+
+`arcot_install_enc_masterkey`:
+
+- password for the encryption key `securestore.enc`
+- Default: `'master1234!'`
+
+### Database Information
 
 `arcot_db_port`:
 
@@ -106,9 +177,9 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `ARCOTUSER`
 
-`arcot_db_password`: 
+`arcot_db_password`:
 
-- Default: `''`
+- Default: No default. You must set this
 
 `arcot_db_host`: 
 
@@ -126,31 +197,21 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `''`
 
-`arcot_install_db_initalize`:
+`arcot_db_rac_section_name`: 
 
-- Default: `0`
+- Default: `''`
 
-`arcot_install_db_upgrade`: 
+`arcot_db_rac_shared_datafile_path`: 
 
-- Default: `0`
+- Default: `''`
 
-`arcot_install_bootstrap`: 
+`arcot_db_rac_connect_string`: 
 
-- Default: `0`
+- Default: `''`
 
-`arcot_admin_pw`: 
+`arcot_db_rac_desc_additions`: 
 
-- Default: `master1234!`
-
-`arcot_default_org_key`: 
-
-- Default: `master1234!`
-
-`arcot_install_enc_masterkey`:
-
-- password for the encryption key `securestore.enc`
-- Default: `master1234!`
-
+- Default: `''`
 
 ### App Config
 
@@ -171,25 +232,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - where advanced auth tools will be installed
 - Default: `/opt/CA/AdvAuth`
 
-`arcot_adapter_install_home`:
-
-- where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
-- Default: `/opt`
-
-`arcot_web_services`:
-
-- Installs the webapps to tomcat
-- Default: true
-
-`arcot_install_sample_app`: 
-
-- Default: `False`
-
-`arcot_db_rac`:
-
-- Will overwrite config to enable RAC db
-- Default: `false`
-
 `arcot_strong_zip_parent_dir`: 
 
 - name of the sub directory in strong auth zip
@@ -208,26 +250,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `CA-RiskAuthentication-9.0.0-Linux-Installer.bin`
 
-`arcot_os_user`: 
-
-- name for the service owning user
-- Default: `arcot`
-
-`arcot_os_password`: 
-
-- password for the os user
-- Default: `''`
-
-`arcot_patch_update`:
-
-- boolean, true to install patches 9.02_patch.yml
-- Default: false
-
-`arcot_3.x_db_update`:
-
-- boolean, true to install 3.x db update. [CA Docs](https://docops.ca.com/ca-advanced-authentication/9-0/en/upgrading/upgrade-from-older-versions)
-- Default: false
-
 `arcot_db_upgrade_zip_dir`:
 
 - folder name that zip unpacks
@@ -238,10 +260,17 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - name of sub folder zip creates
 - Default: `AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0`
 
-`arcot_db_upgrade_zip_url`:
+### System User
 
-- URL used to download upgrade zip file
-- Default: ''
+`arcot_os_user`: 
+
+- name for the service owning user
+- Default: `arcot`
+
+`arcot_os_password`:
+
+- password for the os user
+- Default: None. You must supply
 
 
 ### Download URLs
@@ -266,6 +295,26 @@ URLs for downloading components. Recommend these are hosted internally
 
 `arcot_patch_url`:
 
+- Default: `''`
+
+`arcot_db_upgrade_zip_url`:
+
+- URL used to download upgrade zip file
+- Default: ''
+
+`arcot_sm_url`:
+
+- URL to download statemanager properties file
+- Default: `''`
+
+`pip_proxy_url`:
+
+- URL to set as pip proxy
+- Default: `''`
+
+`pip_trusted_host`:
+
+- Host to set as trusted
 - Default: `''`
 
 HANDLERS

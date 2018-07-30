@@ -17,8 +17,8 @@ arcot_install_configure_db: true
 arcot_install_db_upgrade: 0
 arcot_install_db_initalize: 0
 arcot_install_bootstrap: 0
-arcot_admin_pw: 'master1234!'
-arcot_default_org_key: 'master1234!'
+arcot_install_admin_pw: 'master1234!'
+arcot_install_default_org_key: 'master1234!'
 arcot_install_enc_masterkey: 'master1234!'
 
 arcot_db_port: 1521
@@ -52,3 +52,4 @@ arcot_sm_url: ''
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
+arcot_sm_url: ''
