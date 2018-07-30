@@ -52,3 +52,4 @@ arcot_sm_url: ''
 pip_configure_proxy: false
 pip_proxy_url: ''
 pip_trusted_host: ''
+arcot_sm_url: ''

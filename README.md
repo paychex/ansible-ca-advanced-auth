@@ -124,7 +124,12 @@ I have an inventory that defines the desired config and a playbook to mary the i
 `jdbc_64_bit`:
 
 - boolean, true for 64 bit CPUs.
-- Default: true
+- Default: `true`
+
+`pip_configure_proxy`:
+
+- boolean, true will configure pip proxy settings
+- Default: `false`
 
 
 ### Installation Properties File Options
@@ -192,6 +197,22 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `''`
 
+`arcot_db_rac_section_name`: 
+
+- Default: `''`
+
+`arcot_db_rac_shared_datafile_path`: 
+
+- Default: `''`
+
+`arcot_db_rac_connect_string`: 
+
+- Default: `''`
+
+`arcot_db_rac_desc_additions`: 
+
+- Default: `''`
+
 ### App Config
 
 **These vars determine where the apps will be installed**
@@ -211,11 +232,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - where advanced auth tools will be installed
 - Default: `/opt/CA/AdvAuth`
 
-`arcot_db_rac`:
-
-- Will overwrite config to enable RAC db
-- Default: `false`
-
 `arcot_strong_zip_parent_dir`: 
 
 - name of the sub directory in strong auth zip
@@ -234,17 +250,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `CA-RiskAuthentication-9.0.0-Linux-Installer.bin`
 
-`arcot_os_user`: 
-
-- name for the service owning user
-- Default: `arcot`
-
-`arcot_os_password`: 
-
-- password for the os user
-- Default: `''`
-
-
 `arcot_db_upgrade_zip_dir`:
 
 - folder name that zip unpacks
@@ -255,10 +260,17 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - name of sub folder zip creates
 - Default: `AA-Upgrade-6.2.x-7.x-2.2.6-above-3.x-to-9.0`
 
-`arcot_db_upgrade_zip_url`:
+### System User
 
-- URL used to download upgrade zip file
-- Default: ''
+`arcot_os_user`: 
+
+- name for the service owning user
+- Default: `arcot`
+
+`arcot_os_password`:
+
+- password for the os user
+- Default: None. You must supply
 
 
 ### Download URLs
@@ -283,6 +295,26 @@ URLs for downloading components. Recommend these are hosted internally
 
 `arcot_patch_url`:
 
+- Default: `''`
+
+`arcot_db_upgrade_zip_url`:
+
+- URL used to download upgrade zip file
+- Default: ''
+
+`arcot_sm_url`:
+
+- URL to download statemanager properties file
+- Default: `''`
+
+`pip_proxy_url`:
+
+- URL to set as pip proxy
+- Default: `''`
+
+`pip_trusted_host`:
+
+- Host to set as trusted
 - Default: `''`
 
 HANDLERS
