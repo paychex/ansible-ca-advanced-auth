@@ -89,14 +89,80 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 ## Variables
 
-### DB Config
+### Role Options
+
+`arcot_adapter_install_home`:
+
+- where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
+- Default: `/opt`
+
+`arcot_patch_update`:
+
+- boolean, true to install patches 9.02_patch.yml
+- Default: false
+
+`arcot_web_services`:
+
+- Installs the webapps to tomcat
+- Default: true
+
+`arcot_3.x_db_update`:
+
+- boolean, true to install 3.x db update. [CA Docs](https://docops.ca.com/ca-advanced-authentication/9-0/en/upgrading/upgrade-from-older-versions)
+- Default: false
+
+`arcot_db_rac`:
+
+- boolean, true to configure for a RAC DB
+- Default: false
+
+`arcot_install_sample_app`: 
+
+- boolean, true to install risk / web sample apps
+- Default: `False`
+
+`jdbc_64_bit`:
+
+- boolean, true for 64 bit CPUs.
+- Default: true
+
+
+### Installation Properties File Options
 
 **These properties populate the silent install file and can be found in installer.properties.j2 template**
+
 
 `arcot_install_configure_db`: 
 
 - the arcotcommon.ini db 
 - Default: `true`
+
+`arcot_install_db_initalize`:
+
+- Default: `0`
+
+`arcot_install_db_upgrade`:
+
+- Default: `0`
+
+`arcot_install_bootstrap`:
+
+- Default: `0`
+
+`arcot_install_admin_pw`:
+
+- Default: `'master1234!'`
+
+`arcot_install_default_org_key`:
+
+- Default: `'master1234!'`
+
+`arcot_install_enc_masterkey`:
+
+- password for the encryption key `securestore.enc`
+- Default: `'master1234!'`
+
+### Database Information
 
 `arcot_db_port`:
 
@@ -106,9 +172,9 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - Default: `ARCOTUSER`
 
-`arcot_db_password`: 
+`arcot_db_password`:
 
-- Default: `''`
+- Default: No default. You must set this
 
 `arcot_db_host`: 
 
@@ -125,32 +191,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 `arcot_db_rac_service_name`: 
 
 - Default: `''`
-
-`arcot_install_db_initalize`:
-
-- Default: `0`
-
-`arcot_install_db_upgrade`: 
-
-- Default: `0`
-
-`arcot_install_bootstrap`: 
-
-- Default: `0`
-
-`arcot_admin_pw`: 
-
-- Default: `master1234!`
-
-`arcot_default_org_key`: 
-
-- Default: `master1234!`
-
-`arcot_install_enc_masterkey`:
-
-- password for the encryption key `securestore.enc`
-- Default: `master1234!`
-
 
 ### App Config
 
@@ -170,20 +210,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 - where advanced auth tools will be installed
 - Default: `/opt/CA/AdvAuth`
-
-`arcot_adapter_install_home`:
-
-- where adapter installs. The default installs to the same /opt/CA/AdvAuth. This value is only needed because of what appear to be inconsistenencies in the installation procedure across tools.
-- Default: `/opt`
-
-`arcot_web_services`:
-
-- Installs the webapps to tomcat
-- Default: true
-
-`arcot_install_sample_app`: 
-
-- Default: `False`
 
 `arcot_db_rac`:
 
@@ -218,15 +244,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
 - password for the os user
 - Default: `''`
 
-`arcot_patch_update`:
-
-- boolean, true to install patches 9.02_patch.yml
-- Default: false
-
-`arcot_3.x_db_update`:
-
-- boolean, true to install 3.x db update. [CA Docs](https://docops.ca.com/ca-advanced-authentication/9-0/en/upgrading/upgrade-from-older-versions)
-- Default: false
 
 `arcot_db_upgrade_zip_dir`:
 
