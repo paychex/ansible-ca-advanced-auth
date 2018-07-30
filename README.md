@@ -35,11 +35,14 @@ Recommended Runtime Vars
 
 **You must provide the following vars:**
 
-- properties_enc_masterkey
-- properties_db_password
+- arcot_db_password
 - arcot_os_password
 
-## Example 
+Recommend including:
+
+- arcot_install_enc_masterkey
+
+## Example
 
 I have an inventory that defines the desired config and a playbook to mary the inv to the role. I also pass some vars during execution.
 
@@ -58,9 +61,11 @@ I have an inventory that defines the desired config and a playbook to mary the i
     riskminder-app.hostname.com
 
     [rm-app:vars]
-    properties_db_host=dbhostname
-    properties_db_sid=mydbsid
-    properties_db_dsn='adsnname'
+    arcot_db_host=dbhostname
+    arcot_db_sid=mydbsid
+    arcot_db_dsn='adsnname'
+
+    build_environment='n2a'
 
     arcot_risk_url=http://example.com/file.zip
     arcot_strong_url=http://example.com/file.zip
@@ -78,7 +83,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 ### Execute
 
-    ansible-playbook -i <your_inventory_file> <your_playbook_that_calls_role> -e "properties_enc_masterkey=<your_masterkey> properties_db_password=<your_db_password> arcot_os_password=<your_password>"
+    ansible-playbook -i <your_inventory_file> <your_playbook_that_calls_role> -e "arcot_install_enc_masterkey=<your_masterkey> arcot_db_password=<your_db_password> arcot_os_password=<your_password>"
 
 
 
@@ -88,63 +93,64 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 **These properties populate the silent install file and can be found in installer.properties.j2 template**
 
-`properties_configure_db`: 
+`arcot_install_configure_db`: 
 
 - the arcotcommon.ini db 
 - Default: `true`
 
-`properties_db_port`:
+`arcot_db_port`:
 
 - Default: `1521`
 
-`properties_db_user`:
+`arcot_db_user`:
 
 - Default: `ARCOTUSER`
 
-`properties_db_password`: 
+`arcot_db_password`: 
 
 - Default: `''`
 
-`properties_db_host`: 
+`arcot_db_host`: 
 
 - Default: `''`
 
-`properties_db_sid`: 
+`arcot_db_sid`: 
 
 - Default: `''`
 
-`properties_db_dsn`: 
+`arcot_db_dsn`: 
 
 - Default: `''`
 
-`properties_db_service_name`: 
+`arcot_db_rac_service_name`: 
 
 - Default: `''`
 
-`properties_db_initialize`:
+`arcot_install_db_initalize`:
 
 - Default: `0`
 
-`properties_db_upgrade`: 
+`arcot_install_db_upgrade`: 
 
 - Default: `0`
 
-`properties_bootstrap`: 
+`arcot_install_bootstrap`: 
 
 - Default: `0`
 
-`properties_admin_pw`: 
+`arcot_admin_pw`: 
 
 - Default: `master1234!`
 
-`properties_default_org_key`: 
+`arcot_default_org_key`: 
 
 - Default: `master1234!`
 
-`properties_enc_masterkey`:
+`arcot_install_enc_masterkey`:
 
 - password for the encryption key `securestore.enc`
 - Default: `master1234!`
+
 
 ### App Config
 
@@ -178,6 +184,11 @@ I have an inventory that defines the desired config and a playbook to mary the i
 `arcot_install_sample_app`: 
 
 - Default: `False`
+
+`arcot_db_rac`:
+
+- Will overwrite config to enable RAC db
+- Default: `false`
 
 `arcot_strong_zip_parent_dir`: 
 

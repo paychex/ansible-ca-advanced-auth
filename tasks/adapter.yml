@@ -51,4 +51,18 @@
     state: directory
     mode: 0755
 
-      
+- name: download arcotsm.properties file
+  get_url:
+    url: "{{ arcot_sm_url }}"
+    dest: "{{ arcot_home }}/conf/afm/arcotsm.properties"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0755
+
+- name: set confg for arcotsm.properties file
+  lineinfile:
+    path: "{{ arcot_home }}/conf/afm/arcotsm.properties"
+    regexp: '^RiskFortHOST.1='
+    line: 'RiskFortHOST.1={{ inventory_hostname }}'
+    
+    
