@@ -1,0 +1,49 @@
+---
+# configures advanced auth to use a RAC db
+
+- name: find and replace line in DB script comntinaing service name
+  replace:
+    path: '{{ arcot_home }}/dbscripts/oracle/db-config-for-common.sql'
+    regexp: '^filename'
+    replace: "filename varchar2(100) := '{{ arcot_db_rac_shared_datafile_path }}/data_file/tabspace_arreports_'|| to_char(current_timestamp, 'YYYY-MM-DD-HH24-MI-SS') || '.dat';"
+
+- name: append jdbc url to arcotcommon.ini file
+  lineinfile:
+    path: '{{ arcot_home }}/conf/arcotcommon.ini'
+    state: present
+    line: '{{ arcot_db_rac_connect_string }}'
+    regexp: '^URL.1'
+
+- name: comment out pool connection name to arcotcommon.ini file
+  lineinfile:
+    path: '{{ arcot_home }}/conf/arcotcommon.ini'
+    state: present
+    line: '#AppServerConnectionPoolName'
+    regexp: '^AppServerConnectionPoolName'
+
+
+- name: create tsn.ora file
+  template:
+    src: tns.ora.j2
+    dest: "{{ arcot_home }}/tns.ora"
+    owner: "{{ arcot_os_user }}"
+    group: "{{ arcot_os_group }}"
+    mode: 0644
+
+- name: odbc.ini update hostname
+  replace:
+    path: "{{ arcot_home }}/odbc{%- if jdbc_64_bit -%}64v80{%- else -%}32v60wf{%- endif -%}/odbc.ini"
+    regexp: '^{{ item }}'
+    replace: '#{{ item }}'
+  loop:
+    - 'HostName='
+    - 'PortNumber='
+    - 'SID='
+
+- name: odbc.ini add TNSNamesFile
+  lineinfile:
+    path: "{{ arcot_home }}/odbc{%- if jdbc_64_bit -%}64v80{%- else -%}32v60wf{%- endif -%}/odbc.ini"
+    line: "{{ item }}"
+  loop:
+    - 'TNSNamesFile={{ arcot_home }}/tns.ora'
+    - 'ServerName={{ arcot_db_rac_section_name }}'
