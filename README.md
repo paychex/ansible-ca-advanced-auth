@@ -207,7 +207,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
 
 `arcot_db_rac_connect_string`: 
 
-- Default: `''`
+- Default: `'URL.1=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST={{ arcot_db_host }})(PORT={{ arcot_db_port }})))(CONNECT_DATA=(SERVICE_NAME={{ arcot_db_rac_service_name }})(SERVER=DEDICATED)))'`
 
 `arcot_db_rac_desc_additions`: 
 
