@@ -279,43 +279,43 @@ URLs for downloading components. Recommend these are hosted internally
 
 `arcot_risk_url`: 
 
-- Default: `''`
+- Default: `'http://example.com/CA-RiskAuthentication-9.0.0-Linux-Installer.zip'`
 
 `arcot_strong_url`: 
 
-- Default: `''`
+- Default: `'http://example.com/CA-StrongAuthentication-9.0.0-Linux-Installer.zip'`
 
 `jdbc_driver_url`: 
 
-- Default: `''`
+- Default: `'http://example.com/ojdbc8.jar'`
 
 `arcot_adapter_patch_url`:
 
-- Default: `''`
+- Default: `'http://example.com/CA-Adapter-Patch-9.0.02-Linux.zip'`
 
 `arcot_patch_url`:
 
-- Default: `''`
+- Default: `'http://example.com/CA-AdvancedAuthentication-Patch-9.0.02-Linux.zip'`
 
 `arcot_db_upgrade_zip_url`:
 
 - URL used to download upgrade zip file
-- Default: ''
+- Default: `'http://example.com/GEN500000000000104.zip'`
 
 `arcot_sm_url`:
 
 - URL to download statemanager properties file
-- Default: `''`
+- Default: `'http://example.com/arcotsm.properties'`
 
 `pip_proxy_url`:
 
 - URL to set as pip proxy
-- Default: `''`
+- Default: `'http://host.example.com'`
 
 `pip_trusted_host`:
 
 - Host to set as trusted
-- Default: `''`
+- Default: `'host.example.com'`
 
 HANDLERS
 
