@@ -52,8 +52,7 @@ I have an inventory that defines the desired config and a playbook to mary the i
     - hosts: rm-app
       become: true
       roles:
-          - /home/rmullen/git/roles/tomcat9
-          - /home/rmullen/git/advanced_auth
+          - /home/rmullen/git/ansible-ca-advanced-auth
 
 ### Inventory
 
@@ -64,8 +63,6 @@ I have an inventory that defines the desired config and a playbook to mary the i
     arcot_db_host=dbhostname
     arcot_db_sid=mydbsid
     arcot_db_dsn='adsnname'
-
-    build_environment='n2a'
 
     arcot_risk_url=http://example.com/file.zip
     arcot_strong_url=http://example.com/file.zip
